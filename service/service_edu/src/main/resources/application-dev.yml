@@ -1,0 +1,38 @@
+application:
+  version: v1.0.0
+
+server:
+  port: 8110 # 服务端口
+
+spring:
+  application:
+    name: service_edu # 服务名
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_onlineedu_edu?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+
+#打印sql日志  可以在控制台查看sql语句的日志
+mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: off #关闭mybatis_plus的启动图标
+  mapper-locations: classpath*:com/zty/onlineedu/**/mapper/maps/*.xml,classpath*:com/zty/onlineedu/**/mapper/*/*.xml #配置mapper xml文件的路径
+
+# 控制日志输出自定义，并且MyBatis日志关闭查询结果输出保留SQL输出
+logging:
+  config: classpath:logback-custom.xml
+  level:
+    com.zty: debug
+    org.springframework: error
+    com.baomidou: debug
+    org.springframework.jdbc.datasource.init: debug
+    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: warn
+    org.apache.ibatis: debug
+    java.sql: debug
+    org.apache.tomcat.util.scan.StandardJarScanner: error #扫描包只输出error日志
+  #使用 logging.file.path= 文件名  //直接在跟目录下创建该文件且自动 帮你创建好 spring.log 文件
+  file:
+    path: springbootLogs
