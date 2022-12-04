@@ -24,6 +24,9 @@
         sort,join_date,is_deleted,
         gmt_create,gmt_modified
     </sql>
+    <delete id="deleteData" parameterType="com.zty.onlineedu.edu.entity.EduTeacher">
+        delete from edu_teacher where name=#{name}
+    </delete>
     <select id="getTeacherList" resultMap="BaseResultMap">
         select * from edu_teacher
     </select>

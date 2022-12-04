@@ -24,4 +24,10 @@ public class EduTeacherServiceImpl implements EduTeacherService{
         List<EduTeacher> teacherList=eduTeacherMapper.getTeacherList();
         return teacherList;
     }
+
+    @Override
+    public Integer deleteData(EduTeacher eduTeacher) {
+        Integer resultCount=eduTeacherMapper.deleteData(eduTeacher);
+        return resultCount;
+    }
 }

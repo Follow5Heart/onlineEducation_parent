@@ -11,5 +11,16 @@ import java.util.List;
 */
 public interface EduTeacherService{
 
+    /**
+     * 返回所有数据
+     * @return
+     */
     List<EduTeacher> teacherList();
+
+    /**
+     * 删除一条数据*
+     * @param eduTeacher
+     * @return
+     */
+    Integer deleteData(EduTeacher eduTeacher);
 }

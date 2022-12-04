@@ -20,4 +20,11 @@ public interface EduTeacherMapper {
      * @return
      */
     List<EduTeacher> getTeacherList();
+
+    /**
+     * 删除一条数据
+     * @param eduTeacher
+     * @return
+     */
+    Integer deleteData(EduTeacher eduTeacher);
 }
