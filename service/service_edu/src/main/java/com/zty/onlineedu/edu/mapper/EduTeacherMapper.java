@@ -1,6 +1,7 @@
 package com.zty.onlineedu.edu.mapper;
 
 import com.zty.onlineedu.edu.entity.EduTeacher;
+import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,8 +19,9 @@ public interface EduTeacherMapper {
     /**
      * 获取所有的teacher数据
      * @return
+     * @param teacherQueryVo
      */
-    List<EduTeacher> getTeacherList();
+    List<EduTeacher> getTeacherList(TeacherQueryVo teacherQueryVo);
 
     /**
      * 删除一条数据
@@ -27,4 +29,11 @@ public interface EduTeacherMapper {
      * @return
      */
     Integer deleteData(EduTeacher eduTeacher);
+
+    /**
+     * 保存讲师信息*
+     * @param eduTeacher
+     * @return
+     */
+    int saveTeacher(EduTeacher eduTeacher);
 }

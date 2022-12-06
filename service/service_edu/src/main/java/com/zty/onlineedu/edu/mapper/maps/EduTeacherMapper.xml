@@ -24,10 +24,28 @@
         sort,join_date,is_deleted,
         gmt_create,gmt_modified
     </sql>
+    <insert id="saveTeacher">
+        insert into edu_teacher
+            (<include refid="Base_Column_List"/>)
+        values (#{id},#{name},#{intro},#{career},#{level},#{avatar},#{sort},#{joinDate},#{isDeleted},#{gmtCreate},#{gmtModified})
+    </insert>
+
     <delete id="deleteData" parameterType="com.zty.onlineedu.edu.entity.EduTeacher">
         delete from edu_teacher where name=#{name}
     </delete>
-    <select id="getTeacherList" resultMap="BaseResultMap">
+    <select id="getTeacherList" resultMap="BaseResultMap" >
         select * from edu_teacher
+        <where>
+            <if test="name !=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="level !=null">
+                and level=#{level}
+            </if>
+            <if test="joinDateBegin !=null and joinDateBegin!='' and joinDateEnd!=null and joinDateEnd!=''">
+                and  join_date &gt;#{joinDateBegin} and join_date&lt;#{joinDateEnd}
+            </if>
+        </where>
     </select>
+
 </mapper>

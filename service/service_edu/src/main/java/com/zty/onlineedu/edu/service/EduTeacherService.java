@@ -1,6 +1,8 @@
 package com.zty.onlineedu.edu.service;
 
 import com.zty.onlineedu.edu.entity.EduTeacher;
+import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,8 +16,9 @@ public interface EduTeacherService{
     /**
      * 返回所有数据
      * @return
+     * @param teacherQueryVo
      */
-    List<EduTeacher> teacherList();
+    List<EduTeacher> teacherList(TeacherQueryVo teacherQueryVo);
 
     /**
      * 删除一条数据*
@@ -23,4 +26,11 @@ public interface EduTeacherService{
      * @return
      */
     Integer deleteData(EduTeacher eduTeacher);
+
+    /**
+     * 保存讲师数据*
+     * @param eduTeacher
+     * @return
+     */
+    int saveTeacher(@Param("eduTeacher") EduTeacher eduTeacher);
 }
