@@ -16,6 +16,7 @@ public enum ResultCodeEnum {
     SUCCESS(true,20000,"成功"),
     UNKNOWN_REASON(false, 20001, "未知错误"),
 
+
     BAD_SQL_GRAMMAR(false, 21001, "sql语法错误"),
     JSON_PARSE_ERROR(false, 21002, "json解析异常"),
     PARAM_ERROR(false, 21003, "参数不正确"),
@@ -57,7 +58,9 @@ public enum ResultCodeEnum {
     LOGIN_AUTH(false, 28004, "需要登录"),
     LOGIN_ACL(false, 28005, "没有权限"),
     SMS_SEND_ERROR(false, 28006, "短信发送失败"),
-    SMS_SEND_ERROR_BUSINESS_LIMIT_CONTROL(false, 28007, "短信发送过于频繁");
+    SMS_SEND_ERROR_BUSINESS_LIMIT_CONTROL(false, 28007, "短信发送过于频繁"),
+    USER_EXIST_ERROR(false, 28008, "用户已经存在"),
+    BUSINESS_ERROR(false,29000,"业务异常,请让开发人员进行检查");
 
     private Boolean success;
     private Integer code;

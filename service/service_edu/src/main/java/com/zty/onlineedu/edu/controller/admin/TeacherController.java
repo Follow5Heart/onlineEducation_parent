@@ -6,6 +6,8 @@ import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import com.zty.onlineedu.edu.service.EduTeacherService;
+import com.zty.onlineedu.service.base.exceptions.BusinessException;
+import com.zty.onlineedu.service.base.exceptions.CheckUserNameException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,7 +15,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.zty.onlineedu.common.base.result.ResultCodeEnum.BUSINESS_ERROR;
 
 /**
  * @Author zty
@@ -96,6 +101,42 @@ public class TeacherController {
         }
 
     }
+
+    /**
+     * 测试自定义异常，如果出现了异常，交由全局异常进行处理，并且有全局异常返回响应体
+     * @return
+     */
+    @GetMapping("/error")
+    public Result getError(){
+        if (0==0){
+            throw new BusinessException(BUSINESS_ERROR.getMessage());
+        }
+        return Result.ok();
+
+
+    }
+
+    /**
+     * 测试编译期异常
+     */
+    @GetMapping("/error1/{name}")
+    public Result customException(@ApiParam("用户名") @PathVariable String name) throws CheckUserNameException {
+
+        //这里我就先业务层，处理逻辑了
+        List<String> list = new ArrayList<>();
+        list.add("张三");
+        list.add("王五");
+        list.add("赵六");
+        CheckUserNameException.checkUserName(list,name);
+
+        return Result.ok().message("用户不存在，可以放心使用！");
+
+
+
+
+    }
+
+
 
 
 
