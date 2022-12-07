@@ -106,6 +106,7 @@ public class TeacherController {
      * 测试自定义异常，如果出现了异常，交由全局异常进行处理，并且有全局异常返回响应体
      * @return
      */
+    @ApiOperation("测试自定义异常")
     @GetMapping("/error")
     public Result getError(){
         if (0==0){
@@ -119,6 +120,7 @@ public class TeacherController {
     /**
      * 测试编译期异常
      */
+    @ApiOperation("测试编译期异常")
     @GetMapping("/error1/{name}")
     public Result customException(@ApiParam("用户名") @PathVariable String name) throws CheckUserNameException {
 

@@ -2,6 +2,8 @@ package com.zty.onlineedu.service.base.exceptions;
 
 import java.util.List;
 
+import static com.zty.onlineedu.common.base.result.ResultCodeEnum.USER_EXIST_ERROR;
+
 /**
  *  检查用户名是否存在，编译期异常
  * @Author zty
@@ -21,7 +23,7 @@ public class CheckUserNameException extends Exception{
     public static void checkUserName(List<String> list, String userName) throws CheckUserNameException {
         for (String s : list) {
             if (s.equals(userName)){
-                throw new CheckUserNameException("用户不存在，可以放心使用！");
+                throw new CheckUserNameException(USER_EXIST_ERROR.getMessage());
             }
         }
 
