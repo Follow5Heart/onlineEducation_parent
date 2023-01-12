@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -32,6 +34,16 @@ public class DemoTest01 {
         EduChapter eduChapter = new EduChapter();
         eduChapter.setId("2");
 
+
+    }
+
+    @Test
+    public void test01(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = dtf.format(now);
+
+        System.out.println(format);
 
     }
 }
