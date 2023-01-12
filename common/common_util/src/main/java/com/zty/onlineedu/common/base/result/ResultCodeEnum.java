@@ -14,7 +14,7 @@ public enum ResultCodeEnum {
 
     //创建枚举类对象 枚举类实例对象用逗号分隔
     SUCCESS(true,20000,"成功"),
-    UNKNOWN_REASON(false, 20001, "未知错误"),
+    UNKNOWN_REASON(false, 20001, "系统发生错误,请联系管理员"),
 
 
     BAD_SQL_GRAMMAR(false, 21001, "sql语法错误"),
