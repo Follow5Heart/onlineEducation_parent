@@ -33,4 +33,18 @@ public interface EduTeacherService{
      * @return
      */
     int saveTeacher(@Param("eduTeacher") EduTeacher eduTeacher);
+
+    /**
+     * 通过id查询出教师信息
+     * @param id
+     * @return
+     */
+    EduTeacher queryTeacherById(String id);
+
+    /**
+     *更新教师信息
+     * @param eduTeacher
+     */
+    void updateTeacher(EduTeacher eduTeacher);
+
 }

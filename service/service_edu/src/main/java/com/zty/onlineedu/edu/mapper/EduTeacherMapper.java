@@ -36,4 +36,17 @@ public interface EduTeacherMapper {
      * @return
      */
     int saveTeacher(EduTeacher eduTeacher);
+
+    /**
+     * 通过id查询教师数据*
+     * @param id
+     * @return
+     */
+    EduTeacher queryTeacherById(String id);
+
+    /**
+     * 更新讲师数据*
+     * @param eduTeacher
+     */
+    void updateTeacher(EduTeacher eduTeacher);
 }

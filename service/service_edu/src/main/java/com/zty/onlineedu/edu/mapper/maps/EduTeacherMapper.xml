@@ -5,47 +5,63 @@
 <mapper namespace="com.zty.onlineedu.edu.mapper.EduTeacherMapper">
 
     <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.entity.EduTeacher">
-            <id property="id" column="id" jdbcType="CHAR"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="intro" column="intro" jdbcType="VARCHAR"/>
-            <result property="career" column="career" jdbcType="VARCHAR"/>
-            <result property="level" column="level" jdbcType="OTHER"/>
-            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
-            <result property="sort" column="sort" jdbcType="OTHER"/>
-            <result property="joinDate" column="join_date" jdbcType="DATE"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
-            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
-            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="CHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="intro" column="intro" jdbcType="VARCHAR"/>
+        <result property="career" column="career" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="OTHER"/>
+        <result property="joinDate" column="join_date" jdbcType="DATE"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,intro,
+        id
+        ,name,intro,
         career,level,avatar,
         sort,join_date,is_deleted,
         gmt_create,gmt_modified
     </sql>
     <insert id="saveTeacher">
         insert into edu_teacher
-            (<include refid="Base_Column_List"/>)
-        values (#{id},#{name},#{intro},#{career},#{level},#{avatar},#{sort},#{joinDate},#{isDeleted},#{gmtCreate},#{gmtModified})
+        (<include refid="Base_Column_List"/>)
+        values
+        (#{id},#{name},#{intro},#{career},#{level},#{avatar},#{sort},#{joinDate},#{isDeleted},#{gmtCreate},#{gmtModified})
     </insert>
+    <update id="updateTeacher">
+        update edu_teacher set name=#{name},intro=#{intro},career=#{career},level=#{level},avatar=#{avatar},sort=#{sort},join_date=#{joinDate},gmt_modified=#{gmtModified} where id=#{id}
+    </update>
 
     <delete id="deleteData" parameterType="com.zty.onlineedu.edu.entity.EduTeacher">
-        delete from edu_teacher where name=#{name}
+        delete from edu_teacher
+        <where>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="id!=null and id !=''">
+                and id=#{id}
+            </if>
+        </where>
     </delete>
-    <select id="getTeacherList" resultMap="BaseResultMap" >
+    <select id="getTeacherList" resultMap="BaseResultMap">
         select * from edu_teacher
         <where>
             <if test="name !=null and name!=''">
-                and name=#{name}
+                and name like #{name}
             </if>
             <if test="level !=null">
                 and level=#{level}
             </if>
             <if test="joinDateBegin !=null and joinDateBegin!='' and joinDateEnd!=null and joinDateEnd!=''">
-                and  join_date &gt;#{joinDateBegin} and join_date&lt;#{joinDateEnd}
+                and join_date &gt;#{joinDateBegin} and join_date&lt;#{joinDateEnd}
             </if>
         </where>
+    </select>
+    <select id="queryTeacherById" resultMap="BaseResultMap">
+        select * from edu_teacher where id=#{id}
     </select>
 
 </mapper>

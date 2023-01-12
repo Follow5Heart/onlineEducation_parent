@@ -7,7 +7,10 @@ import com.zty.onlineedu.edu.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * @author 17939
@@ -22,6 +25,13 @@ public class EduTeacherServiceImpl implements EduTeacherService{
 
     @Override
     public List<EduTeacher> teacherList(TeacherQueryVo teacherQueryVo) {
+
+        if (teacherQueryVo.getName()!=null) {
+            String name = teacherQueryVo.getName();
+            teacherQueryVo.setName("%" +name+"%");
+
+
+        }
         List<EduTeacher> teacherList=eduTeacherMapper.getTeacherList(teacherQueryVo);
         return teacherList;
     }
@@ -34,7 +44,30 @@ public class EduTeacherServiceImpl implements EduTeacherService{
 
     @Override
     public int saveTeacher(EduTeacher eduTeacher) {
+        String id = UUID.randomUUID().toString();
+        String uid = id.replaceAll("-", "");
+        eduTeacher.setId(uid);
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String createTime = dtf.format(now);
+        eduTeacher.setGmtCreate(createTime);
         int result=eduTeacherMapper.saveTeacher(eduTeacher);
         return result;
+    }
+
+    @Override
+    public EduTeacher queryTeacherById(String id) {
+        EduTeacher teacher=eduTeacherMapper.queryTeacherById(id);
+        return teacher;
+    }
+
+    @Override
+    public void updateTeacher(EduTeacher eduTeacher) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String updateTime = dtf.format(now);
+        eduTeacher.setGmtModified(updateTime);
+        eduTeacherMapper.updateTeacher(eduTeacher);
     }
 }

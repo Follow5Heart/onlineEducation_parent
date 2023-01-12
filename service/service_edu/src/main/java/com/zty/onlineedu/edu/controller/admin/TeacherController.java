@@ -24,6 +24,7 @@ import static com.zty.onlineedu.common.base.result.ResultCodeEnum.BUSINESS_ERROR
  * @Author zty
  * @Date 2022/12/3 13:53
  */
+@CrossOrigin //容许跨域
 @Api(tags  = "讲师管理")
 @RestController
 @Log4j2
@@ -42,11 +43,11 @@ public class TeacherController {
 
     }
 
-    @ApiOperation("获取路径变量和路径参数变量并打印")
+    @ApiOperation("通过id获取讲师数据")
     @GetMapping("/{id}")
-    public void pringParams(@PathVariable("id") String id, @RequestParam("name") String name){
-        System.out.println(id);
-        System.out.println(name);
+    public Result pringParams(@PathVariable("id") String id){
+        EduTeacher teacher=eduTeacherService.queryTeacherById(id);
+        return Result.ok().data("items", teacher);
 
     }
 
@@ -70,7 +71,7 @@ public class TeacherController {
      * @return
      */
     @ApiOperation("讲师分页列表")
-    @GetMapping("/list/{page}/{limit}")
+    @PostMapping("/list/{page}/{limit}")
     public Result listPate(@ApiParam("当前页码") @PathVariable("page") int page,
                            @ApiParam("每页记录数") @PathVariable("limit") int limit,
                            @ApiParam("查询对象") @RequestBody TeacherQueryVo teacherQueryVo){
@@ -99,6 +100,14 @@ public class TeacherController {
         }else{
             return Result.error().message("保存失败");
         }
+
+    }
+
+    @ApiOperation("更新讲师信息")
+    @PostMapping("/updateTeacher")
+    public Result updateTeacher(@RequestBody @ApiParam("更新的讲师数据") EduTeacher eduTeacher){
+        eduTeacherService.updateTeacher(eduTeacher);
+        return Result.ok();
 
     }
 
