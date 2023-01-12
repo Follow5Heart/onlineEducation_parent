@@ -41,7 +41,7 @@ public class EduTeacher implements Serializable {
      * 头衔 1高级讲师 2首席讲师
      */
     @ApiModelProperty("头衔 1高级讲师 2首席讲师")
-    private Integer level;
+    private String level;
 
     /**
      * 讲师头像
