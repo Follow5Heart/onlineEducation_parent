@@ -1,0 +1,56 @@
+application:
+  version: v1.0.0
+
+server:
+  port: 8111 # 服务端口
+
+spring:
+  application:
+    name: service_file # 服务名
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_onlineedu_edu?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+
+  servlet:
+    multipart:
+      max-file-size: 100MB #单个文件最大限制
+      max-request-size: 200MB #多个文件最大限制
+
+
+  file-storage: #文件存储配置
+    default-platform: local-plus-1 #默认使用的存储平台
+    thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
+    local-plus: # 本地存储升级版，不使用的情况下可以不写
+      - platform: local-plus-1 # 存储平台标识
+        enable-storage: true  #启用存储
+        enable-access: true #启用访问（线上请使用 Nginx 配置，效率更高）
+        domain: "http://127.0.0.1:8111/" #访问域名，例如：“http://127.0.0.1:8030/”，注意后面要和 path-patterns 保持一致，“/”结尾，本地存储建议使用相对路径，方便后期更换域名
+        base-path: uploadfiles/ # 基础路
+        path-patterns: /** # 访问路径
+        storage-path: F:/zty_project/ #存储路径
+
+#打印sql日志  可以在控制台查看sql语句的日志
+mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: off #关闭mybatis_plus的启动图标
+  mapper-locations: classpath*:com/zty/onlineedu/**/mapper/maps/*.xml,classpath*:com/zty/onlineedu/**/mapper/*/*.xml #配置mapper xml文件的路径
+
+# 控制日志输出自定义，并且MyBatis日志关闭查询结果输出保留SQL输出
+logging:
+  config: classpath:logback-custom.xml
+  level:
+    com.zty: debug
+    org.springframework: error
+    com.baomidou: debug
+    org.springframework.jdbc.datasource.init: debug
+    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: warn
+    org.apache.ibatis: debug
+    java.sql: debug
+    org.apache.tomcat.util.scan.StandardJarScanner: error #扫描包只输出error日志
+  #使用 logging.file.path= 文件名  //直接在跟目录下创建该文件且自动 帮你创建好 spring.log 文件
+  file:
+    path: springbootLogs

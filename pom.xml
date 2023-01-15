@@ -10,6 +10,7 @@
         <module>common</module>
         <module>common/common_util</module>
         <module>service</module>
+
     </modules>
 
     <parent>
@@ -52,6 +53,7 @@
         <docker.image.prefix>zx</docker.image.prefix>
         <cloud-alibaba.version>0.2.2.RELEASE</cloud-alibaba.version>
         <mybatis.pagehelper.version>5.1.10</mybatis.pagehelper.version>
+        <spring-file-storage.version>0.7.0</spring-file-storage.version>
 
     </properties>
 
@@ -59,7 +61,21 @@
     ，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，并且没有指定具体版本，才会从父项目中继承该项，
     并且version和scope都读取自父pom;另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本-->
     <dependencyManagement>
+
+
         <dependencies>
+
+            <!--在 SpringBoot 中通过简单的方式将文件存储到 本地、FTP、SFTP、WebDAV、谷歌云存储、阿里云OSS、
+       华为云OBS、七牛云Kodo、腾讯云COS、百度云 BOS、又拍云USS、MinIO、 AWS S3、金山云 KS3、美团云 MSS、
+       京东云 OSS、天翼云 OOS、移动云 EOS、沃云 OSS、 网易数帆 NOS、Ucloud US3、青云 QingStor、平安云 OBS、
+       首云 OSS、IBM COS、其它兼容 S3 协议的平台   -->
+            <!-- spring-file-storage 必须要引入 -->
+            <dependency>
+                <groupId>cn.xuyanwu</groupId>
+                <artifactId>spring-file-storage</artifactId>
+                <version>${spring-file-storage.version}</version>
+            </dependency>
+
             <!--Spring Cloud-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
