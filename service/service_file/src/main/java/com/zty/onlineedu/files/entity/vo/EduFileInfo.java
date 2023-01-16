@@ -24,17 +24,17 @@ public class EduFileInfo implements Serializable {
     /**
      * 是否图片
      */
-    private Integer isimg;
+    private String isImg;
 
     /**
      * 文件类型
      */
-    private String contenttype;
+    private String contentType;
 
     /**
      * 大小
      */
-    private Integer filesize;
+    private String fileSize;
 
     /**
      * 物理路径
@@ -54,7 +54,7 @@ public class EduFileInfo implements Serializable {
     /**
      * 创建日期
      */
-    private String createtime;
+    private String createTime;
 
     private static final long serialVersionUID = 1L;
 }
