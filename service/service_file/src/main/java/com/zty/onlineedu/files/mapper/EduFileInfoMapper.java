@@ -1,5 +1,6 @@
 package com.zty.onlineedu.files.mapper;
 
+import com.zty.onlineedu.files.entity.vo.EduFileInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,6 +11,8 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface EduFileInfoMapper {
+
+    void saveFileInfo(EduFileInfo eduFileInfo);
 
 }
 
