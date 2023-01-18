@@ -2,7 +2,6 @@ package com.zty.onlineedu.edu.service;
 
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public interface EduTeacherService{
      * @param eduTeacher
      * @return
      */
-    int saveTeacher(@Param("eduTeacher") EduTeacher eduTeacher);
+    int saveTeacher(EduTeacher eduTeacher,String fileId);
 
     /**
      * 通过id查询出教师信息
