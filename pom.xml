@@ -54,6 +54,7 @@
         <cloud-alibaba.version>0.2.2.RELEASE</cloud-alibaba.version>
         <mybatis.pagehelper.version>5.1.10</mybatis.pagehelper.version>
         <spring-file-storage.version>0.7.0</spring-file-storage.version>
+        <commons-lang3.version>3.13</commons-lang3.version>
 
     </properties>
 
@@ -62,8 +63,15 @@
     并且version和scope都读取自父pom;另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本-->
     <dependencyManagement>
 
-
+        <!-- Apache Commons Lang3 是 Apache 的一个开源项目，它包含了一组用于操作字符串、数组、日期时间等常用工具类。
+        org.apache.commons.lang3.StringUtils 是 Commons Lang3 中用于操作字符串的工具类。-->
         <dependencies>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
 
             <!--在 SpringBoot 中通过简单的方式将文件存储到 本地、FTP、SFTP、WebDAV、谷歌云存储、阿里云OSS、
        华为云OBS、七牛云Kodo、腾讯云COS、百度云 BOS、又拍云USS、MinIO、 AWS S3、金山云 KS3、美团云 MSS、
