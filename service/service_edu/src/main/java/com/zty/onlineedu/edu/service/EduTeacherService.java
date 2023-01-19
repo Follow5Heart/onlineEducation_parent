@@ -31,7 +31,7 @@ public interface EduTeacherService{
      * @param eduTeacher
      * @return
      */
-    int saveTeacher(EduTeacher eduTeacher,String fileId);
+    int saveTeacher(EduTeacher eduTeacher);
 
     /**
      * 通过id查询出教师信息

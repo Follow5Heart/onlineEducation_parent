@@ -31,6 +31,19 @@
         values
         (#{id},#{name},#{intro},#{career},#{level},#{avatar},#{sort},#{joinDate},#{isDeleted},#{gmtCreate},#{gmtModified})
     </insert>
+    <insert id="saveFileInfoRelation">
+        INSERT INTO edu_file_info_relation(DATAKEY,FILE_INDIRECT_ID,
+                                           FILE_DIRECT_ID,
+                                           FILE_TYPE,
+                                           FILE_ID,
+                                           FILE_NAME,
+                                           FILE_VERSION,
+                                           CREATE_UID,
+                                           CREATE_UNAME,
+                                           CREATE_TIME,
+                                           YEAR,
+                                           PROVINCE) values (#{datakey},#{fileIndirectId},#{fileDirectId},#{fileType},#{fileId},#{fileName},#{fileVersion},#{createUid},#{createUname},#{createTime},#{year},#{province})
+    </insert>
     <update id="updateTeacher">
         update edu_teacher set name=#{name},intro=#{intro},career=#{career},level=#{level},avatar=#{avatar},sort=#{sort},join_date=#{joinDate},gmt_modified=#{gmtModified} where id=#{id}
     </update>
@@ -45,6 +58,9 @@
                 and id=#{id}
             </if>
         </where>
+    </delete>
+    <delete id="deleteFileRelation">
+        delete from edu_file_info_relation where FILE_INDIRECT_ID=#{id}
     </delete>
     <select id="getTeacherList" resultMap="BaseResultMap">
         select * from edu_teacher
@@ -62,6 +78,9 @@
     </select>
     <select id="queryTeacherById" resultMap="BaseResultMap">
         select * from edu_teacher where id=#{id}
+    </select>
+    <select id="queryFileRelationNum" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM edu_file_info_relation WHERE FILE_INDIRECT_ID=#{id} LIMIT 1
     </select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.zty.onlineedu.edu.mapper;
 
+import com.zty.onlineedu.edu.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -49,4 +50,10 @@ public interface EduTeacherMapper {
      * @param eduTeacher
      */
     void updateTeacher(EduTeacher eduTeacher);
+
+    void saveFileInfoRelation(EduFileInfoRelation eduFileInfoRelation);
+
+    Integer queryFileRelationNum(String id);
+
+    void deleteFileRelation(String id);
 }

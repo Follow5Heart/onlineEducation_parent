@@ -79,5 +79,13 @@ public class EduTeacher implements Serializable {
     @ApiModelProperty("更新时间")
     private String gmtModified;
 
+
+    /**
+     * 附件信息
+     */
+    @ApiModelProperty("更新时间")
+    private String fileInfo;
+
+
     private static final long serialVersionUID = 1L;
 }
