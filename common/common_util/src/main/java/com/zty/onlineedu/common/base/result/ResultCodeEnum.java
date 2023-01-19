@@ -20,8 +20,14 @@ public enum ResultCodeEnum {
     BAD_SQL_GRAMMAR(false, 21001, "sql语法错误"),
     JSON_PARSE_ERROR(false, 21002, "json解析异常"),
     PARAM_ERROR(false, 21003, "参数不正确"),
+    TEACHER_LIST_ERROR(false, 21004, "讲师列表返回异常"),
+    GET_TEACHER_DATA_ERROR(false, 21005, "获取讲师数据异常"),
+    DELETE_TEACHER_DATA_ERROR(false, 21006,"删除讲师数据异常"),
+    GET_TEACHER_PAGE_DATA_ERROR(false, 21007,"获取讲师分页数据异常"),
+    SAVE_TEACHER_DATA_ERROR(false,21008,"保存讲师信息异常"),
+    UPDATE_TEACHER_DATA_ERROR(false,21009,"更新讲师信息异常"),
 
-    FILE_UPLOAD_ERROR(false, 21004, "文件上传错误"),
+    FILE_UPLOAD_ERROR(false, 21004, "文件上传异常"),
     FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),
     EXCEL_DATA_IMPORT_ERROR(false, 21006, "Excel数据导入错误"),
 
