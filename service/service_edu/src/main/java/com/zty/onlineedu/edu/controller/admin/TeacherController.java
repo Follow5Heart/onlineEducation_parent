@@ -3,11 +3,15 @@ package com.zty.onlineedu.edu.controller.admin;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zty.onlineedu.common.base.result.Result;
+import com.zty.onlineedu.common.base.result.ResultCodeEnum;
+import com.zty.onlineedu.common.base.utils.ExceptionUtils;
+import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import com.zty.onlineedu.edu.service.EduTeacherService;
 import com.zty.onlineedu.service.base.exceptions.BusinessException;
 import com.zty.onlineedu.service.base.exceptions.CheckUserNameException;
+import com.zty.onlineedu.service.base.exceptions.GeneralException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,8 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import static com.zty.onlineedu.common.base.result.ResultCodeEnum.BUSINESS_ERROR;
 
 /**
  * @Author zty
@@ -37,17 +41,35 @@ public class TeacherController {
     @ApiOperation("所有的讲师列表")
     @GetMapping("/list")
     public Result teacherList(){
-        TeacherQueryVo teacherQueryVo = new TeacherQueryVo();
-        List<EduTeacher> teacherList=eduTeacherService.teacherList(teacherQueryVo);
-        return Result.ok().data("items", teacherList);
+        //统一格式：try{}catch(Exception e){log.error(""),throw new GeneralException(ResultCodeEnum r)}
+        try{
+            TeacherQueryVo teacherQueryVo = new TeacherQueryVo();
+            List<EduTeacher> teacherList=eduTeacherService.teacherList(teacherQueryVo);
+            return Result.ok().data("items", teacherList);
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.TEACHER_LIST_ERROR);
+        }
+
+
 
     }
 
     @ApiOperation("通过id获取讲师数据")
     @GetMapping("/{id}")
-    public Result pringParams(@PathVariable("id") String id){
-        EduTeacher teacher=eduTeacherService.queryTeacherById(id);
-        return Result.ok().data("items", teacher);
+    public Result getTeacherById(@PathVariable("id") String id){
+        try{
+            EduTeacher teacher=eduTeacherService.queryTeacherById(id);
+            Map<String,Object> fileInfoMap=eduTeacherService.queryFileInfo(id);
+            String fileInfo = JsonUtils.objectToJson(fileInfoMap);
+            teacher.setFileInfo(fileInfo);
+            return Result.ok().data("items", teacher);
+
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.GET_TEACHER_DATA_ERROR);
+
+        }
 
     }
 
@@ -57,12 +79,20 @@ public class TeacherController {
     @ApiOperation("删除讲师当条数据")
     @DeleteMapping("/delete")
     public Result deleteData(@RequestBody EduTeacher eduTeacher){
+        try{
+            Integer resultCount=eduTeacherService.deleteData(eduTeacher);
+            if (resultCount>0){
+                return Result.ok().message("删除成功");
+            }
+            return Result.error().message("删除失败");
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.DELETE_TEACHER_DATA_ERROR);
 
-        Integer resultCount=eduTeacherService.deleteData(eduTeacher);
-        if (resultCount>0){
-            return Result.ok().message("删除成功");
         }
-        return Result.error().message("删除失败");
+
+
+
 
     }
 
@@ -75,13 +105,17 @@ public class TeacherController {
     public Result listPate(@ApiParam("当前页码") @PathVariable("page") int page,
                            @ApiParam("每页记录数") @PathVariable("limit") int limit,
                            @ApiParam("查询对象") @RequestBody TeacherQueryVo teacherQueryVo){
-        PageHelper.clearPage();
-        PageHelper.startPage(page, limit);
-        List<EduTeacher> teacherList = eduTeacherService.teacherList(teacherQueryVo);
-        log.info(teacherList);
-        PageInfo<EduTeacher> eduTeacherPageInfo = new PageInfo<>(teacherList, limit);
+        try{
+            PageHelper.clearPage();
+            PageHelper.startPage(page, limit);
+            List<EduTeacher> teacherList = eduTeacherService.teacherList(teacherQueryVo);
+            PageInfo<EduTeacher> eduTeacherPageInfo = new PageInfo<>(teacherList, limit);
 
-        return Result.ok().data("items",eduTeacherPageInfo);
+            return Result.ok().data("items",eduTeacherPageInfo);
+        }catch(Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.GET_TEACHER_PAGE_DATA_ERROR);
+        }
 
     }
 
@@ -93,23 +127,34 @@ public class TeacherController {
     @ApiOperation("保存讲师信息")
     @PostMapping("/saveTeacher")
     public Result saveTeacher(@RequestBody @ApiParam("讲师信息对象") EduTeacher eduTeacher){
-
-        int result=eduTeacherService.saveTeacher(eduTeacher);
-        if (result>0){
-            return Result.ok();
-        }else{
-            return Result.error().message("保存失败");
+        try{
+            int result=eduTeacherService.saveTeacher(eduTeacher);
+            if (result>0){
+                return Result.ok().message("保存成功");
+            }else{
+                return Result.error().message("保存失败");
+            }
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.SAVE_TEACHER_DATA_ERROR);
         }
+
 
     }
 
     @ApiOperation("更新讲师信息")
     @PostMapping("/updateTeacher")
     public Result updateTeacher(@RequestBody @ApiParam("更新的讲师数据") EduTeacher eduTeacher){
-        eduTeacherService.updateTeacher(eduTeacher);
-        return Result.ok();
+        try{
+            eduTeacherService.updateTeacher(eduTeacher);
+            return Result.ok().message("更新成功");
 
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.UPDATE_TEACHER_DATA_ERROR);
+        }
     }
+
 
     /**
      * 测试自定义异常，如果出现了异常，交由全局异常进行处理，并且有全局异常返回响应体
@@ -119,7 +164,7 @@ public class TeacherController {
     @GetMapping("/error")
     public Result getError(){
         if (0==0){
-            throw new BusinessException(BUSINESS_ERROR.getMessage());
+            throw new BusinessException(ResultCodeEnum.BUSINESS_ERROR.getMessage());
         }
         return Result.ok();
 
