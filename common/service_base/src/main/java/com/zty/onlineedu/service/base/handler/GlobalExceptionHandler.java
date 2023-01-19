@@ -1,8 +1,11 @@
 package com.zty.onlineedu.service.base.handler;
 
 import com.zty.onlineedu.common.base.result.Result;
+import com.zty.onlineedu.common.base.utils.ExceptionUtils;
 import com.zty.onlineedu.service.base.exceptions.BusinessException;
 import com.zty.onlineedu.service.base.exceptions.CheckUserNameException;
+import com.zty.onlineedu.service.base.exceptions.GeneralException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -21,7 +24,20 @@ import static com.zty.onlineedu.common.base.result.ResultCodeEnum.*;
  * @Date 2022/12/7 20:25
  */
 @RestControllerAdvice
+@Log4j2
 public class GlobalExceptionHandler {
+
+    /**
+     * controller层的通用类型异常处理
+     * @param
+     * @return
+     */
+    @ExceptionHandler(GeneralException.class)
+    public Result error(GeneralException generalException){
+        log.error(ExceptionUtils.getExceptionMessage(generalException));
+        return Result.setResult(generalException.getResultCodeEnum());
+
+    }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Result error(HttpMessageNotReadableException e){
