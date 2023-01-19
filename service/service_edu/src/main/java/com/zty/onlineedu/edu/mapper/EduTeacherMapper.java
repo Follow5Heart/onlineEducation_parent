@@ -6,6 +6,7 @@ import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 17939
@@ -56,4 +57,8 @@ public interface EduTeacherMapper {
     Integer queryFileRelationNum(String id);
 
     void deleteFileRelation(String id);
+
+    String queryFileInfoRelationByIndirectId(String id);
+
+    Map<String, Object> queryFileInfoById(String fileId);
 }

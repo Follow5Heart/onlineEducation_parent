@@ -82,5 +82,11 @@
     <select id="queryFileRelationNum" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM edu_file_info_relation WHERE FILE_INDIRECT_ID=#{id} LIMIT 1
     </select>
+    <select id="queryFileInfoRelationByIndirectId" resultType="java.lang.String">
+        select FILE_ID from edu_file_info_relation where FILE_INDIRECT_ID=#{id}
+    </select>
+    <select id="queryFileInfoById" resultType="java.util.Map">
+        select * from edu_file_info where id=#{id}
+    </select>
 
 </mapper>

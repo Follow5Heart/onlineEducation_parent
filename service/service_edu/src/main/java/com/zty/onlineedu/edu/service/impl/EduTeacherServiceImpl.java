@@ -2,6 +2,7 @@ package com.zty.onlineedu.edu.service.impl;
 
 import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
+import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
 import com.zty.onlineedu.edu.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.entity.EduTeacher;
@@ -29,7 +30,7 @@ public class EduTeacherServiceImpl implements EduTeacherService{
     @Override
     public List<EduTeacher> teacherList(TeacherQueryVo teacherQueryVo) {
 
-        if (teacherQueryVo.getName()!=null) {
+        if (StringUtils.isNotEmpty(teacherQueryVo.getName())) {
             String name = teacherQueryVo.getName();
             teacherQueryVo.setName("%" +name+"%");
 
@@ -120,10 +121,27 @@ public class EduTeacherServiceImpl implements EduTeacherService{
         Map map = JsonUtils.jsonToMap(fileInfo);
         eduFileInfoRelation.setFileType(map.get("contentType").toString());
         eduFileInfoRelation.setFileId(map.get("id").toString());
-        eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
+        if (map.get("originalFilename")!=null){
+            eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
+        }else if (map.get("name")!=null){
+            eduFileInfoRelation.setFileName(map.get("name").toString());
+        }else{
+            eduFileInfoRelation.setFileName("");
+        }
+
         eduFileInfoRelation.setCreateTime(LocalDateTimeUtils.FormatNow());
         eduTeacherMapper.saveFileInfoRelation(eduFileInfoRelation);
 
 
+    }
+
+    @Override
+    public Map<String, Object> queryFileInfo(String id) {
+        String fileId=eduTeacherMapper.queryFileInfoRelationByIndirectId(id);
+        if (StringUtils.isNotEmpty(fileId)) {
+            Map<String,Object> fileInfo=eduTeacherMapper.queryFileInfoById(fileId);
+            return fileInfo;
+        }
+        return null;
     }
 }

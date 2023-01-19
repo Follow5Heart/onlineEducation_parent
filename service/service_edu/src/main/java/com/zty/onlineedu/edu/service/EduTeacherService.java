@@ -4,6 +4,7 @@ import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 17939
@@ -46,4 +47,10 @@ public interface EduTeacherService{
      */
     void updateTeacher(EduTeacher eduTeacher);
 
+    /**
+     * 通过讲师id,查询附件文件信息
+     * @param id
+     * @return
+     */
+    Map<String, Object> queryFileInfo(String id);
 }
