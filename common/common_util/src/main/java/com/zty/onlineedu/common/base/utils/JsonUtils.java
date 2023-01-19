@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * @Author zty
  * @Date 2023/1/19 15:03
+ * json处理工具类
  */
 public class JsonUtils {
     private static final ObjectMapper MAPPER = new ObjectMapper();
