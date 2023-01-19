@@ -27,7 +27,7 @@ public class FileDetailServiceImpl implements FileDetailService {
      */
     @SneakyThrows
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public boolean record(FileInfo fileInfo) {
 
         //封装数据信息
