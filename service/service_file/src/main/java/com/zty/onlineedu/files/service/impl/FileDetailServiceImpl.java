@@ -31,9 +31,10 @@ public class FileDetailServiceImpl implements FileDetailService {
     public boolean record(FileInfo fileInfo) {
 
         //封装数据信息
+        String datakey=UUID.randomUUID().toString().replace("-", "").toLowerCase();
         EduFileInfo eduFileInfo = new EduFileInfo();
-        eduFileInfo.setId(UUID.randomUUID().toString().replace("-", "").toLowerCase());
-        eduFileInfo.setName(fileInfo.getFilename());
+        eduFileInfo.setId(datakey);
+        eduFileInfo.setName(fileInfo.getOriginalFilename());
         //String[] split = fileInfo.getFilename().split(".");
 
         eduFileInfo.setContentType(fileInfo.getContentType());
@@ -43,6 +44,10 @@ public class FileDetailServiceImpl implements FileDetailService {
         eduFileInfo.setSource("LOCAL");
         eduFileInfo.setCreateTime(LocalDateTimeUtils.FormatNow());
         mapper.saveFileInfo(eduFileInfo);
+
+        //修改回显的id
+        fileInfo.setId(datakey);
+
         return true;
 
 
