@@ -207,8 +207,19 @@ public class TeacherController {
 
         return Result.ok().message("用户不存在，可以放心使用！");
 
+    }
 
+    @ApiOperation("通过关键字实时查询")
+    @GetMapping("/queryListNameByKeyword")
+    public Result queryListNameByKeyword(@ApiParam(value = "关键字",required = true) @RequestParam("keyword") String keyword){
+        try{
+            List<Map<String,Object>> ListName=eduTeacherService.queryListNameByKeyword(keyword);
+            return Result.ok().data("items",ListName);
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.QUERY_LIST_NAME_ERROR);
 
+        }
 
     }
 

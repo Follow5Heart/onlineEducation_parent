@@ -59,4 +59,11 @@ public interface EduTeacherService{
      * @param idLists
      */
     int batchDeleteTeacher(List<String> idLists);
+
+    /**
+     * 通过关键字，查询所有相关讲师姓名
+     * @return
+     */
+    List<Map<String, Object>> queryListNameByKeyword(String keyword);
+
 }

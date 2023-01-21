@@ -94,5 +94,13 @@
     <select id="queryFileInfoById" resultType="java.util.Map">
         select * from edu_file_info where id=#{id}
     </select>
+    <select id="queryListNameByKeyword" resultType="java.util.Map">
+        select name from edu_teacher
+        <where>
+            <if test="keyword!=''">
+                and name like #{keyword}
+            </if>
+        </where>
+    </select>
 
 </mapper>

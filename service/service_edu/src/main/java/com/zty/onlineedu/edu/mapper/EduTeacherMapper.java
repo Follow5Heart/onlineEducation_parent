@@ -64,4 +64,6 @@ public interface EduTeacherMapper {
     Map<String, Object> queryFileInfoById(String fileId);
 
     int batchDeleteTeacher(@Param("idLists") List<String> idLists);
+
+    List<Map<String, Object>> queryListNameByKeyword(@Param("keyword") String keyword);
 }

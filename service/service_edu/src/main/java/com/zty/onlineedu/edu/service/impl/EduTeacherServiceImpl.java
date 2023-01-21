@@ -157,4 +157,16 @@ public class EduTeacherServiceImpl implements EduTeacherService{
 
         return result;
     }
+
+    @Override
+    public List<Map<String, Object>> queryListNameByKeyword(String keyword) {
+
+        if (StringUtils.isNotEmpty(keyword)){
+            keyword="%"+keyword+"%";
+        }else{
+            keyword="";
+        }
+        List<Map<String, Object>> ListName=eduTeacherMapper.queryListNameByKeyword(keyword);
+        return ListName;
+    }
 }
