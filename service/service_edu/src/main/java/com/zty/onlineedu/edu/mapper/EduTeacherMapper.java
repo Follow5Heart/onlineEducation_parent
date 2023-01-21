@@ -4,6 +4,7 @@ import com.zty.onlineedu.edu.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -61,4 +62,6 @@ public interface EduTeacherMapper {
     String queryFileInfoRelationByIndirectId(String id);
 
     Map<String, Object> queryFileInfoById(String fileId);
+
+    int batchDeleteTeacher(@Param("idLists") List<String> idLists);
 }

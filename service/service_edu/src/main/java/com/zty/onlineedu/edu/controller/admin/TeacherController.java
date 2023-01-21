@@ -6,6 +6,7 @@ import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
 import com.zty.onlineedu.common.base.utils.JsonUtils;
+import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import com.zty.onlineedu.edu.service.EduTeacherService;
@@ -91,10 +92,29 @@ public class TeacherController {
 
         }
 
+    }
 
+    @ApiOperation("批量删除讲师数据")
+    @DeleteMapping("/batchDeleteTeacher")
+    public Result batchDeleteTeacher(@ApiParam(value = "讲师id列表",required = true) @RequestBody List<String> idList){
+        try{
+            if (StringUtils.isNotEmpty(idList)){
+                Integer result=eduTeacherService.batchDeleteTeacher(idList);
+                if (result>0){
 
+                    return Result.ok().message("删除成功！");
+                }
+                return Result.error().message("删除失败");
+
+            }
+            return Result.error().message("参数不能为空");
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.BATCH_DELETE_TEACHER_DATA_ERROR);
+        }
 
     }
+
 
     /**
      * 讲师分页列表

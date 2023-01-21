@@ -62,6 +62,12 @@
     <delete id="deleteFileRelation">
         delete from edu_file_info_relation where FILE_INDIRECT_ID=#{id}
     </delete>
+    <delete id="batchDeleteTeacher">
+        delete from edu_teacher where id in
+    <foreach collection="idLists" item="id" open="(" close=")" separator=",">
+        #{id}
+    </foreach>
+    </delete>
     <select id="getTeacherList" resultMap="BaseResultMap">
         select * from edu_teacher
         <where>

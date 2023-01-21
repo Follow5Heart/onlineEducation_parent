@@ -44,6 +44,7 @@ public class EduTeacherServiceImpl implements EduTeacherService{
     @Transactional
     public Integer deleteData(EduTeacher eduTeacher) {
         Integer resultCount=eduTeacherMapper.deleteData(eduTeacher);
+        eduTeacherMapper.deleteFileRelation(eduTeacher.getId());
         return resultCount;
     }
 
@@ -143,5 +144,17 @@ public class EduTeacherServiceImpl implements EduTeacherService{
             return fileInfo;
         }
         return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int batchDeleteTeacher(List<String> idLists) {
+        //删除edu_teacher表数据
+        int result=eduTeacherMapper.batchDeleteTeacher(idLists);
+
+        //删除讲师与附件信息关联表
+        idLists.stream().forEach(id->eduTeacherMapper.deleteFileRelation(id));
+
+        return result;
     }
 }

@@ -26,6 +26,7 @@ public enum ResultCodeEnum {
     GET_TEACHER_PAGE_DATA_ERROR(false, 21007,"获取讲师分页数据异常"),
     SAVE_TEACHER_DATA_ERROR(false,21008,"保存讲师信息异常"),
     UPDATE_TEACHER_DATA_ERROR(false,21009,"更新讲师信息异常"),
+    BATCH_DELETE_TEACHER_DATA_ERROR(false,21010,"批量删除异常"),
 
     FILE_UPLOAD_ERROR(false, 21004, "文件上传异常"),
     FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),

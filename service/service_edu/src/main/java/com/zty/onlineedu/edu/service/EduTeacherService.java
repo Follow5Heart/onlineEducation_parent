@@ -53,4 +53,10 @@ public interface EduTeacherService{
      * @return
      */
     Map<String, Object> queryFileInfo(String id);
+
+    /**
+     * 通过ids，批量删除讲师数据
+     * @param idLists
+     */
+    int batchDeleteTeacher(List<String> idLists);
 }
