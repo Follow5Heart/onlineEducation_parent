@@ -34,6 +34,11 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+        <!--   nacos服务调用 openfeign  一般用于服务得消费方需要此依赖 a调用b得接口，那么a需要安装此依赖，这里为了方便其他服务使用，放在service得pom中  -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 
 
         <dependency>
