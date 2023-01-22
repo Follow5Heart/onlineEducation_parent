@@ -51,7 +51,7 @@
         <commons-dbutils.version>1.7</commons-dbutils.version>
         <canal.client.version>1.1.4</canal.client.version>
         <docker.image.prefix>zx</docker.image.prefix>
-        <cloud-alibaba.version>0.2.2.RELEASE</cloud-alibaba.version>
+        <cloud-alibaba.version>2.2.0.RELEASE</cloud-alibaba.version>
         <mybatis.pagehelper.version>5.1.10</mybatis.pagehelper.version>
         <spring-file-storage.version>0.7.0</spring-file-storage.version>
         <commons-lang3.version>3.13</commons-lang3.version>
@@ -94,11 +94,12 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
+                <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+
             </dependency>
 
             <!--mybatis 持久层-->

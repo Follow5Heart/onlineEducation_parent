@@ -6,12 +6,17 @@ server:
 
 spring:
   application:
-    name: service_edu # 服务名
+    name: service-edu # 服务名
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_onlineedu_edu?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: root
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #nacos服务地址
 
 #打印sql日志  可以在控制台查看sql语句的日志
 mybatis:
