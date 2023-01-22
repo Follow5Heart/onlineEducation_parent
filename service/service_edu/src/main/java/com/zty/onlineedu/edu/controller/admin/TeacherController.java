@@ -9,6 +9,7 @@ import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import com.zty.onlineedu.edu.feign.FileService;
 import com.zty.onlineedu.edu.service.EduTeacherService;
 import com.zty.onlineedu.service.base.exceptions.BusinessException;
 import com.zty.onlineedu.service.base.exceptions.CheckUserNameException;
@@ -38,6 +39,17 @@ public class TeacherController {
 
     @Autowired
     private EduTeacherService eduTeacherService;
+
+    @Autowired
+    private FileService fileService;
+
+    @ApiOperation("测试远程调用")
+    @GetMapping("/test")
+    public Result test(){
+        Result test = fileService.test();
+        return test;
+
+    }
 
     @ApiOperation("所有的讲师列表")
     @GetMapping("/list")

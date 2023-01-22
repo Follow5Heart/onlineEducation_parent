@@ -12,7 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /*如果应用spring-file-storage,
 要在启动类上加上@EnableFileStorage注解*/
 @EnableFileStorage
-@SpringBootApplication()
+@SpringBootApplication
 @EnableDiscoveryClient
 public class ServiceFilesApplication {
     public static void main(String[] args) {

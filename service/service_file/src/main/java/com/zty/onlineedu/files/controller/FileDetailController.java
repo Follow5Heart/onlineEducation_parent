@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Author zty
  * @Date 2023/1/15 20:51
  */
-@Api("文件服务")
+@Api(tags="文件管理")
 @CrossOrigin
 @Log4j2
 @RestController
@@ -39,13 +39,24 @@ public class FileDetailController {
         try{
             FileInfo fileInfo = fileStorageService.of(file).upload();
             return fileInfo == null ? Result.ok().message("文件上传失败！") : Result.ok().data("fileInfo",fileInfo).message("文件上传成功");
-
         }catch (Exception e){
             log.error(ExceptionUtils.getExceptionMessage(e));
             throw new GeneralException(ResultCodeEnum.FILE_UPLOAD_ERROR);
 
         }
 
+
+    }
+
+    /**
+     * 用于微服务之间调用的测试方法
+     * @return
+     */
+    @ApiOperation(value = "测试")
+    @GetMapping("/test")
+    public Result test(){
+           log.info("file test被调用");
+           return Result.ok();
 
     }
 
