@@ -38,6 +38,17 @@ public class Swagger2Config {
 
     }
 
+    @Bean
+    public Docket createFileApi(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("fileApi")
+                .apiInfo(apiInfoAdmin())
+                .select()
+                .paths(Predicates.and(PathSelectors.regex("/service-files/.*")))
+                .build();
+
+    }
+
     private ApiInfo apiInfoWeb(){
         return new ApiInfoBuilder()
                 .title("网站开发接口文档")
