@@ -55,3 +55,5 @@ logging:
 ribbon:
   MaxAutoRetries: 1  #针对当前发给提供方的服务，最大重试次数，不包括首次调用，默认为0，意思就是如果第一次调用远程微服务失败后，会在发一次，还是同一个实例（同一个服务ip,端口都一样）
   MaxAutoRetriesNextServer: 1 #重试其他实例的最大重试次数，不包括首次所选的server,默认为1  就是如果远程调用失败了，会调用下一个server，如果只有一个，那么下一个server就还是它
+  ConnectTimeout: 5000 # 连接建立的超时时长，默认为1秒 这里设置为5秒
+  ReadTimeout: 5000 #处理请求的超时时常，默认为1秒  这里设置为5秒
