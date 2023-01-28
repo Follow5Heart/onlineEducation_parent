@@ -41,3 +41,12 @@ logging:
   #使用 logging.file.path= 文件名  //直接在跟目录下创建该文件且自动 帮你创建好 spring.log 文件
   file:
     path: springbootLogs
+
+
+#nacos是自带Ribbon的。Spring Cloud Ribbon是一个基于HTTP和TCP的客户端负载均衡工具，
+#它基于Netflix Ribbon实现。通过Spring Cloud的封装，
+#可以让我们轻松地将面向服务的REST模版请求自动转换成客户端负载均衡的服务调用。
+#nacos封装好的负载均衡默认是轮询策略，（你一次我一次）
+#service-file:  #这里是服务提供方的名称
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #设置为随机策略
