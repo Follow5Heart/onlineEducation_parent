@@ -50,3 +50,8 @@ logging:
 #service-file:  #这里是服务提供方的名称
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #设置为随机策略
+
+
+ribbon:
+  MaxAutoRetries: 1  #针对当前发给提供方的服务，最大重试次数，不包括首次调用，默认为0，意思就是如果第一次调用远程微服务失败后，会在发一次，还是同一个实例（同一个服务ip,端口都一样）
+  MaxAutoRetriesNextServer: 1 #重试其他实例的最大重试次数，不包括首次所选的server,默认为1  就是如果远程调用失败了，会调用下一个server，如果只有一个，那么下一个server就还是它
