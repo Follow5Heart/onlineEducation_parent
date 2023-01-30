@@ -11,9 +11,25 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface EduFileInfoMapper {
-
+    /**
+     * 保存文件信息
+     * @param eduFileInfo
+     */
     void saveFileInfo(EduFileInfo eduFileInfo);
 
+    /**
+     * 查询文件信息通过文件路径
+     * @param fileId
+     * @return
+     */
+    EduFileInfo queryFileInfoById(String fileId);
+
+    /**
+     * 通过主键删除文件信息表数据
+     * @param id
+     * @return
+     */
+    Integer deleteFileInfo(String id);
 }
 
 

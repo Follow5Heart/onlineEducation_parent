@@ -5,6 +5,7 @@ import cn.xuyanwu.spring.file.storage.FileStorageService;
 import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
+import com.zty.onlineedu.files.service.FileDetailService;
 import com.zty.onlineedu.service.base.exceptions.GeneralException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,9 @@ public class FileDetailController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @Autowired
+    private FileDetailService fileDetailService;
+
     @ApiOperation("文件上传服务")
     @PostMapping("/upload")
     public Result uploadFile(@ApiParam(value = "文件对象", required = true)
@@ -46,6 +50,25 @@ public class FileDetailController {
 
         }
 
+
+    }
+
+    @ApiOperation("文件删除功能")
+    @DeleteMapping("/delete")
+    public Result deleteFile(@ApiParam(value = "文件id",required=true) @RequestBody String fileId){
+        try{
+            boolean result=fileDetailService.deleteFile(fileId);
+            if (result){
+                return Result.ok().message("删除成功");
+            }else{
+                return Result.error().message("删除失败");
+            }
+
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.FILE_DELETE_ERROR);
+
+        }
 
     }
 

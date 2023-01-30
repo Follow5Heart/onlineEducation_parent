@@ -66,4 +66,17 @@ public interface EduTeacherMapper {
     int batchDeleteTeacher(@Param("idLists") List<String> idLists);
 
     List<Map<String, Object>> queryListNameByKeyword(@Param("keyword") String keyword);
+
+    /**
+     * 通过主键id,查询文件的url路径
+     * @param fileId
+     * @return
+     */
+    String queryFileInfoUrl(String fileId);
+
+    /**
+     * 通过主键id,删除文件信息
+     * @param fileId
+     */
+    void deleteFileInfo(String fileId);
 }

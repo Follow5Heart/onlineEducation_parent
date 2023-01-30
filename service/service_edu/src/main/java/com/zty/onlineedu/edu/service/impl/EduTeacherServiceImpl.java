@@ -1,5 +1,6 @@
 package com.zty.onlineedu.edu.service.impl;
 
+import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.StringUtils;
@@ -7,6 +8,7 @@ import com.zty.onlineedu.common.base.utils.UUIDUtils;
 import com.zty.onlineedu.edu.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.entity.EduTeacher;
 import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import com.zty.onlineedu.edu.feign.FileService;
 import com.zty.onlineedu.edu.mapper.EduTeacherMapper;
 import com.zty.onlineedu.edu.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class EduTeacherServiceImpl implements EduTeacherService{
     @Autowired
     private EduTeacherMapper eduTeacherMapper;
 
+    @Autowired
+    private FileService fileService;
+
     @Override
     public List<EduTeacher> teacherList(TeacherQueryVo teacherQueryVo) {
 
@@ -43,6 +48,9 @@ public class EduTeacherServiceImpl implements EduTeacherService{
     @Override
     @Transactional
     public Integer deleteData(EduTeacher eduTeacher) {
+        //先删除存储在本地讲师头像和文件信息表数据
+        deleteFileInfoTableAndLocalFile(eduTeacher.getId());
+
         Integer resultCount=eduTeacherMapper.deleteData(eduTeacher);
         eduTeacherMapper.deleteFileRelation(eduTeacher.getId());
         return resultCount;
@@ -168,5 +176,33 @@ public class EduTeacherServiceImpl implements EduTeacherService{
         }
         List<Map<String, Object>> ListName=eduTeacherMapper.queryListNameByKeyword(keyword);
         return ListName;
+    }
+
+    /**
+     * 公用方法
+     * 通过讲师id删除文件信息表，和本地存储的文件
+     * @param id
+     */
+    public void deleteFileInfoTableAndLocalFile(String id){
+        if (StringUtils.isNotEmpty(id)){
+            EduTeacher teacher = eduTeacherMapper.queryTeacherById(id);
+            if (teacher != null){
+                String fileId = eduTeacherMapper.queryFileInfoRelationByIndirectId(id);
+                if (StringUtils.isNotEmpty(fileId)){
+                    Result result = fileService.deleteFile(fileId);
+                    if (result.getSuccess()!=true){
+                        throw new RuntimeException("远程调用服务异常");
+                    }
+                }else{
+                    throw new RuntimeException("关联表中没有匹配的数据");
+                }
+            }else{
+                throw new RuntimeException("库中没有匹配的数据");
+            }
+
+        }else{
+            throw new RuntimeException("文件id不能为空");
+        }
+
     }
 }

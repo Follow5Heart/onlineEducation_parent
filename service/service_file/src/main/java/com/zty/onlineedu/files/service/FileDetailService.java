@@ -8,4 +8,10 @@ import cn.xuyanwu.spring.file.storage.recorder.FileRecorder;
  */
 
 public interface FileDetailService extends FileRecorder {
+    /**
+     * 删除本地文件和文件信息表数据
+     * @param fileId
+     * @return
+     */
+    boolean deleteFile(String fileId);
 }

@@ -26,4 +26,10 @@
         (<include refid="Base_Column_List"/>)
         values (#{id},#{name},#{isImg},#{contentType},#{fileSize},#{path},#{url},#{source},#{createTime})
     </insert>
+    <delete id="deleteFileInfo">
+        delete from edu_file_info where id=#{id}
+    </delete>
+    <select id="queryFileInfoById" resultType="com.zty.onlineedu.files.entity.vo.EduFileInfo">
+        select * from edu_file_info where id=#{fileId}
+    </select>
 </mapper>

@@ -68,6 +68,9 @@
         #{id}
     </foreach>
     </delete>
+    <delete id="deleteFileInfo">
+        delete from edu_file_info where id=#{fileId}
+    </delete>
     <select id="getTeacherList" resultMap="BaseResultMap">
         select * from edu_teacher
         <where>
@@ -101,6 +104,9 @@
                 and name like #{keyword}
             </if>
         </where>
+    </select>
+    <select id="queryFileInfoUrl" resultType="java.lang.String">
+        select url from edu_file_info where id=#{fileId}
     </select>
 
 </mapper>
