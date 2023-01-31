@@ -51,6 +51,14 @@ public class TeacherController {
 
     }
 
+    @ApiOperation("并发访问接口测试")
+    @GetMapping("/test_connect")
+    public Result testConnect(){
+        log.info("正在进行并发访问测试");
+        return Result.ok();
+
+    }
+
     @ApiOperation("所有的讲师列表")
     @GetMapping("/list")
     public Result teacherList(){

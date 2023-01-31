@@ -3,6 +3,8 @@ application:
 
 server:
   port: 8110 # 服务端口
+  tomcat:
+    max-threads: 10 #将tomcat的最大并发值修改为10，默认是200
 
 spring:
   application:
