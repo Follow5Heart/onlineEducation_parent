@@ -64,3 +64,8 @@ ribbon:
   MaxAutoRetriesNextServer: 1 #重试其他实例的最大重试次数，不包括首次所选的server,默认为1  就是如果远程调用失败了，会调用下一个server，如果只有一个，那么下一个server就还是它
   ConnectTimeout: 5000 # 连接建立的超时时长，默认为1秒 这里设置为5秒
   ReadTimeout: 5000 #处理请求的超时时常，默认为1秒  这里设置为5秒
+
+# 开启feign对sentinel的支持  如果edu调用file服务，如果file报错，那么要对edu进行熔断保护
+feign:
+  sentinel:
+    enabled: true
