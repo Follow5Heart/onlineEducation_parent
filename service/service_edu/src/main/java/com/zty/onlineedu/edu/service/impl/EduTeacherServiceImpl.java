@@ -11,6 +11,7 @@ import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
 import com.zty.onlineedu.edu.feign.FileService;
 import com.zty.onlineedu.edu.mapper.EduTeacherMapper;
 import com.zty.onlineedu.edu.service.EduTeacherService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.util.Map;
 * @description 针对表【edu_teacher(讲师)】的数据库操作Service实现
 * @createDate 2022-12-03 13:53:11
 */
+@Log4j2
 @Service
 public class EduTeacherServiceImpl implements EduTeacherService{
 
@@ -189,9 +191,11 @@ public class EduTeacherServiceImpl implements EduTeacherService{
             if (teacher != null){
                 String fileId = eduTeacherMapper.queryFileInfoRelationByIndirectId(id);
                 if (StringUtils.isNotEmpty(fileId)){
-                    Result result = fileService.deleteFile(fileId);
+                    Result result=fileService.deleteFile(fileId);
+                    //下面的代码要注释掉，因为不需要手动抛出异常，已经有sentinel对其实现了熔断降级处理
+                    //如果fileService.deleteFile(fileId)调用异常，或超时。会实现已经写好的降级处理，不要影响删除的主要逻辑。
                     if (result.getSuccess()!=true){
-                        throw new RuntimeException("远程调用服务异常");
+                        log.error("file微服务删除文件失败，请联系开发人员进行排查");
                     }
                 }else{
                     throw new RuntimeException("关联表中没有匹配的数据");
