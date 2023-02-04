@@ -42,7 +42,7 @@ public class LoginController {
 
             return Result.ok().data("name","dev_admin")
                     .data("roles","[admin]")
-                    .data("avatar","https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.huabanimg.com%2F2dbbc9177be8b9912b2a0d881200dd47ccb84d92710aa-IepOs1_fw658&refer=http%3A%2F%2Fhbimg.huabanimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1675432161&t=b1b040ccdbcf12ec36e27241523f55d8");
+                    .data("avatar","https://img0.baidu.com/it/u=2161987666,4267232203&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500");
         }
         return Result.error();
 
