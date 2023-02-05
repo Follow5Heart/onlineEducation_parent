@@ -1,7 +1,14 @@
 package com.zty.onlineedu.edu.service.impl;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.support.ExcelTypeEnum;
+import com.zty.onlineedu.edu.entity.execl.ExcelSubjectData;
+import com.zty.onlineedu.edu.listener.ExcelSubjectDataListener;
 import com.zty.onlineedu.edu.service.EduSubjectService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
 * @author 17939
@@ -11,4 +18,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class EduSubjectServiceImpl implements EduSubjectService{
 
+
+    @Override
+    public void batchImport(MultipartFile file) throws IOException {
+        //获取文件名
+        String fileName= file.getOriginalFilename();
+        String[] splitName = fileName.split("\\.");
+        String fileType=splitName[splitName.length-1];
+        if ("xls".equals(fileType)){
+            EasyExcel.read(file.getInputStream(), ExcelSubjectData.class, new ExcelSubjectDataListener())
+                    .excelType(ExcelTypeEnum.XLS)
+                    .sheet()
+                    .doRead();
+        }else if("xlsx".equals(fileType)){
+            EasyExcel.read(file.getInputStream(), ExcelSubjectData.class, new ExcelSubjectDataListener())
+                    .excelType(ExcelTypeEnum.XLSX)
+                    .sheet()
+                    .doRead();
+        }else{
+            throw new RuntimeException("只能解析xls,xlsx为后缀的文件");
+        }
+
+
+
+    }
 }
