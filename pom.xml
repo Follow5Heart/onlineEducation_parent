@@ -55,6 +55,7 @@
         <mybatis.pagehelper.version>5.1.10</mybatis.pagehelper.version>
         <spring-file-storage.version>0.7.0</spring-file-storage.version>
         <commons-lang3.version>3.13</commons-lang3.version>
+        <alibaba-easyexcel.version>3.2.0</alibaba-easyexcel.version>
 
     </properties>
 
@@ -70,6 +71,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${alibaba-easyexcel.version}</version>
             </dependency>
 
 
