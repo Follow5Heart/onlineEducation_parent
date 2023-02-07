@@ -24,7 +24,21 @@ spring:
         #port: 8721 #端口配置会在应用对应的机器上启动一个 Http Server，该 Server 会与 Sentinel 控制台做交互。比如 Sentinel 控制台添加了一个限流规则，会把规则数据 push 给这个 Http Server 接收，Http Server 再将规则注册到 Sentinel 中。
         dashboard: localhost:8040  #sentinel服务地址
 
-
+  #Redis相关配置
+  redis:
+    host: localhost
+    port: 6379
+    password: ztyroot
+    database: 0 #操作的是0号数据库
+    # lettuce简单配置
+    lettuce:
+      pool:
+        # 最大活跃链接数 默认8
+        max-active: 100
+        # 最大空闲连接数 默认8
+        max-idle: 10
+        # 最小空闲连接数 默认0
+        min-idle: 0
 #打印sql日志  可以在控制台查看sql语句的日志
 mybatis:
 #  configuration:
