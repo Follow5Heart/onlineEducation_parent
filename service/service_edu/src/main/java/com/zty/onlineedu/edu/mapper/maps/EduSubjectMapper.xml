@@ -5,16 +5,20 @@
 <mapper namespace="com.zty.onlineedu.edu.mapper.EduSubjectMapper">
 
     <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.entity.EduSubject">
-            <id property="id" column="id" jdbcType="CHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="parentId" column="parent_id" jdbcType="CHAR"/>
-            <result property="sort" column="sort" jdbcType="OTHER"/>
-            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
-            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,title,parent_id,
         sort,gmt_create,gmt_modified
     </sql>
+    <insert id="saveSubject">
+        insert into edu_subject (<include refid="Base_Column_List"/>)
+        values (#{id},#{title},#{parentId},#{sort},#{gmtCreate},#{gmtModified});
+    </insert>
 </mapper>
