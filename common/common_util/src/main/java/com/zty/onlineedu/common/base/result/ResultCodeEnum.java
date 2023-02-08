@@ -32,6 +32,7 @@ public enum ResultCodeEnum {
     FILE_UPLOAD_ERROR(false, 21004, "文件上传异常"),
     FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),
     EXCEL_DATA_IMPORT_ERROR(false, 21006, "Excel数据导入错误"),
+    NEXTED_SUBJECT_DATA_ERROR(false, 21007,"获取嵌套课程异常"),
 
     VIDEO_UPLOAD_ALIYUN_ERROR(false, 22001, "视频上传至阿里云失败"),
     VIDEO_UPLOAD_TOMCAT_ERROR(false, 22002, "视频上传至业务服务器失败"),

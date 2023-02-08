@@ -21,4 +21,7 @@
         insert into edu_subject (<include refid="Base_Column_List"/>)
         values (#{id},#{title},#{parentId},#{sort},#{gmtCreate},#{gmtModified});
     </insert>
+    <select id="querySubjectByParentId" resultType="com.zty.onlineedu.edu.entity.EduSubject">
+        select * from edu_subject where parent_id=#{parentId}
+    </select>
 </mapper>

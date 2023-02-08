@@ -1,8 +1,10 @@
 package com.zty.onlineedu.edu.service;
 
+import com.zty.onlineedu.edu.entity.vo.NextedSubjectVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
 * @author 17939
@@ -15,5 +17,11 @@ public interface EduSubjectService{
      * @param file
      */
     void batchImport(MultipartFile file) throws IOException;
+
+    /**
+     * 获取嵌套课程数据
+     * @return
+     */
+    List<NextedSubjectVo> nextedSubject();
 
 }
