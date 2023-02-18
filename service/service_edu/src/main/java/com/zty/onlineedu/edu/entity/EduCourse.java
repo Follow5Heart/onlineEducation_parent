@@ -1,9 +1,8 @@
 package com.zty.onlineedu.edu.entity;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 课程
@@ -11,6 +10,9 @@ import lombok.Data;
  */
 @Data
 public class EduCourse implements Serializable {
+
+    public static final String DRAFT="Draft";
+    public static final String NORMAL="Normal";
     /**
      * 课程ID
      */
@@ -39,12 +41,12 @@ public class EduCourse implements Serializable {
     /**
      * 课程销售价格，设置为0则可免费观看
      */
-    private BigDecimal price;
+    private String  price;
 
     /**
      * 总课时
      */
-    private Object lessonNum;
+    private String  lessonNum;
 
     /**
      * 课程封面图片路径
@@ -54,17 +56,17 @@ public class EduCourse implements Serializable {
     /**
      * 销售数量
      */
-    private Long buyCount;
+    private String  buyCount;
 
     /**
      * 浏览数量
      */
-    private Long viewCount;
+    private String  viewCount;
 
     /**
      * 乐观锁
      */
-    private Long version;
+    private String  version;
 
     /**
      * 课程状态 Draft未发布  Normal已发布
@@ -74,12 +76,12 @@ public class EduCourse implements Serializable {
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private String  gmtCreate;
 
     /**
      * 更新时间
      */
-    private Date gmtModified;
+    private String gmtModified;
 
     private static final long serialVersionUID = 1L;
 }

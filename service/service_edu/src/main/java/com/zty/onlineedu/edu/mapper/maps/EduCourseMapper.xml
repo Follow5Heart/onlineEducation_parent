@@ -5,20 +5,20 @@
 <mapper namespace="com.zty.onlineedu.edu.mapper.EduCourseMapper">
 
     <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.entity.EduCourse">
-            <id property="id" column="id" jdbcType="CHAR"/>
-            <result property="teacherId" column="teacher_id" jdbcType="CHAR"/>
-            <result property="subjectId" column="subject_id" jdbcType="CHAR"/>
-            <result property="subjectParentId" column="subject_parent_id" jdbcType="CHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="teacherId" column="teacher_id" jdbcType="VARCHAR"/>
+            <result property="subjectId" column="subject_id" jdbcType="VARCHAR"/>
+            <result property="subjectParentId" column="subject_parent_id" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="price" column="price" jdbcType="DECIMAL"/>
-            <result property="lessonNum" column="lesson_num" jdbcType="OTHER"/>
+            <result property="price" column="price" jdbcType="VARCHAR"/>
+            <result property="lessonNum" column="lesson_num" jdbcType="VARCHAR"/>
             <result property="cover" column="cover" jdbcType="VARCHAR"/>
-            <result property="buyCount" column="buy_count" jdbcType="BIGINT"/>
-            <result property="viewCount" column="view_count" jdbcType="BIGINT"/>
-            <result property="version" column="version" jdbcType="BIGINT"/>
+            <result property="buyCount" column="buy_count" jdbcType="VARCHAR"/>
+            <result property="viewCount" column="view_count" jdbcType="VARCHAR"/>
+            <result property="version" column="version" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="VARCHAR"/>
-            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
-            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -28,4 +28,24 @@
         view_count,version,status,
         gmt_create,gmt_modified
     </sql>
+
+    <sql id="Course_Description_List">
+        id,description,gmt_create,gmt_modified
+    </sql>
+    <insert id="saveCourse">
+        insert into edu_course (<include refid="Base_Column_List" />)
+        values (#{id},#{teacherId},#{subjectId},#{subjectParentId},#{title},#{price},#{lessonNum},#{cover},#{buyCount},#{viewCount},#{version},#{status},
+                #{gmtCreate},#{gmtModified})
+
+    </insert>
+    <update id="saveCourseDescription">
+        insert into edu_course_description (<include refid="Course_Description_List"/>)
+        values (#{id},#{description},#{gmtCreate},#{gmtModified})
+    </update>
+    <select id="getCourseInfo" resultMap="BaseResultMap">
+        select * from edu_course where id=#{id}
+    </select>
+    <select id="getCourseDescription" resultType="com.zty.onlineedu.edu.entity.EduCourseDescription">
+        select * from edu_course_description where id=#{id}
+    </select>
 </mapper>
