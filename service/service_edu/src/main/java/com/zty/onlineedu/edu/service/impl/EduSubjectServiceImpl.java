@@ -98,4 +98,10 @@ public class EduSubjectServiceImpl implements EduSubjectService {
 
         return resultList;
     }
+
+    @Override
+    public List<EduSubject> getCurrentSubjectList(String parentId) {
+        List<EduSubject> currentSubjectList=eduSubjectMapper.querySubjectByParentId(parentId);
+        return currentSubjectList;
+    }
 }

@@ -1,5 +1,6 @@
 package com.zty.onlineedu.edu.service;
 
+import com.zty.onlineedu.edu.entity.EduSubject;
 import com.zty.onlineedu.edu.entity.vo.NextedSubjectVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public interface EduSubjectService{
     /**
      * 批量导入excel数据
-     * @param file
+     * @param file 文件流
      */
     void batchImport(MultipartFile file) throws IOException;
 
@@ -23,5 +24,12 @@ public interface EduSubjectService{
      * @return
      */
     List<NextedSubjectVo> nextedSubject();
+
+    /**
+     * 通过父级id获取课分类列表
+     * @param parentId 父级id
+     * @return
+     */
+    List<EduSubject> getCurrentSubjectList(String parentId);
 
 }

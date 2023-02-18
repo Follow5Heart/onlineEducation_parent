@@ -33,6 +33,9 @@ public enum ResultCodeEnum {
     FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),
     EXCEL_DATA_IMPORT_ERROR(false, 21006, "Excel数据导入错误"),
     NEXTED_SUBJECT_DATA_ERROR(false, 21007,"获取嵌套课程异常"),
+    SAVE_COURSE_DATA_ERROR(false,21008,"保存课程信息异常"),
+    GET_CURRENT_SUBJECT_DATA_ERROR(false,21009,"获取课程分类异常"),
+    GET_COURSE_BYID_ERROR(false,21010,"查询课程失败"),
 
     VIDEO_UPLOAD_ALIYUN_ERROR(false, 22001, "视频上传至阿里云失败"),
     VIDEO_UPLOAD_TOMCAT_ERROR(false, 22002, "视频上传至业务服务器失败"),

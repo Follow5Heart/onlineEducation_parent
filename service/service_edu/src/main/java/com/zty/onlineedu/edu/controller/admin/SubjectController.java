@@ -3,6 +3,7 @@ package com.zty.onlineedu.edu.controller.admin;
 import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
+import com.zty.onlineedu.edu.entity.EduSubject;
 import com.zty.onlineedu.edu.entity.vo.NextedSubjectVo;
 import com.zty.onlineedu.edu.service.EduSubjectService;
 import com.zty.onlineedu.service.base.exceptions.GeneralException;
@@ -53,6 +54,20 @@ public class SubjectController {
         }catch (Exception e){
             log.error(ExceptionUtils.getExceptionMessage(e));
             throw new GeneralException(ResultCodeEnum.NEXTED_SUBJECT_DATA_ERROR);
+        }
+
+    }
+
+    @ApiOperation("课程当前级的课程分类")
+    @GetMapping("/getCurrentSubjectList")
+    public Result getCurrentSubjectList(@ApiParam("课程分类父级id")
+                                        @RequestParam("parentId") String parentId){
+        try{
+            List<EduSubject> currentSubjectList=eduSubjectService.getCurrentSubjectList(parentId);
+            return Result.ok().data("currentSubjectList",currentSubjectList);
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.GET_CURRENT_SUBJECT_DATA_ERROR);
 
         }
 

@@ -24,4 +24,5 @@
     <select id="querySubjectByParentId" resultType="com.zty.onlineedu.edu.entity.EduSubject">
         select * from edu_subject where parent_id=#{parentId}
     </select>
+
 </mapper>
