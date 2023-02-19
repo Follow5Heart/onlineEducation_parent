@@ -1,6 +1,6 @@
 package com.zty.onlineedu.edu;
 
-import com.zty.onlineedu.edu.entity.EduChapter;
+import com.zty.onlineedu.edu.pojo.entity.EduChapter;
 import com.zty.onlineedu.edu.mapper.EduChapterMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

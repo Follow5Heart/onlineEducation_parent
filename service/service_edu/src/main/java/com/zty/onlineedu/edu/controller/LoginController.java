@@ -1,7 +1,7 @@
 package com.zty.onlineedu.edu.controller;
 
 import com.zty.onlineedu.common.base.result.Result;
-import com.zty.onlineedu.edu.entity.vo.UserInfo;
+import com.zty.onlineedu.edu.pojo.vo.UserInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -24,7 +24,7 @@ public class LoginController {
      */
     @ApiOperation("用户信息验证")
     @PostMapping("/login")
-    public Result login(@RequestBody @ApiParam("用户信息对象") UserInfo user){
+    public Result login(@RequestBody @ApiParam("用户信息对象") UserInfoVo user){
         String username=user.getUsername();
         String password=user.getPassword();
         if (username.equals("admin")&& password.equals("111111")){

@@ -1,7 +1,7 @@
 package com.zty.onlineedu.edu.service;
 
-import com.zty.onlineedu.edu.entity.EduTeacher;
-import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import com.zty.onlineedu.edu.pojo.entity.EduTeacher;
+import com.zty.onlineedu.edu.pojo.query.TeacherQueryParam;
 
 import java.util.List;
 import java.util.Map;
@@ -16,9 +16,9 @@ public interface EduTeacherService{
     /**
      * 返回所有数据
      * @return
-     * @param teacherQueryVo
+     * @param teacherQueryParam
      */
-    List<EduTeacher> teacherList(TeacherQueryVo teacherQueryVo);
+    List<EduTeacher> teacherList(TeacherQueryParam teacherQueryParam);
 
     /**
      * 删除一条数据*

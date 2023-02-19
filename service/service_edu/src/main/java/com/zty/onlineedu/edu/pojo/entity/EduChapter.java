@@ -1,4 +1,4 @@
-package com.zty.onlineedu.edu.entity;
+package com.zty.onlineedu.edu.pojo.entity;
 
 import lombok.Data;
 

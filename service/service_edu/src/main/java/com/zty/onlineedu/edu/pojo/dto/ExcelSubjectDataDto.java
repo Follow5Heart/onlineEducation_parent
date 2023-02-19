@@ -1,4 +1,4 @@
-package com.zty.onlineedu.edu.entity.execl;
+package com.zty.onlineedu.edu.pojo.dto;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.Data;
  * @Date 2023/2/5 15:27
  */
 @Data
-public class ExcelSubjectData {
+public class ExcelSubjectDataDto {
     @ExcelProperty(value = "一级分类")
     private String levelOneTitle;
 

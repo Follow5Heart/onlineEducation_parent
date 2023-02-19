@@ -1,7 +1,7 @@
 package com.zty.onlineedu.edu.service;
 
-import com.zty.onlineedu.edu.entity.EduSubject;
-import com.zty.onlineedu.edu.entity.vo.NextedSubjectVo;
+import com.zty.onlineedu.edu.pojo.entity.EduSubject;
+import com.zty.onlineedu.edu.pojo.vo.NextedSubjectVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

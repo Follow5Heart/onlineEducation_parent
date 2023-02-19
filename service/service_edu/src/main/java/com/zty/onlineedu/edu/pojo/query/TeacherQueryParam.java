@@ -1,4 +1,4 @@
-package com.zty.onlineedu.edu.entity.vo;
+package com.zty.onlineedu.edu.pojo.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @ApiModel("Teacher查询对象")
 @Data
-public class TeacherQueryVo implements Serializable {
+public class TeacherQueryParam implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "讲师姓名")

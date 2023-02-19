@@ -5,9 +5,9 @@ import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
-import com.zty.onlineedu.edu.entity.EduFileInfoRelation;
-import com.zty.onlineedu.edu.entity.EduTeacher;
-import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
+import com.zty.onlineedu.edu.pojo.entity.EduTeacher;
+import com.zty.onlineedu.edu.pojo.query.TeacherQueryParam;
 import com.zty.onlineedu.edu.feign.FileService;
 import com.zty.onlineedu.edu.mapper.EduTeacherMapper;
 import com.zty.onlineedu.edu.service.EduTeacherService;
@@ -35,15 +35,15 @@ public class EduTeacherServiceImpl implements EduTeacherService{
     private FileService fileService;
 
     @Override
-    public List<EduTeacher> teacherList(TeacherQueryVo teacherQueryVo) {
+    public List<EduTeacher> teacherList(TeacherQueryParam teacherQueryParam) {
 
-        if (StringUtils.isNotEmpty(teacherQueryVo.getName())) {
-            String name = teacherQueryVo.getName();
-            teacherQueryVo.setName("%" +name+"%");
+        if (StringUtils.isNotEmpty(teacherQueryParam.getName())) {
+            String name = teacherQueryParam.getName();
+            teacherQueryParam.setName("%" +name+"%");
 
 
         }
-        List<EduTeacher> teacherList=eduTeacherMapper.getTeacherList(teacherQueryVo);
+        List<EduTeacher> teacherList=eduTeacherMapper.getTeacherList(teacherQueryParam);
         return teacherList;
     }
 

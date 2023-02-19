@@ -2,7 +2,7 @@ package com.zty.onlineedu.files.service.impl;
 
 import cn.xuyanwu.spring.file.storage.FileInfo;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
-import com.zty.onlineedu.files.entity.vo.EduFileInfo;
+import com.zty.onlineedu.files.pojo.vo.EduFileInfoVo;
 import com.zty.onlineedu.files.mapper.EduFileInfoMapper;
 import com.zty.onlineedu.files.service.FileDetailService;
 import lombok.SneakyThrows;
@@ -42,18 +42,18 @@ public class FileDetailServiceImpl implements FileDetailService {
 
         //封装数据信息
         String datakey=UUID.randomUUID().toString().replace("-", "").toLowerCase();
-        EduFileInfo eduFileInfo = new EduFileInfo();
-        eduFileInfo.setId(datakey);
-        eduFileInfo.setName(fileInfo.getOriginalFilename());
+        EduFileInfoVo eduFileInfoVo = new EduFileInfoVo();
+        eduFileInfoVo.setId(datakey);
+        eduFileInfoVo.setName(fileInfo.getOriginalFilename());
         //String[] split = fileInfo.getFilename().split(".");
 
-        eduFileInfo.setContentType(fileInfo.getContentType());
-        eduFileInfo.setFileSize(fileInfo.getSize().toString());
-        eduFileInfo.setPath(fileInfo.getPath());
-        eduFileInfo.setUrl(fileInfo.getUrl());
-        eduFileInfo.setSource("LOCAL");
-        eduFileInfo.setCreateTime(LocalDateTimeUtils.FormatNow());
-        mapper.saveFileInfo(eduFileInfo);
+        eduFileInfoVo.setContentType(fileInfo.getContentType());
+        eduFileInfoVo.setFileSize(fileInfo.getSize().toString());
+        eduFileInfoVo.setPath(fileInfo.getPath());
+        eduFileInfoVo.setUrl(fileInfo.getUrl());
+        eduFileInfoVo.setSource("LOCAL");
+        eduFileInfoVo.setCreateTime(LocalDateTimeUtils.FormatNow());
+        mapper.saveFileInfo(eduFileInfoVo);
 
         //修改回显的id
         fileInfo.setId(datakey);
@@ -94,12 +94,12 @@ public class FileDetailServiceImpl implements FileDetailService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean deleteFile(String fileId) {
-        EduFileInfo eduFileInfo = mapper.queryFileInfoById(fileId);
-        if (eduFileInfo!=null){
+        EduFileInfoVo eduFileInfoVo = mapper.queryFileInfoById(fileId);
+        if (eduFileInfoVo !=null){
             //如果存在，删除表中数据
-            mapper.deleteFileInfo(eduFileInfo.getId());
+            mapper.deleteFileInfo(eduFileInfoVo.getId());
             //删除本地存储文件
-            String url = eduFileInfo.getUrl();
+            String url = eduFileInfoVo.getUrl();
             String[] urlList = url.split("/");
             String fileName=urlList[urlList.length-1];
             String finalPath=storagePath+fileName;

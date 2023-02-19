@@ -3,7 +3,7 @@ package com.zty.onlineedu.edu.controller.admin;
 import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
-import com.zty.onlineedu.edu.entity.form.CourseInfoForm;
+import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.service.EduCourseService;
 import com.zty.onlineedu.service.base.exceptions.GeneralException;
 import io.swagger.annotations.Api;
@@ -30,9 +30,9 @@ public class CourseController {
     @ApiOperation("新增课程")
     @PostMapping("/saveCourseInfo")
     public Result saveCourseInfo(@ApiParam("课程基本信息")
-                                 @RequestBody CourseInfoForm courseInfoForm){
+                                 @RequestBody CourseInfoFormDto courseInfoFormDto){
         try{
-            String courseId = eduCourseService.saveCourseInfo(courseInfoForm);
+            String courseId = eduCourseService.saveCourseInfo(courseInfoFormDto);
             return Result.ok().data("courseId",courseId).message("保存成功！");
 
         }catch(Exception e){
@@ -47,9 +47,9 @@ public class CourseController {
     @GetMapping("/getCourseInfo/{id}")
     public Result getCourseInfo(@ApiParam(value = "课程ID" ,required = true) @PathVariable String id){
         try{
-            CourseInfoForm courseInfoForm=eduCourseService.getCourseInfo(id);
-            if(courseInfoForm!=null){
-                return Result.ok().data("courseInfo",courseInfoForm);
+            CourseInfoFormDto courseInfoFormDto =eduCourseService.getCourseInfo(id);
+            if(courseInfoFormDto !=null){
+                return Result.ok().data("courseInfo", courseInfoFormDto);
 
             }else{
                 return Result.ok().message("数据不存在");
@@ -61,7 +61,18 @@ public class CourseController {
 
         }
 
+    }
 
+    @ApiOperation(value = "更新课程")
+    @PutMapping("/updateCourse")
+    public Result updateCourse(@ApiParam(value = "课程基本信息") @RequestBody CourseInfoFormDto courseInfoFormDto){
+        try{
+            eduCourseService.updateCourse(courseInfoFormDto);
+            return Result.ok().message("更新成功");
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.UPDATE_COURSE_ERROR);
+        }
 
     }
 

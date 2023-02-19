@@ -1,4 +1,4 @@
-package com.zty.onlineedu.files.entity.vo;
+package com.zty.onlineedu.files.pojo.vo;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @TableName edu_file_info
  */
 @Data
-public class EduFileInfo implements Serializable {
+public class EduFileInfoVo implements Serializable {
     /**
      * 文件ID
      */

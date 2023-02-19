@@ -1,4 +1,4 @@
-package com.zty.onlineedu.edu.entity;
+package com.zty.onlineedu.edu.pojo.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

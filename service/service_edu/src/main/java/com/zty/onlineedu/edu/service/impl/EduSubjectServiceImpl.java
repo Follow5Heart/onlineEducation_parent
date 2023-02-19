@@ -2,9 +2,9 @@ package com.zty.onlineedu.edu.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.zty.onlineedu.edu.entity.EduSubject;
-import com.zty.onlineedu.edu.entity.execl.ExcelSubjectData;
-import com.zty.onlineedu.edu.entity.vo.NextedSubjectVo;
+import com.zty.onlineedu.edu.pojo.entity.EduSubject;
+import com.zty.onlineedu.edu.pojo.dto.ExcelSubjectDataDto;
+import com.zty.onlineedu.edu.pojo.vo.NextedSubjectVo;
 import com.zty.onlineedu.edu.listener.ExcelSubjectDataListener;
 import com.zty.onlineedu.edu.mapper.EduSubjectMapper;
 import com.zty.onlineedu.edu.service.EduSubjectService;
@@ -41,12 +41,12 @@ public class EduSubjectServiceImpl implements EduSubjectService {
         String[] splitName = fileName.split("\\.");
         String fileType = splitName[splitName.length - 1];
         if ("xls".equals(fileType)) {
-            EasyExcel.read(file.getInputStream(), ExcelSubjectData.class, new ExcelSubjectDataListener(eduSubjectMapper, redisTemplate))
+            EasyExcel.read(file.getInputStream(), ExcelSubjectDataDto.class, new ExcelSubjectDataListener(eduSubjectMapper, redisTemplate))
                     .excelType(ExcelTypeEnum.XLS)
                     .sheet()
                     .doRead();
         } else if ("xlsx".equals(fileType)) {
-            EasyExcel.read(file.getInputStream(), ExcelSubjectData.class, new ExcelSubjectDataListener())
+            EasyExcel.read(file.getInputStream(), ExcelSubjectDataDto.class, new ExcelSubjectDataListener())
                     .excelType(ExcelTypeEnum.XLSX)
                     .sheet()
                     .doRead();

@@ -2,9 +2,9 @@ package com.zty.onlineedu.edu.service.impl;
 
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
-import com.zty.onlineedu.edu.entity.EduCourse;
-import com.zty.onlineedu.edu.entity.EduCourseDescription;
-import com.zty.onlineedu.edu.entity.form.CourseInfoForm;
+import com.zty.onlineedu.edu.pojo.entity.EduCourse;
+import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
+import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.mapper.EduCourseMapper;
 import com.zty.onlineedu.edu.service.EduCourseService;
 import org.springframework.beans.BeanUtils;
@@ -25,12 +25,12 @@ public class EduCourseServiceImpl implements EduCourseService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String saveCourseInfo(CourseInfoForm courseInfoForm) {
+    public String saveCourseInfo(CourseInfoFormDto courseInfoFormDto) {
 
         //保存课程信息
         EduCourse eduCourse = new EduCourse();
         //复制相同字段的属性值，把courseInfoForm中的属性复制到eduCourse中，不同的字段不会变动
-        BeanUtils.copyProperties(courseInfoForm,eduCourse);
+        BeanUtils.copyProperties(courseInfoFormDto,eduCourse);
         //其他参数自己进行封装
         eduCourse.setGmtCreate(LocalDateTimeUtils.FormatNow());
         String courseId=UUIDUtils.getUUID32();
@@ -42,7 +42,7 @@ public class EduCourseServiceImpl implements EduCourseService{
         //保存课程简介 edu_course_description
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
         eduCourseDescription.setId(courseId);
-        eduCourseDescription.setDescription(courseInfoForm.getDescription());
+        eduCourseDescription.setDescription(courseInfoFormDto.getDescription());
         eduCourseDescription.setGmtCreate(LocalDateTimeUtils.FormatNow());
         eduCourseMapper.saveCourseDescription(eduCourseDescription);
 
@@ -51,7 +51,7 @@ public class EduCourseServiceImpl implements EduCourseService{
     }
 
     @Override
-    public CourseInfoForm getCourseInfo(String id) {
+    public CourseInfoFormDto getCourseInfo(String id) {
 
         //获取课程基本信息
         EduCourse eduCourse=eduCourseMapper.getCourseInfo(id);
@@ -62,10 +62,33 @@ public class EduCourseServiceImpl implements EduCourseService{
         EduCourseDescription eduCourseDescription=eduCourseMapper.getCourseDescription(id);
 
         //创建对象,封装
-        CourseInfoForm courseInfoForm = new CourseInfoForm();
-        BeanUtils.copyProperties(eduCourse,courseInfoForm);
-        courseInfoForm.setDescription(eduCourseDescription.getDescription());
+        CourseInfoFormDto courseInfoFormDto = new CourseInfoFormDto();
+        BeanUtils.copyProperties(eduCourse, courseInfoFormDto);
+        courseInfoFormDto.setDescription(eduCourseDescription.getDescription());
 
-        return courseInfoForm;
+        return courseInfoFormDto;
+    }
+
+    @Override
+    public void updateCourse(CourseInfoFormDto courseInfoFormDto) {
+
+        if (courseInfoFormDto.getId()==null){
+            throw new RuntimeException("课程id不能为null");
+        }
+        //更新edu_course表
+        EduCourse eduCourse = new EduCourse();
+        BeanUtils.copyProperties(courseInfoFormDto,eduCourse);
+        eduCourse.setGmtModified(LocalDateTimeUtils.FormatNow());
+        eduCourseMapper.updateCourse(eduCourse);
+
+
+        //更新edu_course_description表
+        EduCourseDescription eduCourseDescription = new EduCourseDescription();
+        eduCourseDescription.setDescription(courseInfoFormDto.getDescription());
+        eduCourseDescription.setId(courseInfoFormDto.getId());
+        eduCourseDescription.setGmtModified(LocalDateTimeUtils.FormatNow());
+        eduCourseMapper.updateCourseDescription(eduCourseDescription);
+
+
     }
 }

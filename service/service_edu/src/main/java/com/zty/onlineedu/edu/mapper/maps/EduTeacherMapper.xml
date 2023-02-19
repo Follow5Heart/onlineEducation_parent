@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zty.onlineedu.edu.mapper.EduTeacherMapper">
 
-    <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.entity.EduTeacher">
+    <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.pojo.entity.EduTeacher">
         <id property="id" column="id" jdbcType="CHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="intro" column="intro" jdbcType="VARCHAR"/>
@@ -48,7 +48,7 @@
         update edu_teacher set name=#{name},intro=#{intro},career=#{career},level=#{level},avatar=#{avatar},sort=#{sort},join_date=#{joinDate},gmt_modified=#{gmtModified} where id=#{id}
     </update>
 
-    <delete id="deleteData" parameterType="com.zty.onlineedu.edu.entity.EduTeacher">
+    <delete id="deleteData" parameterType="com.zty.onlineedu.edu.pojo.entity.EduTeacher">
         delete from edu_teacher
         <where>
             <if test="name!=null and name!=''">

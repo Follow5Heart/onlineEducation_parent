@@ -1,4 +1,4 @@
-package com.zty.onlineedu.edu.entity.form;
+package com.zty.onlineedu.edu.pojo.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @ApiModel("课程基本信息")
 @Data
-public class CourseInfoForm implements Serializable {
+public class CourseInfoFormDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

@@ -1,8 +1,8 @@
 package com.zty.onlineedu.edu.mapper;
 
-import com.zty.onlineedu.edu.entity.EduFileInfoRelation;
-import com.zty.onlineedu.edu.entity.EduTeacher;
-import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
+import com.zty.onlineedu.edu.pojo.entity.EduTeacher;
+import com.zty.onlineedu.edu.pojo.query.TeacherQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,7 +13,7 @@ import java.util.Map;
 * @author 17939
 * @description 针对表【edu_teacher(讲师)】的数据库操作Mapper
 * @createDate 2022-12-03 13:53:11
-* @Entity com.zty.onlineedu.edu.entity.EduTeacher
+* @Entity com.zty.onlineedu.edu.pojo.entity.EduTeacher
 */
 @Mapper
 public interface EduTeacherMapper {
@@ -22,9 +22,9 @@ public interface EduTeacherMapper {
     /**
      * 获取所有的teacher数据
      * @return
-     * @param teacherQueryVo
+     * @param teacherQueryParam
      */
-    List<EduTeacher> getTeacherList(TeacherQueryVo teacherQueryVo);
+    List<EduTeacher> getTeacherList(TeacherQueryParam teacherQueryParam);
 
     /**
      * 删除一条数据

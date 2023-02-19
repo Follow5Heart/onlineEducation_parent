@@ -7,8 +7,8 @@ import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
 import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.StringUtils;
-import com.zty.onlineedu.edu.entity.EduTeacher;
-import com.zty.onlineedu.edu.entity.vo.TeacherQueryVo;
+import com.zty.onlineedu.edu.pojo.entity.EduTeacher;
+import com.zty.onlineedu.edu.pojo.query.TeacherQueryParam;
 import com.zty.onlineedu.edu.feign.FileService;
 import com.zty.onlineedu.edu.service.EduTeacherService;
 import com.zty.onlineedu.service.base.exceptions.BusinessException;
@@ -64,8 +64,8 @@ public class TeacherController {
     public Result teacherList(){
         //统一格式：try{}catch(Exception e){log.error(""),throw new GeneralException(ResultCodeEnum r)}
         try{
-            TeacherQueryVo teacherQueryVo = new TeacherQueryVo();
-            List<EduTeacher> teacherList=eduTeacherService.teacherList(teacherQueryVo);
+            TeacherQueryParam teacherQueryParam = new TeacherQueryParam();
+            List<EduTeacher> teacherList=eduTeacherService.teacherList(teacherQueryParam);
             return Result.ok().data("items", teacherList);
         }catch (Exception e){
             log.error(ExceptionUtils.getExceptionMessage(e));
@@ -144,11 +144,11 @@ public class TeacherController {
     @PostMapping("/list/{page}/{limit}")
     public Result listPate(@ApiParam("当前页码") @PathVariable("page") int page,
                            @ApiParam("每页记录数") @PathVariable("limit") int limit,
-                           @ApiParam("查询对象") @RequestBody TeacherQueryVo teacherQueryVo){
+                           @ApiParam("查询对象") @RequestBody TeacherQueryParam teacherQueryParam){
         try{
             PageHelper.clearPage();
             PageHelper.startPage(page, limit);
-            List<EduTeacher> teacherList = eduTeacherService.teacherList(teacherQueryVo);
+            List<EduTeacher> teacherList = eduTeacherService.teacherList(teacherQueryParam);
             PageInfo<EduTeacher> eduTeacherPageInfo = new PageInfo<>(teacherList, limit);
 
             return Result.ok().data("items",eduTeacherPageInfo);

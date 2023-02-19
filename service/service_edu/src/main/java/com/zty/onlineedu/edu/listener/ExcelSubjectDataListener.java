@@ -4,8 +4,8 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
-import com.zty.onlineedu.edu.entity.EduSubject;
-import com.zty.onlineedu.edu.entity.execl.ExcelSubjectData;
+import com.zty.onlineedu.edu.pojo.entity.EduSubject;
+import com.zty.onlineedu.edu.pojo.dto.ExcelSubjectDataDto;
 import com.zty.onlineedu.edu.mapper.EduSubjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -22,23 +22,23 @@ import java.util.Set;
 @Log4j2
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExcelSubjectDataListener extends AnalysisEventListener<ExcelSubjectData> {
+public class ExcelSubjectDataListener extends AnalysisEventListener<ExcelSubjectDataDto> {
 
     private EduSubjectMapper eduSubjectMapper;
     private RedisTemplate redisTemplate;
     /**
      * 遍历每一行数据
-     * @param excelSubjectData
+     * @param excelSubjectDataDto
      * @param analysisContext
      */
     @Override
-    public void invoke(ExcelSubjectData excelSubjectData, AnalysisContext analysisContext) {
-        log.info("解析到一条记录：{}",excelSubjectData);
+    public void invoke(ExcelSubjectDataDto excelSubjectDataDto, AnalysisContext analysisContext) {
+        log.info("解析到一条记录：{}", excelSubjectDataDto);
         /*处理读取出来的数据*/
         //一级标题
-        String levelOneTitle = excelSubjectData.getLevelOneTitle();
+        String levelOneTitle = excelSubjectDataDto.getLevelOneTitle();
         //二级标题
-        String levelTwoTitle = excelSubjectData.getLevelTwoTitle();
+        String levelTwoTitle = excelSubjectDataDto.getLevelTwoTitle();
         log.info("levelOneTitle:{}",levelOneTitle);
         log.info("levelTwoTitle:{}",levelTwoTitle);
 

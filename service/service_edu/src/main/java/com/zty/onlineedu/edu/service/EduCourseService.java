@@ -1,6 +1,6 @@
 package com.zty.onlineedu.edu.service;
 
-import com.zty.onlineedu.edu.entity.form.CourseInfoForm;
+import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 
 /**
 * @author 17939
@@ -10,15 +10,21 @@ import com.zty.onlineedu.edu.entity.form.CourseInfoForm;
 public interface EduCourseService{
     /**
      * 新增课程
-     * @param courseInfoForm
+     * @param courseInfoFormDto
      */
-    String saveCourseInfo(CourseInfoForm courseInfoForm);
+    String saveCourseInfo(CourseInfoFormDto courseInfoFormDto);
 
     /**
      * 通过id查询课程信息
      * @param id 课程id
      * @return
      */
-    CourseInfoForm getCourseInfo(String id);
+    CourseInfoFormDto getCourseInfo(String id);
+
+    /**
+     * 更新课程
+     * @param courseInfoFormDto 课程基本信息
+     */
+    void updateCourse(CourseInfoFormDto courseInfoFormDto);
 
 }

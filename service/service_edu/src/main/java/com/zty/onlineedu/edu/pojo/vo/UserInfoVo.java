@@ -1,18 +1,18 @@
-package com.zty.onlineedu.edu.entity.vo;
+package com.zty.onlineedu.edu.pojo.vo;
 
 /**
  * @Author zty
  * @Date 2023/1/4 21:37
  */
 
-public class UserInfo {
+public class UserInfoVo {
     private String username;
     private String password;
 
-    public UserInfo() {
+    public UserInfoVo() {
     }
 
-    public UserInfo(String username, String password) {
+    public UserInfoVo(String username, String password) {
         this.username = username;
         this.password = password;
     }

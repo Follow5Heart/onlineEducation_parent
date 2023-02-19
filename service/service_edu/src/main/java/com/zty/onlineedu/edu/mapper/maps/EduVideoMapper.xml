@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zty.onlineedu.edu.mapper.EduVideoMapper">
 
-    <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.entity.EduVideo">
+    <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.pojo.entity.EduVideo">
             <id property="id" column="id" jdbcType="CHAR"/>
             <result property="courseId" column="course_id" jdbcType="CHAR"/>
             <result property="chapterId" column="chapter_id" jdbcType="CHAR"/>
