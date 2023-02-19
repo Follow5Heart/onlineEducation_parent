@@ -51,10 +51,30 @@
     <update id="updateCourseDescription">
         update edu_course_description set description=#{description},gmt_modified=#{gmtModified} where id=#{id}
     </update>
+    <select id="querySubjectById" resultType="String">
+        select title from edu_subject where id=#{id}
+    </select>
     <select id="getCourseInfo" resultMap="BaseResultMap">
         select * from edu_course where id=#{id}
     </select>
     <select id="getCourseDescription" resultType="com.zty.onlineedu.edu.pojo.entity.EduCourseDescription">
         select * from edu_course_description where id=#{id}
+    </select>
+    <select id="courseList" resultType="Map">
+        SELECT
+            c.*,
+            t.name as teacherName
+
+        FROM
+            edu_course c
+                LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+        <where>
+            <if test="title!=null and title !=''">
+                and title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="teacherId!=null and teacherId!=''">
+                and t.id=#{teacherId}
+            </if>
+        </where>
     </select>
 </mapper>

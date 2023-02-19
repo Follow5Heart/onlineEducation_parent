@@ -1,9 +1,13 @@
 package com.zty.onlineedu.edu.controller.admin;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
+import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
 import com.zty.onlineedu.service.base.exceptions.GeneralException;
 import io.swagger.annotations.Api;
@@ -12,6 +16,8 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author zty
@@ -74,6 +80,26 @@ public class CourseController {
             throw new GeneralException(ResultCodeEnum.UPDATE_COURSE_ERROR);
         }
 
+    }
+
+    @ApiOperation(value="课程分页列表")
+    @GetMapping("/list/{page}/{limit}")
+    public Result courseListPage(@ApiParam(value = "当前页码",required=true) @PathVariable int page,
+                                 @ApiParam(value="每页记录数",required=true)@PathVariable int limit,
+                                 @ApiParam(value = "课程查询对象") CourseQueryParam courseQueryParam){
+
+        try{
+            PageHelper.clearPage();
+            PageHelper.startPage(page,limit);
+            List<CourseVo> courseList=eduCourseService.courseList(courseQueryParam);
+            PageInfo<CourseVo> courseVoPageInfo = new PageInfo<>(courseList,limit);
+            return Result.ok().data("items",courseVoPageInfo);
+
+        }catch(Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.GET_COURSE_PAGE_DATA_ERROR);
+
+        }
     }
 
 

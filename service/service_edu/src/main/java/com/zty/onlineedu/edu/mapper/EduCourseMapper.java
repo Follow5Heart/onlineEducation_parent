@@ -2,7 +2,11 @@ package com.zty.onlineedu.edu.mapper;
 
 import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
+import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author 17939
@@ -51,5 +55,19 @@ public interface EduCourseMapper{
      * @param eduCourseDescription 课程简介信息
      */
     void updateCourseDescription(EduCourseDescription eduCourseDescription);
+
+    /**
+     * 获取课程分页数据
+     * @param courseQueryParam 课程查询对象
+     * @return
+     */
+    List<Map<String,Object>> courseList(CourseQueryParam courseQueryParam);
+
+    /**
+     * 通过分类id，查询课程分类标题
+     * @param id  主键id
+     * @return
+     */
+    String querySubjectById(String id);
 
 }

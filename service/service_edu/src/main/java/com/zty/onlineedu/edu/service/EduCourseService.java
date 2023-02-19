@@ -1,6 +1,10 @@
 package com.zty.onlineedu.edu.service;
 
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
+import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.vo.CourseVo;
+
+import java.util.List;
 
 /**
 * @author 17939
@@ -26,5 +30,12 @@ public interface EduCourseService{
      * @param courseInfoFormDto 课程基本信息
      */
     void updateCourse(CourseInfoFormDto courseInfoFormDto);
+
+    /**
+     * 获取课程分页数据
+     * @parm courseQueryParam  课程查询对象
+     * @return
+     */
+    List<CourseVo> courseList(CourseQueryParam courseQueryParam);
 
 }
