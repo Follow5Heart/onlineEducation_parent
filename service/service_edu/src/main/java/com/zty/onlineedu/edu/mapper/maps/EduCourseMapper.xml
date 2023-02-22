@@ -60,20 +60,37 @@
     <select id="getCourseDescription" resultType="com.zty.onlineedu.edu.pojo.entity.EduCourseDescription">
         select * from edu_course_description where id=#{id}
     </select>
-    <select id="courseList" resultType="Map">
+    <select id="courseList" resultType="com.zty.onlineedu.edu.pojo.vo.CourseVo">
         SELECT
-            c.*,
-            t.name as teacherName
-
+        c.id,
+        c.title,
+        s2.title as subjectParentTitle,
+        s1.title as subjectTitle,
+        t.name as teacherName,
+        c.lesson_num as lessonNum,
+        c.price,
+        c.cover,
+        c.buy_count as buyCount,
+        c.view_count as viewCount,
+        c.status,
+        c.gmt_create as gmtCreate
         FROM
-            edu_course c
-                LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+        edu_course c
+        LEFT JOIN edu_teacher t ON t.id = c.teacher_id
+        LEFT JOIN edu_subject s1 ON s1.id = c.subject_id
+        LEFT JOIN edu_subject s2 ON s2.id = c.subject_parent_id
         <where>
             <if test="title!=null and title !=''">
-                and title like CONCAT('%',#{title},'%')
+                and c.title like CONCAT('%',#{title},'%')
             </if>
             <if test="teacherId!=null and teacherId!=''">
                 and t.id=#{teacherId}
+            </if>
+            <if test="subjectParentId!=null and subjectParentId!=''">
+                and c.subject_parent_id=#{subjectParentId}
+            </if>
+            <if test="subjectId!=null and subjectId!=''">
+                and c.subject_id=#{subjectId}
             </if>
         </where>
     </select>

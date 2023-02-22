@@ -1,7 +1,6 @@
 package com.zty.onlineedu.edu.service.impl;
 
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
-import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
 import com.zty.onlineedu.edu.mapper.EduCourseMapper;
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
@@ -15,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
 * @author 17939
@@ -102,75 +98,9 @@ public class EduCourseServiceImpl implements EduCourseService{
 
     @Override
     public List<CourseVo> courseList(CourseQueryParam courseQueryParam) {
-
         //只是过滤了课程标题和讲师id的数据
-        List<Map<String,Object>> courseList=eduCourseMapper.courseList(courseQueryParam);
-
-        //获取课程分类一级id 和二级id
-        String subjectId = courseQueryParam.getSubjectId();
-        String subjectParentId = courseQueryParam.getSubjectParentId();
-
-        List<CourseVo> courseVos = new ArrayList<>();
-
-        if (StringUtils.isNotEmpty(subjectId) && StringUtils.isNotEmpty(subjectParentId)){
-            List<Map<String, Object>> collect = courseList.stream().filter(map -> {
-                if (subjectId.equals(map.get("subject_id").toString()) && subjectParentId.equals(map.get("subject_parent_id")))
-                {
-                    return true;
-                }else{
-                    return false;
-                }
-
-            }).collect(Collectors.toList());
-
-            collect.stream().forEach(map -> {
-                String subjectTitle=eduCourseMapper.querySubjectById(map.get("subject_id").toString());
-                String subjectParentTitle=eduCourseMapper.querySubjectById(map.get("subject_parent_id").toString());
-                CourseVo courseVo = new CourseVo();
-                courseVo.setId(map.get("id")==null ? "" : map.get("id").toString());
-                courseVo.setTitle(map.get("title")==null ? "" : map.get("title").toString());
-                courseVo.setSubjectParentTitle(subjectParentTitle==null?"":subjectParentTitle);
-                courseVo.setSubjectTitle(subjectTitle==null?"":subjectTitle);
-                courseVo.setTeacherName(map.get("teacherName")==null ? "" : map.get("teacherName").toString());
-                courseVo.setLessonNum(map.get("lesson_num")==null?"":map.get("lesson_num").toString());
-                courseVo.setPrice(map.get("price")==null?"":map.get("price").toString());
-                courseVo.setCover(map.get("cover")==null?"":map.get("cover").toString());
-                courseVo.setBuyCount(map.get("buy_count")==null?"":map.get("buy_count").toString());
-                courseVo.setViewCount(map.get("view_count")==null?"":map.get("view_count").toString());
-                courseVo.setStatus(map.get("status")==null?"":map.get("status").toString());
-                courseVo.setGmtCreate(map.get("gmt_create")==null?"":map.get("gmt_create").toString());
-
-                courseVos.add(courseVo);
-
-            });
-
-        }else {
-            courseList.stream().forEach(map -> {
-                String subjectTitle=eduCourseMapper.querySubjectById(map.get("subject_id").toString());
-                String subjectParentTitle=eduCourseMapper.querySubjectById(map.get("subject_parent_id").toString());
-                CourseVo courseVo = new CourseVo();
-                courseVo.setId(map.get("id")==null ? "" : map.get("id").toString());
-                courseVo.setTitle(map.get("title")==null ? "" : map.get("title").toString());
-                courseVo.setSubjectParentTitle(subjectParentTitle==null?"":subjectParentTitle);
-                courseVo.setSubjectTitle(subjectTitle==null?"":subjectTitle);
-                courseVo.setTeacherName(map.get("teacherName")==null ? "" : map.get("teacherName").toString());
-                courseVo.setLessonNum(map.get("lesson_num")==null?"":map.get("lesson_num").toString());
-                courseVo.setPrice(map.get("price")==null?"":map.get("price").toString());
-                courseVo.setCover(map.get("cover")==null?"":map.get("cover").toString());
-                courseVo.setBuyCount(map.get("buy_count")==null?"":map.get("buy_count").toString());
-                courseVo.setViewCount(map.get("view_count")==null?"":map.get("view_count").toString());
-                courseVo.setStatus(map.get("status")==null?"":map.get("status").toString());
-                courseVo.setGmtCreate(map.get("gmt_create")==null?"":map.get("gmt_create").toString());
-
-
-                courseVos.add(courseVo);
-
-            });
-        }
-
-
-
-            return courseVos;
+        List<CourseVo> courseList=eduCourseMapper.courseList(courseQueryParam);
+        return courseList;
 
     }
 }
