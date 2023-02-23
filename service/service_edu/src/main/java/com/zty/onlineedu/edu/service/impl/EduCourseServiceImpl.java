@@ -11,6 +11,7 @@ import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
 import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
 import org.springframework.beans.BeanUtils;
@@ -112,6 +113,8 @@ public class EduCourseServiceImpl implements EduCourseService{
         EduCourse eduCourse = new EduCourse();
         BeanUtils.copyProperties(courseInfoFormDto,eduCourse);
         eduCourse.setGmtModified(LocalDateTimeUtils.FormatNow());
+        //课程状态 更新方法 默认的为未发布
+        eduCourse.setStatus(EduCourse.DRAFT);
         eduCourseMapper.updateCourse(eduCourse);
 
 
@@ -122,36 +125,39 @@ public class EduCourseServiceImpl implements EduCourseService{
         eduCourseDescription.setGmtModified(LocalDateTimeUtils.FormatNow());
         eduCourseMapper.updateCourseDescription(eduCourseDescription);
 
-        //删除原来的讲师与附件关联表
-        Integer fileRelationNum=eduCourseMapper.queryFileRelationNum(courseInfoFormDto.getId());
-        if (fileRelationNum>0){
-            eduCourseMapper.deleteFileRelation(courseInfoFormDto.getId());
-        }
 
-        //保存新的讲师与附件关联表信息
+        //获取当前的fileInfo信息，判断是否为空，如果为空说明没有更新过图像，不做处理，如果不为空，说明更新过图像
         String fileInfo = courseInfoFormDto.getFileInfo();
-        EduFileInfoRelation eduFileInfoRelation = new EduFileInfoRelation();
-        eduFileInfoRelation.setDatakey(UUIDUtils.getUUID32());
-        eduFileInfoRelation.setFileIndirectId(courseInfoFormDto.getId());
-        Map map = JsonUtils.jsonToMap(fileInfo);
-        eduFileInfoRelation.setFileType(map.get("contentType").toString());
-        eduFileInfoRelation.setFileId(map.get("id").toString());
-        if (map.get("originalFilename")!=null){
-            eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
-        }else if (map.get("name")!=null){
-            eduFileInfoRelation.setFileName(map.get("name").toString());
-        }else{
-            eduFileInfoRelation.setFileName("");
+        if (StringUtils.isNotEmpty(fileInfo)) {
+            //删除原来的讲师与附件关联表
+            Integer fileRelationNum = eduCourseMapper.queryFileRelationNum(courseInfoFormDto.getId());
+            if (fileRelationNum > 0) {
+                eduCourseMapper.deleteFileRelation(courseInfoFormDto.getId());
+            }
+
+            //保存新的讲师与附件关联表信息
+            EduFileInfoRelation eduFileInfoRelation = new EduFileInfoRelation();
+            eduFileInfoRelation.setDatakey(UUIDUtils.getUUID32());
+            eduFileInfoRelation.setFileIndirectId(courseInfoFormDto.getId());
+            Map map = JsonUtils.jsonToMap(fileInfo);
+            eduFileInfoRelation.setFileType(map.get("contentType").toString());
+            eduFileInfoRelation.setFileId(map.get("id").toString());
+            if (map.get("originalFilename") != null) {
+                eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
+            } else if (map.get("name") != null) {
+                eduFileInfoRelation.setFileName(map.get("name").toString());
+            } else {
+                eduFileInfoRelation.setFileName("");
+            }
+
+            eduFileInfoRelation.setCreateTime(LocalDateTimeUtils.FormatNow());
+            eduCourseMapper.saveFileInfoRelation(eduFileInfoRelation);
+
         }
-
-        eduFileInfoRelation.setCreateTime(LocalDateTimeUtils.FormatNow());
-        eduCourseMapper.saveFileInfoRelation(eduFileInfoRelation);
-
     }
 
     @Override
     public List<CourseVo> courseList(CourseQueryParam courseQueryParam) {
-        //只是过滤了课程标题和讲师id的数据
         List<CourseVo> courseList=eduCourseMapper.courseList(courseQueryParam);
         return courseList;
 
@@ -182,5 +188,11 @@ public class EduCourseServiceImpl implements EduCourseService{
         eduCourseMapper.deleteFileRelation(courseId);
 
 
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishById(String courseId) {
+        CoursePublishVo coursePublishVo=eduCourseMapper.getCoursePublishById(courseId);
+        return coursePublishVo;
     }
 }

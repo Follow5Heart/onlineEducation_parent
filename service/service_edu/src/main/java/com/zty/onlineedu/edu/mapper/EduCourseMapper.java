@@ -4,6 +4,7 @@ import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
 import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -109,5 +110,12 @@ public interface EduCourseMapper{
      * @return 文件id
      */
     String queryFileRelationFileId(String courseId);
+
+    /**
+     * 通过课程id,获取发布的课程数据
+     * @param courseId 课程id
+     * @return 发布的课程信息
+     */
+    CoursePublishVo getCoursePublishById(String courseId);
 
 }

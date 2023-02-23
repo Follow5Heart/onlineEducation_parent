@@ -2,6 +2,7 @@ package com.zty.onlineedu.edu.service;
 
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 
 import java.util.List;
@@ -43,4 +44,12 @@ public interface EduCourseService{
      * @param courseId 课程id
      */
     void deleteCourseInfo(String courseId);
+
+    /**
+     * 通过课程id,获取发布课程信息
+     * @param courseId 课程id
+     * @return 发布课程数据
+     */
+    CoursePublishVo getCoursePublishById(String courseId);
+
 }

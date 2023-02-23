@@ -7,6 +7,7 @@ import com.zty.onlineedu.common.base.result.ResultCodeEnum;
 import com.zty.onlineedu.common.base.utils.ExceptionUtils;
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
 import com.zty.onlineedu.service.base.exceptions.GeneralException;
@@ -80,6 +81,21 @@ public class CourseController {
         }
 
     }
+
+    @ApiOperation("根据课程id查询发布课程信息")
+    @GetMapping("/getCoursePublish/{courseId}")
+    public Result getCoursePublish(@ApiParam("课程id") @PathVariable String courseId){
+        try{
+            CoursePublishVo coursePublishVo=eduCourseService.getCoursePublishById(courseId);
+            return Result.ok().data("items",coursePublishVo);
+        }catch(Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.GET_COURSE_PUBLISH_DATA_ERROR);
+        }
+
+
+    }
+
 
     @ApiOperation(value = "更新课程")
     @PutMapping("/updateCourse")
