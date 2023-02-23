@@ -68,6 +68,12 @@
     <delete id="deleteFileRelation">
         delete from edu_file_info_relation where FILE_INDIRECT_ID=#{courseId}
     </delete>
+    <delete id="deleteCourseById">
+        delete from edu_course where id=#{courseId}
+    </delete>
+    <delete id="deleteCourseDescriptionById">
+        delete from edu_course_description where id=#{courseId}
+    </delete>
     <select id="querySubjectById" resultType="String">
         select title from edu_subject where id=#{id}
     </select>
@@ -113,5 +119,8 @@
     </select>
     <select id="queryFileRelationNum" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM edu_file_info_relation WHERE FILE_INDIRECT_ID=#{courseId} LIMIT 1
+    </select>
+    <select id="queryFileRelationFileId" resultType="java.lang.String">
+        select FILE_ID from edu_file_info_relation where FILE_INDIRECT_ID=#{courseId}
     </select>
 </mapper>

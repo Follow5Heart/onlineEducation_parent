@@ -38,4 +38,9 @@ public interface EduCourseService{
      */
     List<CourseVo> courseList(CourseQueryParam courseQueryParam);
 
+    /**
+     * 删除课程
+     * @param courseId 课程id
+     */
+    void deleteCourseInfo(String courseId);
 }

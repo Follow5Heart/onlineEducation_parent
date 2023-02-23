@@ -2,7 +2,9 @@ package com.zty.onlineedu.edu.service.impl;
 
 import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
+import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
+import com.zty.onlineedu.edu.feign.FileService;
 import com.zty.onlineedu.edu.mapper.EduCourseMapper;
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.pojo.entity.EduCourse;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
 * @author 17939
@@ -29,6 +32,9 @@ public class EduCourseServiceImpl implements EduCourseService{
 
     @Autowired
     private EduCourseMapper eduCourseMapper;
+
+    @Autowired
+    private FileService fileService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -148,6 +154,33 @@ public class EduCourseServiceImpl implements EduCourseService{
         //只是过滤了课程标题和讲师id的数据
         List<CourseVo> courseList=eduCourseMapper.courseList(courseQueryParam);
         return courseList;
+
+    }
+
+    @Override
+    public void deleteCourseInfo(String courseId) {
+        //删除课程表信息 edu_course
+        eduCourseMapper.deleteCourseById(courseId);
+
+        //删除课程中的简介描述 edu_course_description
+        eduCourseMapper.deleteCourseDescriptionById(courseId);
+
+        //通过课程id查询，文件关联表
+        String fileId=eduCourseMapper.queryFileRelationFileId(courseId);
+
+
+        if (StringUtils.isNotEmpty(fileId)){
+            //异步删除文件
+            CompletableFuture.runAsync(()->{
+                //远程调用删除文件
+                fileService.deleteFile(fileId);
+
+            });
+        }
+
+        //删除文件关联表
+        eduCourseMapper.deleteFileRelation(courseId);
+
 
     }
 }

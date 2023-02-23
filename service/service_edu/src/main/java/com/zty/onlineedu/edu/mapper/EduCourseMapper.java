@@ -91,5 +91,23 @@ public interface EduCourseMapper{
     void deleteFileRelation(String courseId);
 
 
+    /**
+     * 通过课程id，删除课程表数据
+     * @param courseId 课程id
+     */
+    void deleteCourseById(String courseId);
+
+    /**
+     * 通过课程id,删除课程简介表
+     * @param courseId 课程id
+     */
+    void deleteCourseDescriptionById(String courseId);
+
+    /**
+     * 通过课程id，查询文件关联表中的文件id
+     * @param courseId 课程id
+     * @return 文件id
+     */
+    String queryFileRelationFileId(String courseId);
 
 }

@@ -48,6 +48,18 @@ public class CourseController {
         }
 
     }
+    @ApiOperation("删除课程")
+    @DeleteMapping("/removeCourse")
+    public Result removeCourse(@ApiParam(value = "课程id",required = true) String courseId){
+        try{
+            eduCourseService.deleteCourseInfo(courseId);
+            return Result.ok().message("删除成功！");
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.DELETE_COURSE_DATA_ERROR);
+        }
+
+    }
 
     @ApiOperation("根据ID查询课程")
     @GetMapping("/getCourseInfo/{id}")
