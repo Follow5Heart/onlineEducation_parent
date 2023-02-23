@@ -1,11 +1,13 @@
 package com.zty.onlineedu.edu.service.impl;
 
+import com.zty.onlineedu.common.base.utils.JsonUtils;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
 import com.zty.onlineedu.edu.mapper.EduCourseMapper;
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
+import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 17939
@@ -49,6 +52,26 @@ public class EduCourseServiceImpl implements EduCourseService{
         eduCourseDescription.setDescription(courseInfoFormDto.getDescription());
         eduCourseDescription.setGmtCreate(LocalDateTimeUtils.FormatNow());
         eduCourseMapper.saveCourseDescription(eduCourseDescription);
+
+        //处理文件附件信息 进行关联保存
+        String fileInfo = courseInfoFormDto.getFileInfo();
+        Map<String, Object> map = JsonUtils.jsonToMap(fileInfo);
+        EduFileInfoRelation eduFileInfoRelation = new EduFileInfoRelation();
+        eduFileInfoRelation.setDatakey(UUIDUtils.getUUID32());
+        eduFileInfoRelation.setFileIndirectId(courseId);
+        eduFileInfoRelation.setFileType(map.get("contentType")==null?"":map.get("contentType").toString());
+        eduFileInfoRelation.setFileId(map.get("id")==null?"":map.get("id").toString());
+        if (map.get("originalFilename")!=null){
+            eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
+        }else if (map.get("name")!=null){
+            eduFileInfoRelation.setFileName(map.get("name").toString());
+        }else{
+            eduFileInfoRelation.setFileName("");
+        }
+        eduFileInfoRelation.setCreateTime(LocalDateTimeUtils.FormatNow());
+        eduCourseMapper.saveFileInfoRelation(eduFileInfoRelation);
+
+
 
         return courseId;
 
@@ -93,6 +116,30 @@ public class EduCourseServiceImpl implements EduCourseService{
         eduCourseDescription.setGmtModified(LocalDateTimeUtils.FormatNow());
         eduCourseMapper.updateCourseDescription(eduCourseDescription);
 
+        //删除原来的讲师与附件关联表
+        Integer fileRelationNum=eduCourseMapper.queryFileRelationNum(courseInfoFormDto.getId());
+        if (fileRelationNum>0){
+            eduCourseMapper.deleteFileRelation(courseInfoFormDto.getId());
+        }
+
+        //保存新的讲师与附件关联表信息
+        String fileInfo = courseInfoFormDto.getFileInfo();
+        EduFileInfoRelation eduFileInfoRelation = new EduFileInfoRelation();
+        eduFileInfoRelation.setDatakey(UUIDUtils.getUUID32());
+        eduFileInfoRelation.setFileIndirectId(courseInfoFormDto.getId());
+        Map map = JsonUtils.jsonToMap(fileInfo);
+        eduFileInfoRelation.setFileType(map.get("contentType").toString());
+        eduFileInfoRelation.setFileId(map.get("id").toString());
+        if (map.get("originalFilename")!=null){
+            eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
+        }else if (map.get("name")!=null){
+            eduFileInfoRelation.setFileName(map.get("name").toString());
+        }else{
+            eduFileInfoRelation.setFileName("");
+        }
+
+        eduFileInfoRelation.setCreateTime(LocalDateTimeUtils.FormatNow());
+        eduCourseMapper.saveFileInfoRelation(eduFileInfoRelation);
 
     }
 

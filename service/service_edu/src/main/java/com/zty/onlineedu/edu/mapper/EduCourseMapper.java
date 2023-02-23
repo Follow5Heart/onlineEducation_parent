@@ -2,6 +2,7 @@ package com.zty.onlineedu.edu.mapper;
 
 import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
+import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -69,5 +70,26 @@ public interface EduCourseMapper{
      * @return
      */
     String querySubjectById(String id);
+
+    /**
+     * 保存课程信息与文件关联表的关系
+     * @param eduFileInfoRelation
+     */
+    void saveFileInfoRelation(EduFileInfoRelation eduFileInfoRelation);
+
+    /**
+     * 通过课程id,查询文件关联表中是否存在
+     * @param courseId 课程id
+     * @return 存在1 不存在0
+     */
+    Integer queryFileRelationNum(String courseId);
+
+    /**
+     * 通过课程id,删除文件关联表数据
+     * @param courseId 课程id
+     */
+    void deleteFileRelation(String courseId);
+
+
 
 }

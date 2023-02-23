@@ -69,5 +69,11 @@ public class CourseInfoFormDto implements Serializable {
     @ApiModelProperty(value = "课程简介")
     private String description;
 
+    /**
+     * 附件信息
+     */
+    @ApiModelProperty("更新时间")
+    private String fileInfo;
+
 
 }

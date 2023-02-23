@@ -98,7 +98,6 @@ public class EduTeacherServiceImpl implements EduTeacherService{
         eduFileInfoRelation.setFileId(map.get("id").toString());
         eduFileInfoRelation.setFileName(map.get("originalFilename").toString());
         eduFileInfoRelation.setCreateTime(LocalDateTimeUtils.FormatNow());
-
         eduTeacherMapper.saveFileInfoRelation(eduFileInfoRelation);
 
         return result;
