@@ -195,4 +195,10 @@ public class EduCourseServiceImpl implements EduCourseService{
         CoursePublishVo coursePublishVo=eduCourseMapper.getCoursePublishById(courseId);
         return coursePublishVo;
     }
+
+    @Override
+    public void publishCourse(String courseId) {
+        //修改课程的发布状态
+        eduCourseMapper.updateCourseStatus(courseId);
+    }
 }

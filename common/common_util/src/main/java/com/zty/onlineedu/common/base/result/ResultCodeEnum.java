@@ -40,6 +40,7 @@ public enum ResultCodeEnum {
     GET_COURSE_PAGE_DATA_ERROR(false, 21012,"获取课程分页数据异常"),
     DELETE_COURSE_DATA_ERROR(false,21013,"删除课程异常"),
     GET_COURSE_PUBLISH_DATA_ERROR(false,21014,"获取课程发布数据异常"),
+    PUBLISH_COURSE_ERROR(false,21015,"发布课程异常"),
 
     VIDEO_UPLOAD_ALIYUN_ERROR(false, 22001, "视频上传至阿里云失败"),
     VIDEO_UPLOAD_TOMCAT_ERROR(false, 22002, "视频上传至业务服务器失败"),

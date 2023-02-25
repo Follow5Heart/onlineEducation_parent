@@ -87,6 +87,9 @@ public class CourseController {
     public Result getCoursePublish(@ApiParam("课程id") @PathVariable String courseId){
         try{
             CoursePublishVo coursePublishVo=eduCourseService.getCoursePublishById(courseId);
+            if(coursePublishVo==null){
+                return Result.ok().message("数据不存在！");
+            }
             return Result.ok().data("items",coursePublishVo);
         }catch(Exception e){
             log.error(ExceptionUtils.getExceptionMessage(e));
@@ -130,5 +133,20 @@ public class CourseController {
         }
     }
 
+    @ApiOperation("根据课程id,发布课程")
+    @GetMapping("/publishCourse/{courseId}")
+    public Result publishCourse(@ApiParam(value = "课程id", required = true)
+                                @PathVariable String courseId){
+        try{
+            eduCourseService.publishCourse(courseId);
+            return Result.ok().message("发布课程成功！");
+
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.PUBLISH_COURSE_ERROR);
+
+        }
+
+    }
 
 }

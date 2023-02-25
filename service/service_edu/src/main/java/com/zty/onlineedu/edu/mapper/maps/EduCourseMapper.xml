@@ -65,6 +65,9 @@
     <update id="updateCourseDescription">
         update edu_course_description set description=#{description},gmt_modified=#{gmtModified} where id=#{id}
     </update>
+    <update id="updateCourseStatus">
+        update edu_course set status="Normal" where id=#{courseId}
+    </update>
     <delete id="deleteFileRelation">
         delete from edu_file_info_relation where FILE_INDIRECT_ID=#{courseId}
     </delete>

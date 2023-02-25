@@ -52,4 +52,10 @@ public interface EduCourseService{
      */
     CoursePublishVo getCoursePublishById(String courseId);
 
+    /**
+     * 根据课程id，发布课程
+     * @param courseId 课程id
+     */
+    void publishCourse(String courseId);
+
 }

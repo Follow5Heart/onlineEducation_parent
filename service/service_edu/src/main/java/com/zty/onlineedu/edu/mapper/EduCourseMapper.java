@@ -118,4 +118,9 @@ public interface EduCourseMapper{
      */
     CoursePublishVo getCoursePublishById(String courseId);
 
+    /**
+     * 根据课程id，更新课程状态
+     * @param courseId 课程id
+     */
+    void updateCourseStatus(String courseId);
 }
