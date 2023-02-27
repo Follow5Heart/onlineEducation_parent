@@ -5,19 +5,32 @@
 <mapper namespace="com.zty.onlineedu.edu.mapper.EduChapterMapper">
 
     <resultMap id="BaseResultMap" type="com.zty.onlineedu.edu.pojo.entity.EduChapter">
-            <id property="id" column="id" jdbcType="CHAR"/>
-            <result property="courseId" column="course_id" jdbcType="CHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="courseId" column="course_id" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="sort" column="sort" jdbcType="OTHER"/>
-            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
-            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="sort" column="sort" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="VARCHAR"/>
     </resultMap>
+    <insert id="saveChapter">
+        insert into edu_chapter (<include refid="Base_Column_List"/>)
+        values (#{id},#{courseId},#{title},#{sort},#{gmtCreate},#{gmtModified})
+    </insert>
+    <update id="updateChapter">
+        update edu_chapter set course_id=#{courseId},title = #{title},sort=#{sort},gmt_create = #{gmtCreate},gmt_modified=#{gmtModified} where id=#{id}
+    </update>
+    <delete id="deleteChapter">
+        delete from edu_chapter where id=#{eduChapterId}
+    </delete>
 
-<!--    <sql id="Base_Column_List">-->
-<!--        id,course_id,title,-->
-<!--        sort,gmt_create,gmt_modified-->
-<!--    </sql>-->
+    <sql id="Base_Column_List">
+        id,course_id,title,
+        sort,gmt_create,gmt_modified
+    </sql>
     <select id="getAllData" resultType="com.zty.onlineedu.edu.pojo.entity.EduChapter" resultMap="BaseResultMap">
         select * from edu_chapter where id=#{id}
+    </select>
+    <select id="getChapterById" resultType="com.zty.onlineedu.edu.pojo.entity.EduChapter" resultMap="BaseResultMap">
+        select * from edu_chapter where id=#{eduChapterId}
     </select>
 </mapper>

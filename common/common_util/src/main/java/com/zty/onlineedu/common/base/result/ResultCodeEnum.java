@@ -42,6 +42,11 @@ public enum ResultCodeEnum {
     GET_COURSE_PUBLISH_DATA_ERROR(false,21014,"获取课程发布数据异常"),
     PUBLISH_COURSE_ERROR(false,21015,"发布课程异常"),
 
+    SAVE_CHAPTER_ERROR(false,21016,"保存章节异常"),
+    GET_CHAPTER_BY_ID_ERROR(false,21017,"查询章节数据异常"),
+    UPDATE_CHAPTER_ERROR(false,21018,"更新章节数据异常"),
+    DELETE_CHAPTER_ERROR(false,21019,"删除章节数据异常"),
+
     VIDEO_UPLOAD_ALIYUN_ERROR(false, 22001, "视频上传至阿里云失败"),
     VIDEO_UPLOAD_TOMCAT_ERROR(false, 22002, "视频上传至业务服务器失败"),
     VIDEO_DELETE_ALIYUN_ERROR(false, 22003, "阿里云视频文件删除失败"),

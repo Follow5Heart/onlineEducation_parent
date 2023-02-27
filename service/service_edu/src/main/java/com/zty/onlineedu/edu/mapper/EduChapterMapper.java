@@ -20,6 +20,33 @@ public interface EduChapterMapper {
      */
     List<EduChapter> getAllData(String id);
 
+    /**
+     * 保存章节
+     * @param eduChapter 章节信息
+     * @return 成功与否
+     */
+    Boolean saveChapter(EduChapter eduChapter);
+
+    /**
+     * 通过章节id，查询章节信息
+     * @param eduChapterId 章节id
+     * @return 章节信息
+     */
+    EduChapter getChapterById(String eduChapterId);
+
+    /**
+     * 更新章节信息
+     * @param eduChapter 章节信息
+     * @return 成功与否
+     */
+    Boolean updateChapter(EduChapter eduChapter);
+
+    /**
+     * 通过章节id,删除章节信息
+     * @param eduChapterId 章节id
+     * @return 成功与否
+     */
+    Boolean deleteChapter(String eduChapterId);
 
 
 }
