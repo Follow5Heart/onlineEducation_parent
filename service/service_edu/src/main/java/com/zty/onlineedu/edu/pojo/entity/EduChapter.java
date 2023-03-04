@@ -29,7 +29,7 @@ public class EduChapter implements Serializable {
     /**
      * 显示排序
      */
-    private Object sort;
+    private String sort;
 
     /**
      * 创建时间

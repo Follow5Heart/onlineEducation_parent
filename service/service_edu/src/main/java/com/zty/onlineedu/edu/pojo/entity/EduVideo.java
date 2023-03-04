@@ -1,8 +1,8 @@
 package com.zty.onlineedu.edu.pojo.entity;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 课程视频
@@ -43,22 +43,22 @@ public class EduVideo implements Serializable {
     /**
      * 排序字段
      */
-    private Object sort;
+    private String sort;
 
     /**
      * 播放次数
      */
-    private Long playCount;
+    private String playCount;
 
     /**
      * 是否可以试听：0收费 1免费
      */
-    private Integer isFree;
+    private String isFree;
 
     /**
      * 视频时长（秒）
      */
-    private Double duration;
+    private String duration;
 
     /**
      * 状态
@@ -68,22 +68,22 @@ public class EduVideo implements Serializable {
     /**
      * 视频源文件大小（字节）
      */
-    private Long size;
+    private String size;
 
     /**
      * 乐观锁
      */
-    private Long version;
+    private String version;
 
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private String gmtCreate;
 
     /**
      * 更新时间
      */
-    private Date gmtModified;
+    private String gmtModified;
 
     private static final long serialVersionUID = 1L;
 }

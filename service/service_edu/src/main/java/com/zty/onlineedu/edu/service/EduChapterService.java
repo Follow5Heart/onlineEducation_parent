@@ -1,6 +1,9 @@
 package com.zty.onlineedu.edu.service;
 
 import com.zty.onlineedu.edu.pojo.entity.EduChapter;
+import com.zty.onlineedu.edu.pojo.vo.ChapterVo;
+
+import java.util.List;
 
 /**
 * @author 17939
@@ -32,9 +35,16 @@ public interface EduChapterService {
 
     /**
      * 删除章节
-     * @param eduChapterId 章节id
+     * @param chapterId 章节id
      * @return 成功与否
      */
-    Boolean deleteChapter(String eduChapterId);
+    Integer deleteChapter(String chapterId);
+
+    /**
+     * 通过课程id,获取嵌套章节列表信息
+     * @param courseId 课程id
+     * @return 套章节列表信息
+     */
+    List<ChapterVo> getNestedListByCourseId(String courseId);
 
 }

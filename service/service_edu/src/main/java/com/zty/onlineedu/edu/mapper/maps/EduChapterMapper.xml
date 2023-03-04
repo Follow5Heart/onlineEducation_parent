@@ -20,7 +20,7 @@
         update edu_chapter set course_id=#{courseId},title = #{title},sort=#{sort},gmt_create = #{gmtCreate},gmt_modified=#{gmtModified} where id=#{id}
     </update>
     <delete id="deleteChapter">
-        delete from edu_chapter where id=#{eduChapterId}
+        delete from edu_chapter where id=#{chapterId}
     </delete>
 
     <sql id="Base_Column_List">
@@ -31,6 +31,15 @@
         select * from edu_chapter where id=#{id}
     </select>
     <select id="getChapterById" resultType="com.zty.onlineedu.edu.pojo.entity.EduChapter" resultMap="BaseResultMap">
-        select * from edu_chapter where id=#{eduChapterId}
+        select * from edu_chapter where id=#{chapterId}
+    </select>
+    <select id="getChapterByCourseId" resultType="com.zty.onlineedu.edu.pojo.entity.EduChapter">
+        select id,title,sort from edu_chapter where course_id=#{courseId} order by sort,gmt_create ASC
+    </select>
+    <select id="getVideoByTwoId" resultType="com.zty.onlineedu.edu.pojo.entity.EduVideo">
+        select id,title,is_free as isFree,sort,video_source_id as videoSourceId from edu_video where course_id=#{courseId} and chapter_id=#{chapterId} order by sort,gmt_create ASC
+    </select>
+    <select id="queryVideoDataByChapterId" resultType="java.lang.Integer">
+        select count(1) from edu_video where chapter_id=#{chapterId} limit 1
     </select>
 </mapper>
