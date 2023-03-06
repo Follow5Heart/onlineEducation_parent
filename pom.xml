@@ -8,7 +8,6 @@
 
     <modules>
         <module>common</module>
-        <module>common/common_util</module>
         <module>service</module>
 
     </modules>
