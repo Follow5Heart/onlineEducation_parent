@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @CrossOrigin
 @Log4j2
 @RestController
-@RequestMapping("/service-files")
+@RequestMapping("/service-file/files")
 public class FileDetailController {
     /**
      * 使用spring file storage 就要注意实例

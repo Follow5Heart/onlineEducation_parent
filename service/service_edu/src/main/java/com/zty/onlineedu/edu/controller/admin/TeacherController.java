@@ -34,7 +34,7 @@ import java.util.Map;
 @Api(tags  = "讲师管理")
 @RestController
 @Log4j2
-@RequestMapping("/admin/edu/teacher")
+@RequestMapping("/service-edu/admin/edu/teacher")
 public class TeacherController {
 
     @Autowired

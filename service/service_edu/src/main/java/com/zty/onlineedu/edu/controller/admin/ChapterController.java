@@ -24,7 +24,7 @@ import java.util.List;
 @Log4j2
 @CrossOrigin
 @RestController
-@RequestMapping("/admin/edu/chapter")
+@RequestMapping("/service-edu/admin/edu/chapter")
 public class ChapterController {
 
     @Autowired

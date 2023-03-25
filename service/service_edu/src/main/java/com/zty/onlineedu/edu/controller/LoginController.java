@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
  * @Author zty
  * @Date 2023/1/4 21:06
  */
-@CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/service-edu/user")
 @Api(tags = "用户登录接口")
 public class LoginController {
 

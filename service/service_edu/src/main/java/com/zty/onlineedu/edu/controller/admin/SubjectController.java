@@ -25,7 +25,7 @@ import java.util.List;
 @Api(tags  = "课程分类管理")
 @RestController
 @Log4j2
-@RequestMapping("/admin/edu/subject")
+@RequestMapping("/service-edu/admin/edu/subject")
 public class SubjectController {
     @Autowired
     private EduSubjectService eduSubjectService;

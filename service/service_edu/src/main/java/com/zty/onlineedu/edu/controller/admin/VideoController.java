@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 @CrossOrigin
 @RestController
-@RequestMapping("/admin/edu/video")
+@RequestMapping("/service-edu/admin/edu/video")
 public class VideoController {
     @Autowired
     private EduVideoService eduVideoService;
