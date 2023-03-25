@@ -1,4 +1,4 @@
-package com.zty.onlineedu.edu.config;
+package com.zty.onlineedu.service.base.redis.config;
 
 
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -14,6 +14,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * @Author zty
  * @Date 2023/2/6 0:00
+ * redis的配置类
  */
 @Configuration
 @EnableCaching
