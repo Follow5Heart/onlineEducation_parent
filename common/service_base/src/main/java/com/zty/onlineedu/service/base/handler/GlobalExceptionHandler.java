@@ -9,6 +9,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MultipartException;
+
+import java.io.EOFException;
 
 import static com.zty.onlineedu.common.base.result.ResultCodeEnum.*;
 
@@ -39,12 +42,26 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(EOFException.class)
+    public Result error(EOFException e){
+        e.printStackTrace();
+        return Result.setResult(JSON_PARSE_ERROR);
+
+    }
+    @ExceptionHandler(MultipartException.class)
+    public Result error(MultipartException e){
+        log.warn("----------------------->当前视频已经暂停");
+        return Result.setResult(VIDEO_CHUNK_PAUSE);
+
+    }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Result error(HttpMessageNotReadableException e){
         e.printStackTrace();
         return Result.setResult(JSON_PARSE_ERROR);
 
     }
+
+
 
 
     /**

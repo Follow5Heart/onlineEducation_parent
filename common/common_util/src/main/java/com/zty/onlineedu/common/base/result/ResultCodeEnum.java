@@ -52,6 +52,11 @@ public enum ResultCodeEnum {
     DELETE_VIDEO_ERROR(false,21022,"删除课时异常"),
     SAVE_VIDEO_ERROR(false,21023,"保存课时异常"),
 
+    VIDEO_CHUNK_UPLOAD_ERROR(false,22010,"视频分块上传异常"),
+    VIDEO_CHECK_CHUNK_UPLOAD_ERROR(false,22011,"视频分块校验异常"),
+    VIDEO_CHUNK_MERGE_ERROR(false,22012,"视频分块合并异常"),
+    VIDEO_CHUNK_PAUSE(true,22013,"视频上传已暂停"),
+
     VIDEO_UPLOAD_ALIYUN_ERROR(false, 22001, "视频上传至阿里云失败"),
     VIDEO_UPLOAD_TOMCAT_ERROR(false, 22002, "视频上传至业务服务器失败"),
     VIDEO_DELETE_ALIYUN_ERROR(false, 22003, "阿里云视频文件删除失败"),

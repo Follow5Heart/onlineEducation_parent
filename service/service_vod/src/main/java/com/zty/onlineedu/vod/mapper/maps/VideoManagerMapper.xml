@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zty.onlineedu.vod.mapper.VideoManagerMapper">
+    <resultMap id="BaseResultMap" type="com.zty.onlineedu.vod.entity.EduVideoInfo">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="isimg" column="isImg" jdbcType="TINYINT"/>
+        <result property="contenttype" column="contentType" jdbcType="VARCHAR"/>
+        <result property="filesize" column="filesize" jdbcType="INTEGER"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="source" column="source" jdbcType="VARCHAR"/>
+        <result property="createtime" column="createTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,isImg,
+        contentType,filesize,path,
+        url,source,createTime
+    </sql>
+
+    <insert id="saveVideoInfo">
+        insert into edu_video_info (<include refid="Base_Column_List"></include>)
+        values (#{id},#{name},#{isimg},#{contenttype},#{filesize},#{path},#{url},#{source},#{createtime})
+    </insert>
+
+    <select id="queryVideoUrlById" resultType="java.lang.String">
+        select id from edu_video_info where id=#{videoId}
+    </select>
+
+</mapper>
