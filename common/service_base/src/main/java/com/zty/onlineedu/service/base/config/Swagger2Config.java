@@ -49,6 +49,17 @@ public class Swagger2Config {
 
     }
 
+    @Bean
+    public Docket createVideoApi(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("videoApi")
+                .apiInfo(apiInfoAdmin())
+                .select()
+                .paths(Predicates.and(PathSelectors.regex("/video/.*")))
+                .build();
+
+    }
+
     private ApiInfo apiInfoWeb(){
         return new ApiInfoBuilder()
                 .title("网站开发接口文档")
