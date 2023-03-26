@@ -186,7 +186,7 @@ public class VideoManagerServiceImpl implements VideoManagerService {
                 checkResult.put("url", url == null ? "" : url);
                 checkResult.put("videoId", chunk.getIdentifier());
                 checkResult.put("skipUpload", true);
-                checkResult.put("title", chunk.getFilename());
+                checkResult.put("filename", chunk.getFilename());
             } else {
                 //如果只是断点上传
                 checkResult.put("uploaded", chunkNumbers);

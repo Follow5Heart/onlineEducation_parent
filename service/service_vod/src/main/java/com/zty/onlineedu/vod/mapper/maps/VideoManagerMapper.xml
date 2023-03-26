@@ -27,7 +27,7 @@
     </insert>
 
     <select id="queryVideoUrlById" resultType="java.lang.String">
-        select id from edu_video_info where id=#{videoId}
+        select url from edu_video_info where id=#{videoId}
     </select>
 
 </mapper>
