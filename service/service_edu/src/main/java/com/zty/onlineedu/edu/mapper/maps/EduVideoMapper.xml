@@ -161,6 +161,19 @@
         delete from edu_video where id=#{videoId}
     </delete>
     <select id="getVideoById" resultType="com.zty.onlineedu.edu.pojo.vo.VideoVo">
-        select id,title,is_free as isFree,sort,video_source_id from edu_video where id=#{videoId}
+        SELECT
+            e.id,
+            e.title,
+            e.is_free AS isFree,
+            e.sort,
+            e.video_source_id AS videoSourceId,
+            e.video_original_name AS videoOriginalName,
+            v.contentType AS fileType,
+            v.filesize AS fileSize
+        FROM
+            edu_video e
+                LEFT JOIN edu_video_info v ON v.id = e.video_source_id
+        WHERE
+            e.id = #{videoId}
     </select>
 </mapper>

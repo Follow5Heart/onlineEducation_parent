@@ -19,4 +19,7 @@ public class VideoVo implements Serializable {
     private String sort;
 
     private String videoSourceId;
+    private String videoOriginalName;
+    private String fileType;
+    private Integer fileSize;
 }
