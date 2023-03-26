@@ -58,7 +58,7 @@ public class VideoManagerController {
                              @ApiParam("文件大小") @RequestParam("filesize") String filesize) {
         try {
             Map<String, Object> mergeResult = videoManagerService.chunkMerge(filename, identifier, contentType, filesize);
-            return Result.ok().code(200).message("合并成功");
+            return Result.ok().code(200).message("合并成功").data(mergeResult);
 
         } catch (Exception e) {
             log.error(ExceptionUtils.getExceptionMessage(e));
