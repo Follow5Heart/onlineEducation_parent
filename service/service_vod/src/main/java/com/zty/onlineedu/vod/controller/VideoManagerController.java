@@ -85,10 +85,10 @@ public class VideoManagerController {
     }
 
     @ApiOperation("视频删除功能")
-    @DeleteMapping("/delete")
-    public Result deleteFile(@ApiParam(value = "文件id", required = true) @RequestBody String fileId) {
+    @DeleteMapping("/removeVideo/{videoSourceId}")
+    public Result removeVideo(@ApiParam(value = "视频id", required = true) @PathVariable String videoSourceId) {
         try {
-            boolean result = false;
+            Boolean result = videoManagerService.removeVideo(videoSourceId);
             if (result) {
                 return Result.ok().message("删除成功");
             } else {

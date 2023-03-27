@@ -36,6 +36,11 @@ public interface VideoManagerService{
      */
     Map<String,Object> chunkMerge(String contentType, String filesize, String filename, String identifier) throws IOException;
 
-
+    /**
+     *删除视频
+     * @param videoSourceId 视频id
+     * @return 删除结果
+     */
+    Boolean removeVideo(String videoSourceId);
 
 }

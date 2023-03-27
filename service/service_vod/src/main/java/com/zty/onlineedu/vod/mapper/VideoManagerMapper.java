@@ -25,6 +25,13 @@ public interface VideoManagerMapper {
      */
     String queryVideoUrlById(String videoId);
 
+    /**
+     * 删除视频
+     * @param videoSourceId 视频id
+     * @return 删除结果
+     */
+    Boolean removeVideo(String videoSourceId);
+
 }
 
 

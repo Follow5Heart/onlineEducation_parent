@@ -25,6 +25,9 @@
         insert into edu_video_info (<include refid="Base_Column_List"></include>)
         values (#{id},#{name},#{isimg},#{contenttype},#{filesize},#{path},#{url},#{source},#{createtime})
     </insert>
+    <delete id="removeVideo">
+        delete from edu_video_info where id =#{videoSourceId}
+    </delete>
 
     <select id="queryVideoUrlById" resultType="java.lang.String">
         select url from edu_video_info where id=#{videoId}

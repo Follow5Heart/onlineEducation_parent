@@ -272,6 +272,12 @@ public class VideoManagerServiceImpl implements VideoManagerService {
         return mergeResult;
     }
 
+    @Override
+    public Boolean removeVideo(String videoSourceId) {
+        Boolean result=videoManagerMapper.removeVideo(videoSourceId);
+        return result;
+    }
+
 
     /**
      * 合并文件方法
