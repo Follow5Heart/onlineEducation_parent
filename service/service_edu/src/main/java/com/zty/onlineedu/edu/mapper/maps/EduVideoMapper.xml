@@ -124,10 +124,10 @@
             <if test="title!=null and title!=''">
             title=#{title},
             </if>
-            <if test="videoSourceId!=null and videoSourceId!=''">
+            <if test="videoSourceId!=null">
                 video_source_id=#{videoSourceId},
             </if>
-            <if test="videoOriginalName!=null and videoOriginalName!=''">
+            <if test="videoOriginalName!=null">
                 video_original_name=#{videoOriginalName},
             </if>
             <if test="sort!=null and sort!=''">
