@@ -77,6 +77,25 @@
     <delete id="deleteCourseDescriptionById">
         delete from edu_course_description where id=#{courseId}
     </delete>
+
+    <delete id="deleteChapterByIds">
+        delete from edu_chapter where id in
+        <foreach collection="chapterIds" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+
+    </delete>
+    <delete id="deleteVideoByIds">
+        delete from edu_video
+        <where>
+            <if test="videoMapLists!=null and videoMapLists.size()>0">
+                and id in
+                <foreach collection="videoMapLists" item="videoMap" separator="," open="(" close=")">
+                    #{videoMap.id}
+                </foreach>
+            </if>
+        </where>
+    </delete>
     <select id="querySubjectById" resultType="String">
         select title from edu_subject where id=#{id}
     </select>
@@ -143,5 +162,24 @@
         LEFT JOIN edu_subject s2 ON s2.id = c.subject_parent_id
         where c.id=#{courseId}
 
+    </select>
+    <select id="queryChapterIds" resultType="java.lang.String">
+        select id from edu_chapter where course_id=#{courseId}
+    </select>
+    <select id="queryVideoInfoIdByChapterId" resultType="Map">
+        select id,video_source_id as videoInfoId from edu_video 
+        <where>
+            <if test="chapterIds!=null and chapterIds.length>0">
+                and chapter_id in
+                <foreach collection="chapterIds" item="chapterId" separator="," open="(" close=")">
+                   #{chapterId}
+                </foreach>
+            </if>
+
+            <if test="courseId!=null and courseId!=''">
+                and course_id =#{courseId}
+            </if>
+
+        </where>
     </select>
 </mapper>

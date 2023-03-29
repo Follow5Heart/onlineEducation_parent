@@ -3,6 +3,8 @@ package com.zty.onlineedu.vod.mapper;
 import com.zty.onlineedu.vod.entity.EduVideoInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author 17939
 * @description 针对表【edu_file_info(文件信息表)】的数据库操作Mapper
@@ -31,6 +33,13 @@ public interface VideoManagerMapper {
      * @return 删除结果
      */
     Boolean removeVideo(String videoSourceId);
+
+    /**
+     * 批量删除视频
+     * @param videoSourceIds 视频id列表
+     * @return 批量删除结果
+     */
+    Boolean batchRemoveVideoByIds(List<String> videoSourceIds);
 
 }
 

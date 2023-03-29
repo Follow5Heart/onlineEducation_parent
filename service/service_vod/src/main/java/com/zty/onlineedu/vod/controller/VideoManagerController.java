@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -98,6 +99,25 @@ public class VideoManagerController {
         } catch (Exception e) {
             log.error(ExceptionUtils.getExceptionMessage(e));
             throw new GeneralException(ResultCodeEnum.FILE_DELETE_ERROR);
+
+        }
+
+    }
+
+    @ApiOperation("批量删除功能")
+    @DeleteMapping("/batchRemoveVideoByIds")
+    public Result batchRemoveVideoByIds(@ApiParam(value = "视频id列表", required = true) @RequestBody List<String> videoSourceIds) {
+        try {
+            Boolean result = videoManagerService.batchRemoveVideoByIds(videoSourceIds);
+            if (result) {
+                return Result.ok().message("批量删除成功");
+            } else {
+                return Result.error().message("批量删除失败");
+            }
+
+        } catch (Exception e) {
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.FILE_BATCH_DELETE_ERROR);
 
         }
 

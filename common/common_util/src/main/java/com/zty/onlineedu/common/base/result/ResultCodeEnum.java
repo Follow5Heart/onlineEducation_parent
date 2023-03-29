@@ -31,6 +31,7 @@ public enum ResultCodeEnum {
 
     FILE_UPLOAD_ERROR(false, 21004, "文件上传异常"),
     FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),
+    FILE_BATCH_DELETE_ERROR(false, 21016, "文件批量刪除错误"),
     EXCEL_DATA_IMPORT_ERROR(false, 21006, "Excel数据导入错误"),
     NEXTED_SUBJECT_DATA_ERROR(false, 21007,"获取嵌套课程异常"),
     SAVE_COURSE_DATA_ERROR(false,21008,"保存课程信息异常"),

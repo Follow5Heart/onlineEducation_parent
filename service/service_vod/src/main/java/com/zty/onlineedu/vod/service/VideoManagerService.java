@@ -3,6 +3,7 @@ package com.zty.onlineedu.vod.service;
 import com.zty.onlineedu.vod.util.ChunkMultipartFileParam;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,5 +43,12 @@ public interface VideoManagerService{
      * @return 删除结果
      */
     Boolean removeVideo(String videoSourceId);
+
+    /**
+     * 批量文件删除
+     * @param videoSourceIds 视频id列表
+     * @return 批量删除结果
+     */
+    Boolean batchRemoveVideoByIds(List<String> videoSourceIds);
 
 }

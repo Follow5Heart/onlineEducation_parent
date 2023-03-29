@@ -278,6 +278,12 @@ public class VideoManagerServiceImpl implements VideoManagerService {
         return result;
     }
 
+    @Override
+    public Boolean batchRemoveVideoByIds(List<String> videoSourceIds) {
+        Boolean result=videoManagerMapper.batchRemoveVideoByIds(videoSourceIds);
+        return result;
+    }
+
 
     /**
      * 合并文件方法

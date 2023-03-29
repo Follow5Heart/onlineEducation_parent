@@ -28,6 +28,13 @@
     <delete id="removeVideo">
         delete from edu_video_info where id =#{videoSourceId}
     </delete>
+    <delete id="batchRemoveVideoByIds">
+        delete from edu_video_info
+        where id in
+        <foreach collection="videoSourceIds" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="queryVideoUrlById" resultType="java.lang.String">
         select url from edu_video_info where id=#{videoId}

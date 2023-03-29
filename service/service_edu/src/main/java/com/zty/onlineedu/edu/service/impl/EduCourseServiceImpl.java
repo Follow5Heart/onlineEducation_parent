@@ -5,6 +5,7 @@ import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.StringUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
 import com.zty.onlineedu.edu.feign.FileService;
+import com.zty.onlineedu.edu.feign.VodService;
 import com.zty.onlineedu.edu.mapper.EduCourseMapper;
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.pojo.entity.EduCourse;
@@ -14,6 +15,7 @@ import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
 * @author 17939
 * @description 针对表【edu_course(课程)】的数据库操作Service实现
 * @createDate 2022-12-03 13:52:58
 */
+@Log4j2
 @Service
 public class EduCourseServiceImpl implements EduCourseService{
 
@@ -36,6 +40,9 @@ public class EduCourseServiceImpl implements EduCourseService{
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private VodService vodService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -104,6 +111,7 @@ public class EduCourseServiceImpl implements EduCourseService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateCourse(CourseInfoFormDto courseInfoFormDto) {
 
         if (courseInfoFormDto.getId()==null){
@@ -164,6 +172,7 @@ public class EduCourseServiceImpl implements EduCourseService{
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteCourseInfo(String courseId) {
         //删除课程表信息 edu_course
         eduCourseMapper.deleteCourseById(courseId);
@@ -186,6 +195,27 @@ public class EduCourseServiceImpl implements EduCourseService{
 
         //删除文件关联表
         eduCourseMapper.deleteFileRelation(courseId);
+
+        //通过课程id，查询章节id
+        String[] chapterIds=eduCourseMapper.queryChapterIds(courseId);
+        //如果章节id存在
+        if (chapterIds!=null && chapterIds.length>0){
+            //删除章节信息
+            eduCourseMapper.deleteChapterByIds(chapterIds);
+
+            //通过章节id，获取视频信息
+            List<Map<String,Object>> videoMapLists=eduCourseMapper.queryVideoInfoIdByChapterId(chapterIds,courseId);
+
+            //删除视频信息
+            eduCourseMapper.deleteVideoByIds(videoMapLists);
+
+
+            List<String> videoInfoIds = videoMapLists.stream().map(videoMap -> videoMap.get("videoInfoId").toString()).collect(Collectors.toList());
+            log.info("----------------->正在批量删除视频");
+            vodService.batchRemoveVideoByIds(videoInfoIds);
+
+
+        }
 
 
     }

@@ -7,8 +7,10 @@ import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 17939
@@ -123,4 +125,34 @@ public interface EduCourseMapper{
      * @param courseId 课程id
      */
     void updateCourseStatus(String courseId);
+
+    /**
+     * 通过课程id，查询章节id列表
+     * @param courseId 课程id
+     * @return 章节id列表
+     */
+    String[] queryChapterIds(String courseId);
+
+
+    /**
+     * 通过章节id列表，删除章节信息
+     * @param chapterIds 章节id列表
+     */
+    void deleteChapterByIds(@Param("chapterIds") String[] chapterIds);
+
+    /**
+     * 通过章节id列表和课程id，查询出所有的视频id列表
+     * @param chapterIds  视频章节列表
+     * @param courseId 课程id
+     * @return 视频id列表
+     */
+    List<Map<String,Object>> queryVideoInfoIdByChapterId(@Param("chapterIds") String[] chapterIds, @Param("courseId") String courseId);
+
+    /**
+     * 通过视频id列表删除视频信息
+     * @param videoMapLists 视频id列表
+     */
+    void deleteVideoByIds(@Param("videoMapLists") List<Map<String, Object>> videoMapLists);
+
+
 }
