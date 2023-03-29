@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
  *  fallback=void.class 定义容错的处理类，当调用远程接口失败或超时时，会调用对应接口的容错逻辑，fallback指定的类必须实现@FeignClient标记的接口*
  */
 @Service
-@FeignClient(value = "service-file",fallback= FileServiceFallBack.class)
+@FeignClient(value = "service-files",fallback= FileServiceFallBack.class)
 public interface FileService {
     /**
      * 调用微服务的测试方法
      * @return
      */
-    @GetMapping("/service-files/test")
+    @GetMapping("/service-files/file/test")
     Result test();
 
     /**
@@ -29,6 +29,6 @@ public interface FileService {
      * @param fileId
      * @return
      */
-    @DeleteMapping("/service-files/delete")
+    @DeleteMapping("/service-file/files/delete")
     Result deleteFile(String fileId);
 }

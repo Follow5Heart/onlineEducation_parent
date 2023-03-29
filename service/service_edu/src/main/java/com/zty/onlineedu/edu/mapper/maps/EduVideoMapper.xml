@@ -176,4 +176,7 @@
         WHERE
             e.id = #{videoId}
     </select>
+    <select id="getVideoSourceIdById" resultType="java.lang.String">
+        select video_source_id from edu_video where id=#{videoId}
+    </select>
 </mapper>

@@ -41,4 +41,11 @@ public interface EduVideoMapper{
      */
     VideoVo getVideoById(String videoId);
 
+    /**
+     *  通过课时id，查询课时的视频id
+     * @param videoId 视频信息id
+     * @return 视频id
+     */
+    String getVideoSourceIdById(String videoId);
+
 }

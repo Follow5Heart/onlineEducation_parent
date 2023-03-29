@@ -1,7 +1,9 @@
 package com.zty.onlineedu.edu.service.impl;
 
+import com.zty.onlineedu.common.base.result.Result;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.common.base.utils.UUIDUtils;
+import com.zty.onlineedu.edu.feign.VodService;
 import com.zty.onlineedu.edu.mapper.EduVideoMapper;
 import com.zty.onlineedu.edu.pojo.entity.EduVideo;
 import com.zty.onlineedu.edu.pojo.vo.VideoVo;
@@ -20,6 +22,9 @@ public class EduVideoServiceImpl implements EduVideoService{
     @Autowired
     private EduVideoMapper eduVideoMapper;
 
+    @Autowired
+    private VodService vodService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean updateVideo(EduVideo eduVideo) {
@@ -32,6 +37,12 @@ public class EduVideoServiceImpl implements EduVideoService{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteVideo(String videoId) {
+        //通过课程视频的主键查询 video_source_id
+        String videoSourceId=eduVideoMapper.getVideoSourceIdById(videoId);
+        //远程调用 删除课程视频
+        Result  remoteResult= vodService.removeVideo(videoSourceId);
+
+        //删除课程视频表信息
         Boolean result=eduVideoMapper.deleteVideoById(videoId);
         return result;
     }
