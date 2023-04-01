@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -179,6 +180,8 @@ public class EduTeacherServiceImpl implements EduTeacherService{
         return ListName;
     }
 
+
+
     /**
      * 公用方法
      * 通过讲师id删除文件信息表，和本地存储的文件
@@ -207,5 +210,16 @@ public class EduTeacherServiceImpl implements EduTeacherService{
             throw new RuntimeException("文件id不能为空");
         }
 
+    }
+
+
+    @Override
+    public Map<String, Object> getTeacherById(String id) {
+        EduTeacher teacher=eduTeacherMapper.queryTeacherById(id);
+        List<Map<String,Object>> courseInfo=eduTeacherMapper.queryCourseInfoByTeachrId(id);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("teacher",teacher);
+        map.put("courseList",courseInfo);
+        return map;
     }
 }

@@ -108,5 +108,8 @@
     <select id="queryFileInfoUrl" resultType="java.lang.String">
         select url from edu_file_info where id=#{fileId}
     </select>
+    <select id="queryCourseInfoByTeachrId" resultType="java.util.Map">
+        select * from edu_course where teacher_id=#{id}
+    </select>
 
 </mapper>

@@ -66,4 +66,11 @@ public interface EduTeacherService{
      */
     List<Map<String, Object>> queryListNameByKeyword(String keyword);
 
+    /**
+     * 根据教师id,获取老师信息和老师所属下面的课程信息
+     * @param id 教师id
+     * @return 教师信息列表奥
+     */
+    Map<String, Object> getTeacherById(String id);
+
 }

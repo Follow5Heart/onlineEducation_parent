@@ -79,4 +79,12 @@ public interface EduTeacherMapper {
      * @param fileId
      */
     void deleteFileInfo(String fileId);
+
+    /**
+     * 通过教师id，查询讲师下面的所有的课程信息
+     * @param id 教师id
+     * @return
+     */
+    List<Map<String, Object>> queryCourseInfoByTeachrId(String id);
+
 }
