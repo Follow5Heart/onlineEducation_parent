@@ -12,6 +12,7 @@ import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
 import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
@@ -230,5 +231,12 @@ public class EduCourseServiceImpl implements EduCourseService{
     public void publishCourse(String courseId) {
         //修改课程的发布状态
         eduCourseMapper.updateCourseStatus(courseId);
+    }
+
+    @Override
+    public List<CourseVo> getCourseList(WebCourseQueryParam webCourseQueryParam) {
+        List<CourseVo> courseVoList=eduCourseMapper.getCourseList(webCourseQueryParam);
+        return courseVoList;
+
     }
 }

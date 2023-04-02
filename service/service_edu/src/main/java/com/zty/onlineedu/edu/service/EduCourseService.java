@@ -2,6 +2,7 @@ package com.zty.onlineedu.edu.service;
 
 import com.zty.onlineedu.edu.pojo.dto.CourseInfoFormDto;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 
@@ -57,5 +58,13 @@ public interface EduCourseService{
      * @param courseId 课程id
      */
     void publishCourse(String courseId);
+
+    /**
+     * 前端课程查询参数，查询课程信息列表
+     * @param webCourseQueryParam 前端课程查询参数
+     * @return 课程信息列表
+     */
+    List<CourseVo> getCourseList(WebCourseQueryParam webCourseQueryParam);
+
 
 }

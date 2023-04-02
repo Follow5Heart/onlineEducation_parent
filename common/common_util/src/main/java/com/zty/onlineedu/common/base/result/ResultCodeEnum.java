@@ -65,6 +65,8 @@ public enum ResultCodeEnum {
     REFRESH_VIDEO_UPLOADAUTH_ERROR(false, 22005, "刷新上传地址和凭证失败"),
     FETCH_PLAYAUTH_ERROR(false, 22006, "获取播放凭证失败"),
 
+    WEB_GET_COURSE_LIST_ERROR(false,22007,"课程列表查询异常"),
+
     URL_ENCODE_ERROR(false, 23001, "URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false, 23002, "非法回调请求"),
     FETCH_ACCESSTOKEN_FAILD(false, 23003, "获取accessToken失败"),

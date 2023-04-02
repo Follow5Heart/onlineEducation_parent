@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Author zty
  * @Date 2023/4/1 16:13
@@ -11,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("前端服务器课程查询对象")
-public class WebCourseQueryParam {
+public class WebCourseQueryParam implements Serializable {
     private static final long serialVersionUID =1L;
 
     @ApiModelProperty(value="课程分类二级id")

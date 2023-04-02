@@ -4,6 +4,7 @@ import com.zty.onlineedu.edu.pojo.entity.EduCourse;
 import com.zty.onlineedu.edu.pojo.entity.EduCourseDescription;
 import com.zty.onlineedu.edu.pojo.entity.EduFileInfoRelation;
 import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
+import com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -154,5 +155,11 @@ public interface EduCourseMapper{
      */
     void deleteVideoByIds(@Param("videoMapLists") List<Map<String, Object>> videoMapLists);
 
+    /**
+     * 前端课程查询参数，查询课程信息列表
+     * @param webCourseQueryParam 前端课程查询参数
+     * @return 课程信息列表
+     */
+    List<CourseVo> getCourseList(WebCourseQueryParam webCourseQueryParam);
 
 }

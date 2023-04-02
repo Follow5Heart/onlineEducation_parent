@@ -182,4 +182,48 @@
 
         </where>
     </select>
+    <select id="getCourseList" resultType="com.zty.onlineedu.edu.pojo.vo.CourseVo" parameterType="com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam">
+        select
+        id,
+        title,
+        lesson_num as lessonNum,
+        price,
+        cover,
+        buy_count as buyCount,
+        view_count as viewCount,
+        status,
+        gmt_create as gmtCreate
+        from edu_course
+        <where>
+            <if test="subjectParentId!=null and subjectParentId!=''">
+                and subject_parent_id=#{subjectParentId}
+            </if>
+            <if test="subjectId!=null and subjectId!=''">
+                and subject_id=#{subjectId}
+            </if>
+        </where>
+        <choose>
+            <when test="buyCountSort!=null and buyCountSort!=''">
+                ORDER BY buy_count
+                <if test='buyCountSort=="1"'>
+                    DESC
+                </if>
+                <if test='buyCountSort=="0"'>
+                    ASC
+                </if>
+            </when>
+            <when test="gmtCreateSort!=null and gmtCreateSort!=''">
+                ORDER BY gmt_create DESC
+            </when>
+            <when test="priceSort!=null and priceSort!=''">
+                ORDER BY price
+                <if test='priceSort == "1"'>
+                    DESC
+                </if>
+                <if test='priceSort == "0"'>
+                    ASC
+                </if>
+            </when>
+        </choose>
+    </select>
 </mapper>
