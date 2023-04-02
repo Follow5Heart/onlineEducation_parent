@@ -44,7 +44,7 @@ public class Swagger2Config {
                 .groupName("fileApi")
                 .apiInfo(apiInfoAdmin())
                 .select()
-                .paths(Predicates.and(PathSelectors.regex("/service-files/.*")))
+                .paths(Predicates.and(PathSelectors.regex("/service-file/.*")))
                 .build();
 
     }
