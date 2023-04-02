@@ -33,7 +33,7 @@ public class Swagger2Config {
                 .groupName("adminApi")
                 .apiInfo(apiInfoAdmin())
                 .select()
-                .paths(Predicates.and(PathSelectors.regex("/admin/.*")))
+                .paths(Predicates.and(PathSelectors.regex("/service-edu/.*")))
                 .build();
 
     }
@@ -55,7 +55,7 @@ public class Swagger2Config {
                 .groupName("videoApi")
                 .apiInfo(apiInfoAdmin())
                 .select()
-                .paths(Predicates.and(PathSelectors.regex("/video/.*")))
+                .paths(Predicates.and(PathSelectors.regex("/service-vod/.*")))
                 .build();
 
     }
