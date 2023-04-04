@@ -18,6 +18,7 @@ public class WebCourseQueryParam implements Serializable {
 
     @ApiModelProperty(value="课程分类二级id")
     private String subjectParentId;
+
     @ApiModelProperty("课程分类一级id")
     private String subjectId;
 

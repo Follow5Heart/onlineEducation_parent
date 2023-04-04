@@ -10,8 +10,8 @@ import java.io.Serializable;
  * @Author zty
  * @Date 2022/12/6 20:27
  */
-@ApiModel("Teacher查询对象")
 @Data
+@ApiModel("Teacher查询对象")
 public class TeacherQueryParam implements Serializable {
     private static final long serialVersionUID = 1L;
 
