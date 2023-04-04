@@ -204,7 +204,7 @@
         </where>
         <choose>
             <when test="buyCountSort!=null and buyCountSort!=''">
-                ORDER BY buy_count
+                ORDER BY buy_count+0
                 <if test='buyCountSort=="1"'>
                     DESC
                 </if>
@@ -216,7 +216,7 @@
                 ORDER BY gmt_create DESC
             </when>
             <when test="priceSort!=null and priceSort!=''">
-                ORDER BY price
+                ORDER BY price+0
                 <if test='priceSort == "1"'>
                     DESC
                 </if>
