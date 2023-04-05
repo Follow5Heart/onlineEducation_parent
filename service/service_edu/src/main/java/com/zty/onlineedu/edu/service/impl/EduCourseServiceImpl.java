@@ -15,6 +15,7 @@ import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
+import com.zty.onlineedu.edu.pojo.vo.WebCourseVo;
 import com.zty.onlineedu.edu.service.EduCourseService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
@@ -238,5 +239,18 @@ public class EduCourseServiceImpl implements EduCourseService{
         List<CourseVo> courseVoList=eduCourseMapper.getCourseList(webCourseQueryParam);
         return courseVoList;
 
+    }
+
+    @Override
+    public WebCourseVo getWebCourseInfo(String courseId) {
+        //通过课程id，查询课程信息
+        EduCourse courseInfo = eduCourseMapper.getCourseInfo(courseId);
+        courseInfo.setViewCount((Integer.valueOf(courseInfo.getViewCount())+1)+"");
+        //更新课程的浏览量
+        eduCourseMapper.updateCourse(courseInfo);
+
+        //获取课程的详细信息
+        WebCourseVo webCourseVo=eduCourseMapper.getWebCourseInfo(courseId);
+        return webCourseVo;
     }
 }

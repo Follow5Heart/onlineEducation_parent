@@ -226,4 +226,30 @@
             </when>
         </choose>
     </select>
+    <select id="getWebCourseInfo" resultType="com.zty.onlineedu.edu.pojo.vo.WebCourseVo">
+        SELECT
+            c.id,
+            c.title,
+            c.price,
+            c.lesson_num AS lessonNum,
+            c.cover,
+            c.buy_count AS buyCount,
+            c.view_count AS viewCount,
+            d.description,
+            t.id as teacherId,
+            t.name as teacherName,
+            t.intro,
+            t.avatar,
+            s.id as subjectLevelOneId,
+            s.title as subjectLevelOne,
+            s1.id as subjectLevelTwoId,
+            s1.title as subjectLevelTwo
+        FROM
+            edu_course c
+                left join edu_course_description d on c.id=d.id
+                left join edu_teacher t on c.teacher_id=t.id
+                left join edu_subject s on c.subject_parent_id=s.id
+                left join edu_subject s1 on c.subject_id=s1.id
+        where c.id=#{courseId}
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
+import com.zty.onlineedu.edu.pojo.vo.WebCourseVo;
 
 import java.util.List;
 
@@ -66,5 +67,11 @@ public interface EduCourseService{
      */
     List<CourseVo> getCourseList(WebCourseQueryParam webCourseQueryParam);
 
+    /**
+     * 获取课程详情页信息并更新浏览量
+     * @param courseId 课程id
+     * @return 课程详情页信息
+     */
+    WebCourseVo getWebCourseInfo(String courseId);
 
 }

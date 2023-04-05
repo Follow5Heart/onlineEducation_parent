@@ -7,6 +7,7 @@ import com.zty.onlineedu.edu.pojo.query.CourseQueryParam;
 import com.zty.onlineedu.edu.pojo.query.WebCourseQueryParam;
 import com.zty.onlineedu.edu.pojo.vo.CoursePublishVo;
 import com.zty.onlineedu.edu.pojo.vo.CourseVo;
+import com.zty.onlineedu.edu.pojo.vo.WebCourseVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -161,5 +162,12 @@ public interface EduCourseMapper{
      * @return 课程信息列表
      */
     List<CourseVo> getCourseList(WebCourseQueryParam webCourseQueryParam);
+
+    /**
+     * 通过课程id，获取前端服务器课程详情页信息
+     * @param courseId 课程id
+     * @return 课程详情页信息
+     */
+    WebCourseVo getWebCourseInfo(String courseId);
 
 }
