@@ -55,7 +55,7 @@
         <spring-file-storage.version>0.7.0</spring-file-storage.version>
         <commons-lang3.version>3.13</commons-lang3.version>
         <alibaba-easyexcel.version>3.2.0</alibaba-easyexcel.version>
-
+        <hutools.version>5.8.16</hutools.version>
     </properties>
 
     <!-- 只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。如果不在子项目中声明依赖
@@ -76,6 +76,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${alibaba-easyexcel.version}</version>
+            </dependency>
+
+            <!-- 一个Java基础工具类，对文件、流、加密解密、转码、正则、线程、XML等JDK方法进行封装，组成各种Util工具类      -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutools.version}</version>
             </dependency>
 
 
