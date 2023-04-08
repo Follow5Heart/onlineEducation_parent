@@ -57,9 +57,47 @@
         values (#{id},#{description},#{gmtCreate},#{gmtModified})
     </update>
     <update id="updateCourse">
-        update edu_course set teacher_id=#{teacherId},subject_id=#{subjectId},subject_parent_id=#{subjectParentId},title=#{title},price=#{price},
-                              lesson_num=#{lessonNum},cover=#{cover},buy_count=#{buyCount},view_count=#{viewCount},version=#{version},status=#{status},
-                            gmt_modified=#{gmtModified} where id=#{id}
+        update edu_course
+        <set>
+            <if test="teacherId!=null and teacherId!=''">
+                teacher_id=#{teacherId},
+            </if>
+            <if test="subjectId!=null and subjectId!=''">
+                subject_id=#{subjectId},
+            </if>
+            <if test="subjectParentId!=null and subjectParentId!=''">
+                subject_parent_id=#{subjectParentId},
+            </if>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="lessonNum!=null and lessonNum!=''">
+                lesson_num=#{lessonNum},
+            </if>
+            <if test="price!=null and price!=''">
+                price=#{price},
+            </if>
+            <if test="cover!=null and cover!=''">
+                cover=#{cover},
+            </if>
+            <if test="buyCount!=null and buyCount!=''">
+                buy_count=#{buyCount},
+            </if>
+            <if test="viewCount!=null and viewCount!=''">
+                view_count=#{viewCount},
+            </if>
+            <if test="version!=null and version!=''">
+                version=#{version},
+            </if>
+            <if test="status!=null and status!=''">
+                status=#{status},
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+                gmt_modified=#{gmtModified},
+            </if>
+
+        </set>
+         where id=#{id}
 
     </update>
     <update id="updateCourseDescription">
