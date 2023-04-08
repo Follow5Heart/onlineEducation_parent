@@ -284,6 +284,14 @@ public class VideoManagerServiceImpl implements VideoManagerService {
         return result;
     }
 
+    @Override
+    public String getVideoUrlById(String videoId) {
+        String videoUrl=videoManagerMapper.getVideoUrlById(videoId);
+        return videoUrl;
+
+
+    }
+
 
     /**
      * 合并文件方法

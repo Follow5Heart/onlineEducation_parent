@@ -51,4 +51,11 @@ public interface VideoManagerService{
      */
     Boolean batchRemoveVideoByIds(List<String> videoSourceIds);
 
+    /**
+     * 通过课程id获取视频链接
+     * @param videoId 课程id
+     * @return 视频链接
+     */
+    String getVideoUrlById(String videoId);
+
 }

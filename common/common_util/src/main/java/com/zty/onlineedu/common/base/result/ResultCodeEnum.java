@@ -67,6 +67,7 @@ public enum ResultCodeEnum {
 
     WEB_GET_COURSE_LIST_ERROR(false,22007,"课程列表查询异常"),
     WEB_GET_COURSE_INFO_ERROR(false,22008,"课程详情页获取异常"),
+    WEB_GET_VIDEO_URL_ERROR(false,22009,"获取视频链接地址异常"),
 
     URL_ENCODE_ERROR(false, 23001, "URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false, 23002, "非法回调请求"),
