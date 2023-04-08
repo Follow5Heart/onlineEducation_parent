@@ -1,8 +1,8 @@
 package com.zty.onlineedu.cms.pojo.entity;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 推荐位
@@ -23,12 +23,12 @@ public class CmsAdType implements Serializable {
     /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private String gmtCreate;
 
     /**
      * 更新时间
      */
-    private Date gmtModified;
+    private String gmtModified;
 
     private static final long serialVersionUID = 1L;
 }

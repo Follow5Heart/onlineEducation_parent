@@ -7,13 +7,13 @@
     <resultMap id="BaseResultMap" type="com.zty.onlineedu.cms.pojo.entity.CmsAd">
             <id property="id" column="id" jdbcType="CHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="typeId" column="type_id" jdbcType="CHAR"/>
+            <result property="typeId" column="type_id" jdbcType="VARCHAR"/>
             <result property="imageUrl" column="image_url" jdbcType="VARCHAR"/>
             <result property="color" column="color" jdbcType="VARCHAR"/>
             <result property="linkUrl" column="link_url" jdbcType="VARCHAR"/>
-            <result property="sort" column="sort" jdbcType="OTHER"/>
-            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
-            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="sort" column="sort" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
