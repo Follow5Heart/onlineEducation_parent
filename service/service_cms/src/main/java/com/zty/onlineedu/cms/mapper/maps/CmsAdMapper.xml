@@ -21,4 +21,122 @@
         image_url,color,link_url,
         sort,gmt_create,gmt_modified
     </sql>
+    <insert id="save">
+        insert into cms_ad
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                id,
+            </if>
+            <if test="title!=null and title!=''">
+                title,
+            </if>
+            <if test="typeId!=null and typeId!=''">
+                type_id,
+            </if>
+            <if test="imageUrl!=null and imageUrl!=''">
+                image_url,
+            </if>
+            <if test="color!=null and color!=''">
+                color,
+            </if>
+            <if test="linkUrl!=null and linkUrl!=''">
+                link_url,
+            </if>
+            <if test="sort!=null and sort!=''">
+                sort,
+            </if>
+            <if test="gmtCreate!=null and gmtCreate!=''">
+                gmt_create,
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+                gmt_modified,
+            </if>
+
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="title!=null and title!=''">
+               #{title},
+            </if>
+            <if test="typeId!=null and typeId!=''">
+               #{typeId},
+            </if>
+            <if test="imageUrl!=null and imageUrl!=''">
+               #{imageUrl},
+            </if>
+            <if test="color!=null and color!=''">
+              #{color},
+            </if>
+            <if test="linkUrl!=null and linkUrl!=''">
+              #{linkUrl},
+            </if>
+            <if test="sort!=null and sort!=''">
+             #{sort},
+            </if>
+            <if test="gmtCreate!=null and gmtCreate!=''">
+               #{gmtCreate},
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+                #{gmtModified},
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateById">
+        update cms_ad
+        <set>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="typeId!=null and typeId!=''">
+                type_id=#{typeId},
+            </if>
+            <if test="imageUrl!=null and imageUrl!=''">
+                image_url=#{imageUrl},
+            </if>
+            <if test="color!=null and color!=''">
+                color=#{color},
+            </if>
+            <if test="linkUrl!=null and linkUrl!=''">
+                link_url=#{linkUrl},
+            </if>
+            <if test="sort!=null and sort!=''">
+                sort=#{sort},
+            </if>
+            <if test="gmtCreate!=null and gmtCreate!=''">
+                gmt_create=#{gmtCreate},
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+                gmt_modified=#{gmtModified},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="removeById" >
+        delete from cms_ad where id =#{id}
+    </delete>
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from cms_ad where id=#{id}
+    </select>
+    <select id="getAdAllData" resultType="com.zty.onlineedu.cms.pojo.vo.AdVo">
+        SELECT
+            a.id,
+            a.title,
+            a.sort,
+            t.title as Type
+        FROM
+            cms_ad a
+                left join  cms_ad_type t on t.id=a.type_id
+    </select>
+    <select id="getById" resultMap="BaseResultMap">
+        select * from cms_ad where id=#{id}
+    </select>
+    <select id="listByAdTypeId" resultMap="BaseResultMap">
+        select a.* from cms_ad
+        left join cms_ad_type t on a.type_id=t.id
+        where t.id=#{adTypeId}
+    </select>
 </mapper>

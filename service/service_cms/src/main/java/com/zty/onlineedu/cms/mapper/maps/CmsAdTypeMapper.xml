@@ -15,4 +15,61 @@
         id,title,gmt_create,
         gmt_modified
     </sql>
+    <insert id="save">
+        insert into cms_ad_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                id,
+            </if>
+            <if test="title!=null and title!=''">
+                title,
+            </if>
+            <if test="gmtCreate!=null and gmtCreate!=''">
+                gmt_create,
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+                gmt_modified,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null and id!=''">
+                #{id},
+            </if>
+            <if test="title!=null and title!=''">
+               #{title},
+            </if>
+            <if test="gmtCreate!=null and gmtCreate!=''">
+                #{gmtCreate},
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+             #{gmtModified},
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateById">
+        update cms_ad_type
+        <set>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="gmtCreate!=null and gmtCreate!=''">
+                gmt_create=#{gmtCreate},
+            </if>
+            <if test="gmtModified!=null and gmtModified!=''">
+                gmt_modified=#{gmtModified},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="removeById">
+        delete from cms_ad_type where id=#{id}
+    </delete>
+    <select id="list" resultMap="BaseResultMap">
+        select * from cms_ad_type
+    </select>
+    <select id="getById" resultMap="BaseResultMap">
+        select * from cms_ad_type where id=#{id}
+    </select>
 </mapper>

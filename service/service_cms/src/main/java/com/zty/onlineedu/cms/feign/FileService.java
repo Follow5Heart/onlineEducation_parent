@@ -1,7 +1,7 @@
-package com.zty.onlineedu.edu.feign;
+package com.zty.onlineedu.cms.feign;
 
+import com.zty.onlineedu.cms.feign.fallback.FileServiceFallBack;
 import com.zty.onlineedu.common.base.result.Result;
-import com.zty.onlineedu.edu.feign.fallback.FileServiceFallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,11 +26,18 @@ public interface FileService {
 
     /**
      * 调用service-file服务的文件删除方法*
-     * @param fileId 文件id
+     * @param fileId
      * @return
      */
     @DeleteMapping("/service-file/files/delete")
     Result deleteFile(String fileId);
 
 
+    /**
+     * 调用service-file服务的通过文件路径删除文件方法*
+     * @param imageUrl 文件路径
+     * @return
+     */
+    @DeleteMapping("/service-file/files/deleteByUrl")
+    Result deleteFileByUrl(String imageUrl);
 }
