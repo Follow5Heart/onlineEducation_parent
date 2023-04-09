@@ -1,5 +1,6 @@
 package com.zty.onlineedu.files.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import cn.xuyanwu.spring.file.storage.FileInfo;
 import com.zty.onlineedu.common.base.utils.LocalDateTimeUtils;
 import com.zty.onlineedu.files.pojo.vo.EduFileInfoVo;
@@ -116,6 +117,18 @@ public class FileDetailServiceImpl implements FileDetailService {
         }else{
             return false;
         }
+
+    }
+
+    @Override
+    public boolean deleteFileByUrl(String imageUrl) {
+        boolean result=false;
+        String fileId=mapper.getIdByImageUrl(imageUrl);
+        if(StrUtil.hasBlank(fileId)){
+            result=deleteFile(fileId);
+        }
+        return result;
+
 
     }
 }

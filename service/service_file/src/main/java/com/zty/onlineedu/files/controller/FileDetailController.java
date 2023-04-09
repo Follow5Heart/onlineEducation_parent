@@ -72,6 +72,26 @@ public class FileDetailController {
 
     }
 
+    @ApiOperation("通过文件路径删除文件功能")
+    @DeleteMapping("/deleteByUrl")
+    public Result deleteFileByUrl(@ApiParam(value = "文件路径",required=true) @RequestBody String imageUrl){
+        try{
+
+            boolean result=fileDetailService.deleteFileByUrl(imageUrl);
+            if (result){
+                return Result.ok().message("删除成功");
+            }else{
+                return Result.error().message("删除失败");
+            }
+
+        }catch (Exception e){
+            log.error(ExceptionUtils.getExceptionMessage(e));
+            throw new GeneralException(ResultCodeEnum.FILE_DELETE_ERROR);
+
+        }
+
+    }
+
     /**
      * 用于微服务之间调用的测试方法
      * @return

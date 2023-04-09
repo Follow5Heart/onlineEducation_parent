@@ -32,4 +32,7 @@
     <select id="queryFileInfoById" resultType="com.zty.onlineedu.files.pojo.vo.EduFileInfoVo">
         select * from edu_file_info where id=#{fileId}
     </select>
+    <select id="getIdByImageUrl" resultType="java.lang.String">
+        select id from edu_file_info where url=#{imageUrl}
+    </select>
 </mapper>

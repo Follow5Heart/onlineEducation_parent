@@ -30,6 +30,14 @@ public interface EduFileInfoMapper {
      * @return
      */
     Integer deleteFileInfo(String id);
+
+    /**
+     * 通过文件路径，获取文件id
+     * @param imageUrl 文件路径
+     * @return 文件id
+     */
+    String getIdByImageUrl(String imageUrl);
+
 }
 
 

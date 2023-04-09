@@ -14,4 +14,12 @@ public interface FileDetailService extends FileRecorder {
      * @return
      */
     boolean deleteFile(String fileId);
+
+    /**
+     * 通过文件路径删除文件信息
+     * @param imageUrl 文件路径
+     * @return 成功与否
+     */
+    boolean deleteFileByUrl(String imageUrl);
+
 }
