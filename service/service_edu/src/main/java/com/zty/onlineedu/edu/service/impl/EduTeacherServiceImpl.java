@@ -222,4 +222,12 @@ public class EduTeacherServiceImpl implements EduTeacherService{
         map.put("courseList",courseInfo);
         return map;
     }
+
+    @Override
+    public List<EduTeacher> getHotTeacher() {
+        List<EduTeacher> teacherList=eduTeacherMapper.getHotTeacher();
+        return teacherList;
+
+
+    }
 }

@@ -253,4 +253,11 @@ public class EduCourseServiceImpl implements EduCourseService{
         WebCourseVo webCourseVo=eduCourseMapper.getWebCourseInfo(courseId);
         return webCourseVo;
     }
+
+    @Override
+    public List<CourseVo> getHotCourse() {
+
+        List<CourseVo> courseVoList=eduCourseMapper.getHotCourse();
+        return courseVoList;
+    }
 }

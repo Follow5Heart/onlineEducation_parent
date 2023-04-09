@@ -111,5 +111,14 @@
     <select id="queryCourseInfoByTeachrId" resultType="java.util.Map">
         select * from edu_course where teacher_id=#{id}
     </select>
+    <select id="getHotTeacher" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+            edu_teacher
+        ORDER BY
+            sort+0 DESC
+            LIMIT 4
+    </select>
 
 </mapper>

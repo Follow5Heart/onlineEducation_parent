@@ -290,4 +290,26 @@
                 left join edu_subject s1 on c.subject_id=s1.id
         where c.id=#{courseId}
     </select>
+    <select id="getHotCourse" resultType="com.zty.onlineedu.edu.pojo.vo.CourseVo">
+        SELECT
+            c.id,
+            c.title,
+            s2.title as subjectParentTitle,
+            s1.title as subjectTitle,
+            t.name as teacherName,
+            c.lesson_num as lessonNum,
+            c.price,
+            c.cover,
+            c.buy_count as buyCount,
+            c.view_count as viewCount,
+            c.status,
+            c.gmt_create as gmtCreate
+        FROM
+            edu_course c
+                LEFT JOIN edu_teacher t ON t.id = c.teacher_id
+                LEFT JOIN edu_subject s1 ON s1.id = c.subject_id
+                LEFT JOIN edu_subject s2 ON s2.id = c.subject_parent_id
+        order by c.view_count+0 desc
+            limit 8
+    </select>
 </mapper>

@@ -74,4 +74,11 @@ public interface EduCourseService{
      */
     WebCourseVo getWebCourseInfo(String courseId);
 
+    /**
+     * 获取课程热门数据
+     * @return 课程数据集合
+     */
+    List<CourseVo> getHotCourse();
+
+
 }

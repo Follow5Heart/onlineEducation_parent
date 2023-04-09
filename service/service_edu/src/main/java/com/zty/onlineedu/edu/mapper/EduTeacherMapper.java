@@ -87,4 +87,10 @@ public interface EduTeacherMapper {
      */
     List<Map<String, Object>> queryCourseInfoByTeachrId(String id);
 
+    /**
+     * 获取热门讲师数据集合
+     * @return 讲师数据集合
+     */
+    List<EduTeacher> getHotTeacher();
+
 }

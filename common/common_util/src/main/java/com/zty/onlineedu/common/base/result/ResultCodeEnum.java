@@ -72,6 +72,7 @@ public enum ResultCodeEnum {
     UPDATE_AD_ERROR(false,22010,"更新推荐异常"),
 
     GET_AD_BY_ADTYPE_LIST_ERROR(false,22100,"据推荐位id显示广告推荐异常"),
+    GET_INDEX_DATA_ERROR(false,22101,"课程和讲师的首页数据异常"),
 
     URL_ENCODE_ERROR(false, 23001, "URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false, 23002, "非法回调请求"),

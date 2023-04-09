@@ -75,7 +75,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--    redis所需要的依赖    -->
+        <!--    redis所需要的依赖  lecttuce 缓存连接池  -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
