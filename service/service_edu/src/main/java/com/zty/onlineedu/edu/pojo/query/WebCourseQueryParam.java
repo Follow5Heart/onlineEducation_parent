@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @Author zty
  * @Date 2023/4/1 16:13
- * @deprecated 前端服务器 课程查询对象
+ *  前端服务器 课程查询对象
  */
 @Data
 @ApiModel("前端服务器课程查询对象")
