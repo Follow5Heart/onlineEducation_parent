@@ -135,7 +135,7 @@
         select * from cms_ad where id=#{id}
     </select>
     <select id="listByAdTypeId" resultMap="BaseResultMap">
-        select a.* from cms_ad
+        select a.* from cms_ad a
         left join cms_ad_type t on a.type_id=t.id
         where t.id=#{adTypeId}
     </select>
