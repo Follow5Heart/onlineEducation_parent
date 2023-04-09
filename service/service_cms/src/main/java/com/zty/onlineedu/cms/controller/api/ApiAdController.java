@@ -27,7 +27,7 @@ import java.util.List;
 @CrossOrigin //解决跨域问题
 @Api(tags = "广告推荐")
 @RestController
-@RequestMapping("/service-cms/api/cms/ad")
+@RequestMapping("/api/cms/ad")
 @Slf4j
 public class ApiAdController {
     @Autowired
