@@ -30,6 +30,7 @@ spring:
     port: 6379
     password: ztyroot
     database: 0 #操作的是0号数据库
+    timeout: 30 #Redis连接超时时间，默认1分钟，也就是说会等待一分钟，确认连不上Redis才会走数据库，
     # lettuce简单配置
     lettuce:
       pool:
