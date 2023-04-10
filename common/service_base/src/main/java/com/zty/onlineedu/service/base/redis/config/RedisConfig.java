@@ -1,21 +1,32 @@
 package com.zty.onlineedu.service.base.redis.config;
 
 
+import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.time.Duration;
 
 /**
  * @Author zty
  * @Date 2023/2/6 0:00
  * redis的配置类
  */
+@Log4j2
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
@@ -40,6 +51,69 @@ public class RedisConfig extends CachingConfigurerSupport {
     //使用Jackson序列化器
     private RedisSerializer<Object> valueSerializer(){
         return new GenericJackson2JsonRedisSerializer();
+    }
+
+    /**
+     *  用于创建一个 Redis 缓存管理器（CacheManager）实例。
+     * 具体来说，它通过 LettuceConnectionFactory 连接工厂创建了一个 Redis 缓存管理器实例 cacheManager，
+     * 并指定了缓存配置 config，该缓存配置包括以下内容：
+     * 设置缓存条目的过期时间为 600 秒。
+     * 配置 Redis 序列化器，使用 StringRedisSerializer 序列化缓存键，使用 GenericJackson2JsonRedisSerializer 序列化缓存值。
+     * 禁用缓存 null 值。
+     * 在整个应用程序中，可以使用 cacheManager 实例来管理 Redis 缓存。
+     * * 其他组件可以通过依赖注入（Dependency Injection）获取该实例，
+     * * 并使用它来读取和写入缓存数据。例如，当需要从数据库中读取数据时，可以首先尝试从 Redis 缓存中获取数据，
+     * * 如果缓存中没有，则从数据库中读取数据，并将数据写入 Redis 缓存以供下一次使用。这样可以提高数据读取的性能和响应速度。
+     * @param connectionFactory
+     * @return
+     */
+    @Bean
+    public CacheManager cacheManager(LettuceConnectionFactory connectionFactory) {
+
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                //过期时间600秒
+                .entryTtl(Duration.ofSeconds(600))
+                // 配置序列化
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+                .disableCachingNullValues();
+
+        RedisCacheManager cacheManager = RedisCacheManager.builder(connectionFactory)
+                .cacheDefaults(config)
+                .build();
+        return cacheManager;
+    }
+
+    /**
+     * Redis数据操作异常处理，进行自定义配置，如果redis挂了，会绕过redis直接走数据库，反之则会抛出异常
+     *
+     * @return
+     */
+    @Bean
+    @Override
+    public CacheErrorHandler errorHandler() {
+        CacheErrorHandler cacheErrorHandler = new CacheErrorHandler() {
+            @Override
+            public void handleCachePutError(RuntimeException exception, Cache cache, Object key, Object value) {
+                log.error("从redis推送数据异常，redis可能挂了");
+            }
+
+            @Override
+            public void handleCacheGetError(RuntimeException exception, Cache cache, Object key) {
+                log.error("从redis获取数据异常，redis可能挂了");
+            }
+
+            @Override
+            public void handleCacheEvictError(RuntimeException exception, Cache cache, Object key) {
+
+            }
+
+            @Override
+            public void handleCacheClearError(RuntimeException exception, Cache cache) {
+
+            }
+        };
+        return cacheErrorHandler;
     }
     /*
     //**集群版写法***
