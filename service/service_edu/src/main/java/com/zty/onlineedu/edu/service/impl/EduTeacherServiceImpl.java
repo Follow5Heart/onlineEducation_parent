@@ -13,6 +13,7 @@ import com.zty.onlineedu.edu.mapper.EduTeacherMapper;
 import com.zty.onlineedu.edu.service.EduTeacherService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -224,6 +225,7 @@ public class EduTeacherServiceImpl implements EduTeacherService{
     }
 
     @Override
+    @Cacheable(value = "index",key ="'getHotTeacher'" )
     public List<EduTeacher> getHotTeacher() {
         List<EduTeacher> teacherList=eduTeacherMapper.getHotTeacher();
         return teacherList;

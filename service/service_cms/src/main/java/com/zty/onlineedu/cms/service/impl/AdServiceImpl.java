@@ -9,6 +9,7 @@ import com.zty.onlineedu.cms.pojo.vo.AdVo;
 import com.zty.onlineedu.cms.service.AdService;
 import com.zty.onlineedu.common.base.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -92,6 +93,7 @@ public class AdServiceImpl  implements AdService {
     }
 
     @Override
+    @Cacheable(value = "index",key = "'listByAdTypeId'+#adTypeId")
     public List<CmsAd> listByAdTypeId(String adTypeId) {
         List<CmsAd> adList=cmsAdMapper.listByAdTypeId(adTypeId);
         return adList;
