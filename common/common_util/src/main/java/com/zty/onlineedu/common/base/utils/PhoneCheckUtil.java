@@ -42,15 +42,36 @@ public class PhoneCheckUtil {
     private static final String ALL_PHONE_PATTERN = "^((0\\d{2,3}-\\d{7,8})|(1[3456789]\\d{9}))$";
 
     /**
+     * 香港手机号码8位数，5|6|8|9开头+7位任意数
+     */
+    private static final String HK_PHONE_PATTERN= "^(5|6|8|9)\\d{7}$";
+
+    /**
      * 中国大陆手机号码校验
      *
      * @param phone
      *
      * @return
      */
-    public static boolean checkPhone(String phone) {
+    public static boolean checkChinaPhone(String phone) {
         if (StringUtils.isNotBlank(phone)) {
             if (checkChinaMobile(phone) || checkChinaUnicom(phone) || checkChinaTelecom(phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 中国大陆和香港手机号码校验
+     *
+     * @param phone
+     *
+     * @return
+     */
+    public static boolean checkChinaAndHkPhone(String phone) {
+        if (StringUtils.isNotBlank(phone)) {
+            if (checkChinaMobile(phone) || checkChinaUnicom(phone) || checkChinaTelecom(phone) || checkKHPhone(phone)) {
                 return true;
             }
         }
@@ -187,9 +208,21 @@ public class PhoneCheckUtil {
         }
         return false;
     }
+    /**
+     * 香港手机号码8位数，5|6|8|9开头+7位任意数
+     */
+    public static boolean checkKHPhone(String phone){
+        if (StringUtils.isNotBlank(phone)) {
+            Pattern regexp = Pattern.compile(HK_PHONE_PATTERN);
+            if (regexp.matcher(phone).matches()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
-        System.out.println("中国大陆手机号码校验:" + checkPhone("15310996969"));
+        System.out.println("中国大陆手机号码校验:" + checkChinaPhone("15310996969"));
         System.out.println("中国移动手机号码校验:" + checkChinaMobile("15310996969"));
         System.out.println("中国联通手机号码校验:" + checkChinaUnicom("15310996969"));
         System.out.println("中国电信手机号码校验:" + checkChinaTelecom("15310996969"));
