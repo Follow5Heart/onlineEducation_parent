@@ -35,7 +35,7 @@ public class ApiAdController {
 
 
     @ApiOperation("根据推荐位id显示广告推荐")
-    @GetMapping("list/{adTypeId}")
+    @GetMapping("/list/{adTypeId}")
     public Result listByAdTypeId(@ApiParam(value ="推荐位id",required = true) @PathVariable String adTypeId){
         try{
             List<CmsAd> adList=adService.listByAdTypeId(adTypeId);

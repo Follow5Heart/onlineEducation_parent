@@ -71,6 +71,17 @@ public class Swagger2Config {
 
     }
 
+    @Bean
+    public Docket createSmsApi(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("smsApi")
+                .apiInfo(apiInfoAdmin())
+                .select()
+                .paths(Predicates.and(PathSelectors.regex("/service-sms/.*")))
+                .build();
+
+    }
+
     private ApiInfo apiInfoWeb(){
         return new ApiInfoBuilder()
                 .title("网站开发接口文档")

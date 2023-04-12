@@ -33,7 +33,7 @@ public class GeneralException extends RuntimeException{
     @Override
     public String toString() {
         return "GeneralException{" +
-                "code=" + code +
+                "code=" + code +","+
                 "message=" + resultCodeEnum.getMessage() +
                 '}';
     }
