@@ -90,7 +90,7 @@ feign:
 aliyun:
   sms:
     regionId: cn-hangzhou
-    keyId: LTAI5tGKT2cvEhiWEwehXMpe
-    keySecret: ZqSQRZafuN16WyA3Totj6sQtMK6cB9
+    keyId: 你的keyId
+    keySecret: 你的keySecret
     templateCode: SMS_276170405 #短信模板code
     signName: zty在线教育 #短信模板签名
