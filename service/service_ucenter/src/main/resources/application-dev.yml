@@ -2,13 +2,13 @@ application:
   version: v1.0.0
 
 server:
-  port: 8150 # 服务端口
+  port: 8160 # 服务端口
   tomcat:
     max-threads: 10 #将tomcat的最大并发值修改为10，默认是200
 
 spring:
   application:
-    name: service-sms # 服务名
+    name: service-ucenter # 服务名
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_onlineedu_edu?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
@@ -29,7 +29,7 @@ spring:
     host: localhost
     port: 6379
     password: ztyroot
-    database: 1 #操作的是0号数据库
+    database: 1 #操作的是1号数据库
     timeout: 30 #Redis连接超时时间，默认1分钟，也就是说会等待一分钟，确认连不上Redis才会走数据库，
     # lettuce简单配置
     lettuce:
@@ -86,11 +86,3 @@ feign:
     enabled: true
 
 
-# 阿里云短信
-aliyun:
-  sms:
-    regionId: cn-hangzhou
-    keyId: LTAI5tGKT2cvEhiWEwehXMpe
-    keySecret: ZqSQRZafuN16WyA3Totj6sQtMK6cB9
-    templateCode: SMS_276170405 #短信模板code
-    signName: zty在线教育 #短信模板签名
