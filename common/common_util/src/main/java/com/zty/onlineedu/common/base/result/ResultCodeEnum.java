@@ -76,6 +76,8 @@ public enum ResultCodeEnum {
 
     SEND_SMS_ERROR(false,22201,"发送验证码服务异常"),
 
+    USER_REGISTER_ERROR(false,22202,"用户注册异常"),
+
     URL_ENCODE_ERROR(false, 23001, "URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false, 23002, "非法回调请求"),
     FETCH_ACCESSTOKEN_FAILD(false, 23003, "获取accessToken失败"),

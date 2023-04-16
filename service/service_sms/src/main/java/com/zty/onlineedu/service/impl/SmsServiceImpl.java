@@ -1,4 +1,4 @@
-package com.zty.onlineedu.Service.impl;
+package com.zty.onlineedu.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.aliyun.auth.credentials.Credential;
@@ -8,7 +8,7 @@ import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.sdk.service.dysmsapi20170525.models.SendSmsResponseBody;
 import com.google.gson.Gson;
-import com.zty.onlineedu.Service.SmsService;
+import com.zty.onlineedu.service.SmsService;
 import com.zty.onlineedu.util.SmsProperties;
 import darabonba.core.client.ClientOverrideConfiguration;
 import lombok.extern.log4j.Log4j2;
