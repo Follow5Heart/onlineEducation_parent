@@ -1,6 +1,7 @@
 package com.zty.onlineedu.ucenter.service;
 
 import com.zty.onlineedu.common.base.result.Result;
+import com.zty.onlineedu.ucenter.pojo.dto.LoginDto;
 import com.zty.onlineedu.ucenter.pojo.dto.RegisterDto;
 
 /**
@@ -16,5 +17,12 @@ public interface MemberService {
      * @return
      */
     Result registerMember(RegisterDto registerDto);
+
+    /**
+     * 会员登录
+     * @param loginDto 登录信息
+     * @return
+     */
+    Result login(LoginDto loginDto);
 
 }

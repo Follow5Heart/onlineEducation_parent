@@ -17,14 +17,8 @@ public interface MemberMapper {
      * @param nickname 昵称
      * @return 是否
      */
-    boolean isMatchByNickname(String nickname);
+    Boolean queryNicknameExist(String nickname);
 
-    /**
-     * 判断当前手机号是否已经存在
-     * @param phone 手机号
-     * @return 是否
-     */
-    Boolean isMatchByPhone(String phone);
 
     /**
      * 保存会员信息
@@ -32,6 +26,34 @@ public interface MemberMapper {
      *
      */
     void saveMember(UcenterMember ucenterMember);
+
+    /**
+     * 校验手机号是否存在
+     * @param phone 手机号
+     * @return 是否存在
+     */
+    Boolean queryPhoneExist(String phone);
+
+    /**
+     * 通过手机号获取加密密码
+     * @param phone 手机号
+     * @return 加密密码
+     */
+    String getPasswordByPhone(String phone);
+
+    /**
+     * 通过手机号，查询当前用户是否被禁用
+     * @param phone 手机号
+     * @return 是否禁用
+     */
+    Boolean queryIsDisabled(String phone);
+
+    /**
+     * 通过手机号获取用户的所有信息
+     * @param phone 手机号
+     * @return 用户的所有信息
+     */
+    UcenterMember getMemberInfo(String phone);
 
 }
 

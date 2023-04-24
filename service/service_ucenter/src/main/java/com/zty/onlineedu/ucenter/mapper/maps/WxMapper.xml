@@ -2,32 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zty.onlineedu.ucenter.mapper.MemberMapper">
-
-    <resultMap id="BaseResultMap" type="com.zty.onlineedu.ucenter.pojo.entity.UcenterMember">
-            <id property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="openid" column="openid" jdbcType="VARCHAR"/>
-            <result property="phone" column="phone" jdbcType="VARCHAR"/>
-            <result property="password" column="password" jdbcType="VARCHAR"/>
-            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
-            <result property="sex" column="sex" jdbcType="VARCHAR"/>
-            <result property="age" column="age" jdbcType="VARCHAR"/>
-            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
-            <result property="sign" column="sign" jdbcType="VARCHAR"/>
-            <result property="isDisabled" column="is_disabled" jdbcType="VARCHAR"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="VARCHAR"/>
-            <result property="gmtCreate" column="gmt_create" jdbcType="VARCHAR"/>
-            <result property="gmtModified" column="gmt_modified" jdbcType="VARCHAR"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,openid,phone,
-        password,nickname,sex,
-        age,avatar,sign,
-        is_disabled,is_deleted,gmt_create,
-        gmt_modified
-    </sql>
-    <insert id="saveMember">
+<mapper namespace="com.zty.onlineedu.ucenter.mapper.WxMapper">
+    <insert id="saveUserInfo">
         insert into ucenter_member
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id!=null and id!=''">
@@ -82,7 +58,7 @@
                 #{phone},
             </if>
             <if test="password!=null and password!=''">
-              #{password},
+                #{password},
             </if>
             <if test="nickname!=null and nickname!=''">
                 #{nickname},
@@ -91,7 +67,7 @@
                 #{sex},
             </if>
             <if test="age!=null and age!=''">
-              #{age},
+                #{age},
             </if>
             <if test="avatar!=null and avatar!=''">
                 #{avater},
@@ -103,30 +79,18 @@
                 #{isDisabled},
             </if>
             <if test="isDeleted!=null and isDeleted!=''">
-               #{isDeleted},
+                #{isDeleted},
             </if>
             <if test="gmtCreate!=null and gmtCreate!=''">
-               #{gmtCreate},
+                #{gmtCreate},
             </if>
             <if test="gmtModified!=null and gmtModified!=''">
                 #{gmtModified},
             </if>
         </trim>
     </insert>
-    <select id="queryNicknameExist" resultType="Boolean">
-        select count(1) from ucenter_member where nickname=#{nickname}
+    <select id="queryOpenIdExist" resultType="java.lang.Boolean">
+        select count(1) from ucenter_member where openid=#{openId}
     </select>
 
-    <select id="queryPhoneExist" resultType="java.lang.Boolean">
-        select count(1) from ucenter_member where phone=#{phone} and is_deleted="0"
-    </select>
-    <select id="getPasswordByPhone" resultType="java.lang.String">
-        select password from ucenter_member where phone=#{phone}
-    </select>
-    <select id="queryIsDisabled" resultType="java.lang.Boolean">
-        select count(1) from ucenter_member where phone=#{phone} and is_disabled="1"
-    </select>
-    <select id="getMemberInfo" resultType="com.zty.onlineedu.ucenter.pojo.entity.UcenterMember">
-        select * from ucenter_member where phone=#{phone} and is_disabled="0" and is_deleted="0"
-    </select>
 </mapper>

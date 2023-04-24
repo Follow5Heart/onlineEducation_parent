@@ -77,12 +77,17 @@ public enum ResultCodeEnum {
     SEND_SMS_ERROR(false,22201,"发送验证码服务异常"),
 
     USER_REGISTER_ERROR(false,22202,"用户注册异常"),
+    USER_LOGIN_ERROR(false,22203,"用户登录异常"),
 
     URL_ENCODE_ERROR(false, 23001, "URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false, 23002, "非法回调请求"),
     FETCH_ACCESSTOKEN_FAILD(false, 23003, "获取accessToken失败"),
     FETCH_USERINFO_ERROR(false, 23004, "获取用户信息失败"),
     LOGIN_ERROR(false, 23005, "登录失败"),
+
+    GET_QR_ERROR(false, 23006,"获取二维码异常"),
+    YD_CALLBACK_REQUEST_ERROR(false, 23007,"易登回调异常"),
+    VERIFY_LOGIN_STATUS_ERROR(false, 23008,"验证用户是否登录异常"),
 
     COMMENT_EMPTY(false, 24006, "评论内容必须填写"),
 
